@@ -11,8 +11,24 @@
 <title>세트마크</title>
 </head>
 <body>
-<div id="app"></div>
+<main id="install-guide" class="install-guide">
+  <header class="install-header">
+    <img src="./icon-192.png" width="64" height="64" alt="">
+    <h1>세트마크</h1>
+    <p>홈 화면에 추가해서 운동을 기록해 보세요.</p>
+  </header>
+  <section class="card" aria-labelledby="install-title">
+    <h2 id="install-title">iPhone에 추가하기</h2>
+    <ol>
+      <li>이 링크를 <strong>Safari</strong>에서 열어요. 카카오톡에서 열었다면 메뉴에서 Safari로 열거나 링크를 복사해 Safari에 붙여넣어요.</li>
+      <li>Safari의 <strong>공유</strong> 버튼(□↑)을 누르고 <strong>홈 화면에 추가</strong>를 선택해요.</li>
+      <li><strong>웹 앱으로 열기</strong>가 보이면 켜고 <strong>추가</strong>를 눌러요.</li>
+      <li>홈 화면에서 <strong>세트마크</strong> 아이콘을 눌러 실행해요.</li>
+    </ol>
+  </section>
+</main>
+<div id="app" hidden></div>
 <div id="notice" role="status"></div>
-<script type="module" src="./app.js"></script>
+<script type="module" src="./launch.js"></script>
 </body>
 </html>
