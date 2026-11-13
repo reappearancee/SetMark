@@ -157,3 +157,28 @@ dialog:has(> #search) {
 dialog > #search + .chips {
   margin-top: 12px;
 }
+
+.routine-preview {
+  display: flex;
+  align-items: center;
+  margin: 12px 0 16px;
+}
+.routine-preview > .pose,
+.routine-preview-more {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+}
+.routine-preview > * + * { margin-inline-start: -7px; }
+.routine-preview-more {
+  display: grid;
+  place-items: center;
+  background: #e4f0e8;
+  color: var(--green);
+  font-size: .8rem;
+  font-weight: 700;
+}
+.routine-exercise-title { min-width: 0; }
+.routine-exercise-title > strong { overflow-wrap: anywhere; }
