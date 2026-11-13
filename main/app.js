@@ -247,7 +247,7 @@ function modal() {
     +(routine.restEnabled?'checked':'')+'></label>'
     +(routine.restEnabled?restControls(routine.restSeconds ?? state.rest,'routine-rest'):'')
     +'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row routine-exercise-title">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge({...routine,restEnabled:routine.restEnabled === true},e))+'</div>'
-    +(isCardio(e)?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')+'</div>'+routineSets(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
+    +(isCardio(e)?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')+'</div><div data-routine-sets>'+routineSets(e,i)+'</div><div class="row">'+btn('−','routine-minus','',i)+'<span data-routine-count>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
 }
@@ -444,8 +444,29 @@ app.addEventListener('click', async event=>{
     }
     case 'routine-edit': routine=structuredClone(state.routines.find(r=>r.id===value));dialog='routine';break;
     case 'weekday': routine.weekdays=routine.weekdays.includes(i)?routine.weekdays.filter(x=>x!==i):[...routine.weekdays,i].sort();break;
-    case 'routine-minus': if(routine.exercises[i].sets.length>1) routine.exercises[i].sets.pop();break;
-    case 'routine-plus': if(routine.exercises[i].sets.length<20) routine.exercises[i].sets.push(set());break;
+    case 'routine-minus':
+    case 'routine-plus': {
+      const exercise = routine.exercises[i];
+      const adding = action === 'routine-plus';
+      if (adding ? exercise.sets.length >= 20 : exercise.sets.length <= 1) return;
+      const controls = target.parentElement;
+      const rows = controls.previousElementSibling;
+      const count = controls.querySelector('[data-routine-count]');
+      const panel = target.closest('dialog');
+      const scroll = panel.scrollTop;
+      if (adding) {
+        exercise.sets.push(set());
+        const template = document.createElement('template');
+        template.innerHTML = routineSets(exercise,i);
+        rows.append(template.content.lastElementChild);
+      } else {
+        exercise.sets.pop();
+        rows.lastElementChild.remove();
+      }
+      count.textContent = exercise.sets.length + (isCardio(exercise) ? '회차' : '세트');
+      panel.scrollTop = scroll;
+      return;
+    }
     case 'routine-remove': routine.exercises.splice(i,1);break;
     case 'routine-save':
       routine.title=routine.title.trim();
