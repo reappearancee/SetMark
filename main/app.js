@@ -40,6 +40,15 @@ const vol = workout => workout.exercises.filter(e=>!isCardio(e)).flatMap(e=>e.se
 const cardioTotal = workout => workout.exercises.filter(isCardio).flatMap(e=>e.sets)
   .reduce((total,s)=>total+s.minutes,0);
 const parseMinutes = value => Number(String(value ?? '').trim().replace(',','.'));
+const paceLabel = name => ['천국의 계단','스텝퍼'].includes(name) ? '레벨' : '속도';
+const validPace = value => {
+  const pace = parseMinutes(value);
+  return pace >= 0 && pace <= 999;
+};
+function cardioEntry(entry) {
+  return {id:entry.id, minutes:parseMinutes(entry.minutes),
+    ...(String(entry.pace ?? '').trim() ? {pace:parseMinutes(entry.pace)} : {})};
+}
 const validMinutes = value => { const minutes = parseMinutes(value); return minutes > 0 && minutes <= 1440; };
 const number = x => Number(x).toLocaleString('ko-KR',{maximumFractionDigits:2});
 const sorted = () => [...state.workouts].sort((a,b)=>new Date(b.finishedAt)-new Date(a.finishedAt));
@@ -128,7 +137,7 @@ function routineSets(exercise, index) {
     const number = i + 1;
     const input = (field, title, mode) => '<input aria-label="'+number+'세트 '+title+'" placeholder="'+title+'" inputmode="'+mode+'" data-routine-set="'+index+':'+i+':'+field+'" value="'+esc(entry[field])+'">';
     if (isCardio(exercise)) {
-      return '<div class="routine-set"><small>'+(i+1)+'회차</small>'+input('minutes','시간 (분)','decimal')+'</div>';
+      return '<div class="routine-set"><small>'+(i+1)+'회차</small>' +input('pace',paceLabel(exercise.name),'decimal')+input('minutes','시간 (분)','decimal')+'</div>';
     }
     return '<div class="routine-set"><small>' +number+'세트</small>'
       + input('weight','무게 (kg)','decimal') + input('reps','횟수','numeric') + '</div>';
@@ -168,9 +177,10 @@ function workoutTimer(draft) {
   return '<section class="card workout-timer"><div class="row"><strong>운동 시간</strong><strong class="clock workout-time" data-clock></strong>'+toggle+(paused?'<small>일시정지</small>':'')+'</div>'
     + '<div class="timer-adjust" role="group" aria-label="운동 시간 조절">'+adjust+'</div></section>';
 }
-function cardioRow(entry, exercise, index, started) {
+function cardioRow(entry, exercise, index, started, name) {
   const position = exercise+':'+index;
-  return '<div class="set"><small>'+(index+1)+'</small><input aria-label="유산소 시간 (분)" placeholder="시간 (분)" inputmode="decimal" data-set="'+position+':minutes" value="'+esc(entry.minutes)+'" '+(entry.checked?'disabled':'')+'><span></span>'
+  const input = (field,label) => '<input aria-label="'+label+'" placeholder="'+label+'" inputmode="decimal" data-set="'+position+':'+field+'" value="'+esc(entry[field])+'" '+(entry.checked?'disabled':'')+'>';
+  return '<div class="set"><small>'+(index+1)+'</small>'+input('pace',paceLabel(name))+input('minutes','시간 (분)')
     +btn(entry.checked?'✓':'○','check',entry.checked?'checked':'',position,!started)
     +btn('×','remove-set','danger',position)+'</div>';
 }
@@ -191,7 +201,7 @@ function workout() {
   const clock = started
     ? workoutTimer(d)
     : btn('운동 시작','begin-workout','primary wide workout-start');
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge(d,e))+'</div></div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+'<div class="exercise-actions">'+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+btn('종목 삭제','remove-exercise','danger',i)+'</div></section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge(d,e))+'</div></div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started,e.name) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+'<div class="exercise-actions">'+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+btn('종목 삭제','remove-exercise','danger',i)+'</div></section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
 }
 function routinePreview(exercises) {
   const visibleCount = 5;
@@ -206,7 +216,7 @@ function routines() {
 function history() {
   if (activeRecord) {
     const w = state.workouts.find(item=>item.id===activeRecord);
-    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(recordElapsed(w))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>isCardio(e) ? '<p>'+(i+1)+'회차 · '+number(s.minutes)+'분</p>' : '<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('');
+    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(recordElapsed(w))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>isCardio(e) ? '<p>'+(i+1)+'회차 · '+(s.pace==null?'':paceLabel(e.name)+' '+number(s.pace)+' · ')+number(s.minutes)+'분</p>' : '<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('')+btn('기록 삭제','delete-record','danger wide',w.id);
   }
   const first = new Date(month.getFullYear(),month.getMonth(),1);
   const length = new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
@@ -351,7 +361,7 @@ function closeDialog() {
 }
 function finish() {
   const d = state.draft;
-  const exercises = d.exercises.map(e=>({...e,sets:e.sets.filter(s=>s.checked).map(s=>isCardio(e)?{id:s.id,minutes:parseMinutes(s.minutes)}:{id:s.id,weightKg:Number(s.weight.trim().replace(',','.')),repetitions:Number(s.reps)})})).filter(e=>e.sets.length);
+  const exercises = d.exercises.map(e=>({...e,sets:e.sets.filter(s=>s.checked).map(s=>isCardio(e)?cardioEntry(s):{id:s.id,weightKg:Number(s.weight.trim().replace(',','.')),repetitions:Number(s.reps)})})).filter(e=>e.sets.length);
   if (!exercises.length) return notice('완료한 세트를 한 개 이상 체크해 주세요.');
   if (d.exercises.some(e=>e.sets.some(s=>!s.checked)) && !confirm('체크한 세트만 저장할까요?')) return;
   const {id,title,startedAt} = d;
@@ -363,7 +373,7 @@ function finish() {
   editor=false; tab='기록'; activeRecord=id;
 }
 function download() {
-  const data = {formatVersion:1, exportedAt:new Date().toISOString(), workouts:state.workouts, routines:state.routines.map(r=>({...r, exercises:r.exercises.map(e=>({...e,sets:e.sets.map(s=>isCardio(e)?{id:s.id,minutes:parseMinutes(s.minutes)||0}:{id:s.id,weightKg:Number(s.weight.trim().replace(',','.'))||0,repetitions:Number(s.reps)||0,restSeconds:s.restSeconds})}))}))};
+  const data = {formatVersion:1, exportedAt:new Date().toISOString(), workouts:state.workouts, routines:state.routines.map(r=>({...r, exercises:r.exercises.map(e=>({...e,sets:e.sets.map(s=>isCardio(e)?cardioEntry(s):{id:s.id,weightKg:Number(s.weight.trim().replace(',','.'))||0,repetitions:Number(s.reps)||0,restSeconds:s.restSeconds})}))}))};
   const url = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
   const link = document.createElement('a'); link.href=url; link.download='Setmark-'+new Date().toISOString().slice(0,10)+'.json'; link.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
@@ -378,7 +388,7 @@ app.addEventListener('click', async event=>{
     case 'tab': tab=value; editor=false; activeRecord=null; window.scrollTo(0,0); break;
     case 'start': {
       const template=state.routines.find(r=>r.id===value);
-      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restEnabled:template ? template.restEnabled === true : undefined,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,minutes:s.minutes,restSeconds:s.restSeconds}))}))||[]};
+      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restEnabled:template ? template.restEnabled === true : undefined,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,minutes:s.minutes,pace:s.pace,restSeconds:s.restSeconds}))}))||[]};
       editor=true; window.scrollTo(0,0); save(); break;
     }
     case 'begin-workout':
@@ -407,7 +417,7 @@ app.addEventListener('click', async event=>{
     case 'remove-exercise': if(confirm('이 종목을 삭제할까요?')) {d.exercises.splice(i,1);save();} break;
     case 'add-set': {
       const last=d.exercises[i].sets.at(-1);
-      d.exercises[i].sets.push({...set(),weight:last?.weight||'',reps:last?.reps||'',minutes:last?.minutes||''});save();break;
+      d.exercises[i].sets.push({...set(),weight:last?.weight||'',reps:last?.reps||'',minutes:last?.minutes||'',pace:last?.pace||''});save();break;
     }
     case 'remove-set': d.exercises[i].sets.splice(j,1);save();break;
     case 'check': {
@@ -417,6 +427,7 @@ app.addEventListener('click', async event=>{
       if (!s.checked && (isCardio(exercise) ? !validMinutes(s.minutes) : !validSet(s))) {
         return notice(isCardio(exercise) ? '유산소 시간을 분 단위로 입력해 주세요.' : '무게와 횟수를 확인해 주세요.');
       }
+      if (!s.checked && isCardio(exercise) && !validPace(s.pace)) return notice('속도 또는 레벨을 0~999로 입력해 주세요.');
       s.checked=!s.checked;
       if (s.checked && !isCardio(exercise)) startRest(restFor(d,exercise,s));
       save(); break;
@@ -426,7 +437,7 @@ app.addEventListener('click', async event=>{
     case 'choose': {
       const cardio = catalog['유산소'].includes(value);
       const prior=sorted().flatMap(w=>w.exercises).find(e=>isCardio(e)===cardio && e.name.toLowerCase()===value.toLowerCase());
-      const sets=!routine && prior ? prior.sets.map(s=>cardio ? {...set(),minutes:String(s.minutes)} : {...set(),weight:String(s.weightKg),reps:String(s.repetitions)}) : [set()];
+      const sets=!routine && prior ? prior.sets.map(s=>cardio ? {...set(),minutes:String(s.minutes),pace:String(s.pace ?? '')} : {...set(),weight:String(s.weightKg),reps:String(s.repetitions)}) : [set()];
       (routine||d).exercises.push({id:id(),name:value,kind:cardio?'cardio':undefined,sets});
       if(!routine) save();
       closeDialog(); break;
@@ -488,6 +499,9 @@ app.addEventListener('click', async event=>{
       if (routine.exercises.some(e=>isCardio(e)&&e.sets.some(s=>String(s.minutes ?? '').trim()&&!validMinutes(s.minutes)))) {
         return notice('유산소 시간은 0분 초과, 1440분 이하로 입력해 주세요.');
       }
+      if (routine.exercises.some(e=>isCardio(e)&&e.sets.some(s=>!validPace(s.pace)))) {
+        return notice('속도 또는 레벨을 0~999로 입력해 주세요.');
+      }
       {
         const previous = state.routines;
         state.routines = previous.some(r=>r.id===routine.id)
@@ -499,6 +513,18 @@ app.addEventListener('click', async event=>{
       break;
     case 'routine-delete': if(confirm('이 루틴을 삭제할까요?')) {state.routines=state.routines.filter(r=>r.id!==value);save();}break;
     case 'record': tab='기록';activeRecord=value;window.scrollTo(0,0);break;
+    case 'delete-record': {
+      if (activeRecord !== value || !confirm('이 운동 기록을 삭제할까요? 삭제한 기록은 복구할 수 없어요.')) return;
+      const previous = state.workouts;
+      const record = previous.find(w=>w.id===value);
+      if (!record) return;
+      state.workouts = previous.filter(w=>w.id!==value);
+      if (!save()) { state.workouts = previous; return; }
+      day = month = new Date(record.finishedAt);
+      activeRecord = null;
+      window.scrollTo(0,0);
+      break;
+    }
     case 'back-record': activeRecord=null;break;
     case 'month': month=new Date(month.getFullYear(),month.getMonth()+i,1);day=month;break;
     case 'day': day=new Date(month.getFullYear(),month.getMonth(),i);break;
