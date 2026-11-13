@@ -2,7 +2,7 @@ import { catalog } from './catalog.js';
 import { poses, keywords } from './poses.js';
 
 const key = 'setmark.web.v1';
-const defaults = { name: null, rest: 90, draft: null, workouts: [], routines: [] };
+const defaults = { name: null, rest: 90, restSound: true, draft: null, workouts: [], routines: [] };
 const app = document.querySelector('#app');
 let state;
 try { state = { ...defaults, ...JSON.parse(localStorage.getItem(key) || '{}') }; }
@@ -10,6 +10,8 @@ catch { state = { ...defaults }; }
 let tab = '홈', editor = false, routine = null, dialog = '', category = '', query = '';
 let activeRecord = null, day = new Date(), month = new Date(), days = 30, metric = 'weight', movement = '';
 let registration, applying = false, noticeTimer;
+let restAudio;
+let announcedRestEnd = 0;
 const tabs = ['홈', '루틴', '기록', '통계', '설정'];
 const paths = ['M3 10l9-7 9 7v10h-6v-6H9v6H3z','M4 5h16v14H4zM8 9h8m-8 5h8','M4 6h16v14H4zM8 3v6m8-6v6M4 11h16','M5 20V11m7 9V4m7 16v-7','M12 4v3m0 10v3M4 12h3m10 0h3M6 6l2 2m8 8 2 2M6 18l2-2m8-8 2-2M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8'];
 const weekday = ['일','월','화','수','목','금','토'];
@@ -86,7 +88,7 @@ function statistics() {
   return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div><section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
 }
 function settings() {
-  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2><label>기본 휴식 (초) <input id="rest-seconds" type="number" min="15" max="300" step="1" value="'+state.rest+'"></label></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card stack"><h2>앱 업데이트</h2>'+btn(registration?.waiting?'업데이트 적용':'업데이트 확인',registration?.waiting?'apply':'update',registration?.waiting?'primary':'')+'</section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';
+  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2><label>기본 휴식 (초) <input id="rest-seconds" type="number" min="15" max="300" step="1" value="'+state.rest+'"></label><p><label><input id="rest-sound" type="checkbox" '+(state.restSound?'checked':'')+'> 휴식 종료음</label></p><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card stack"><h2>앱 업데이트</h2>'+btn(registration?.waiting?'업데이트 적용':'업데이트 확인',registration?.waiting?'apply':'update',registration?.waiting?'primary':'')+'</section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';
 }
 function pickerResults() {
   const q = query.trim().toLowerCase();
@@ -115,11 +117,46 @@ function tick() {
   const remaining = Math.max(0,(d?.restEnd||0)-Date.now());
   const capsule = app.querySelector('.capsule');
   capsule.hidden = remaining===0;
+  if (d?.restEnd && remaining === 0 && !document.hidden && announcedRestEnd !== d.restEnd) {
+    announcedRestEnd = d.restEnd;
+    notice('휴식이 끝났어요. 다음 세트를 시작하세요.');
+    playRestSound();
+  }
   capsule.querySelector('.ring').style.setProperty('--progress', (remaining ? Math.min(100,remaining/(d.restEnd-d.restStart)*100) : 0)+'%');
   app.querySelectorAll('[data-rest]').forEach(n=>n.textContent=duration(Math.ceil(remaining/1000)*1000));
   if (d) app.querySelectorAll('[data-clock]').forEach(n=>n.textContent=duration(Date.now()-new Date(d.startedAt)));
 }
+function prepareRestSound() {
+  if (!state.restSound) return;
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  try {
+    restAudio ??= new AudioContext();
+    if (restAudio.state !== 'running') restAudio.resume().catch(() => {});
+  } catch {
+    // The on-screen alert works when audio is unavailable.
+  }
+}
+function playRestSound() {
+  if (!state.restSound || restAudio?.state !== 'running') return;
+  const now = restAudio.currentTime;
+  for (const [index, frequency] of [660, 880].entries()) {
+    const tone = restAudio.createOscillator();
+    const gain = restAudio.createGain();
+    const start = now + index * 0.16;
+    tone.type = 'sine';
+    tone.frequency.value = frequency;
+    gain.gain.setValueAtTime(0, start);
+    gain.gain.linearRampToValueAtTime(0.16, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + 0.14);
+    tone.connect(gain).connect(restAudio.destination);
+    tone.start(start);
+    tone.stop(start + 0.15);
+    tone.onended = () => { tone.disconnect(); gain.disconnect(); };
+  }
+}
 function startRest() {
+  prepareRestSound();
   state.draft.restStart = Date.now();
   state.draft.restEnd = state.draft.restStart + state.rest*1000;
 }
@@ -236,6 +273,11 @@ app.addEventListener('input', event=>{
 });
 app.addEventListener('change',event=>{
   if(event.target.id==='movement') {movement=event.target.value;render();}
+  if(event.target.id==='rest-sound') {
+    state.restSound = event.target.checked;
+    if (state.restSound) prepareRestSound();
+    save();
+  }
   if(event.target.id==='rest-seconds') {
     state.rest=Math.min(300,Math.max(15,Math.round(Number(event.target.value)||90)));save();render();
   }
