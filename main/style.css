@@ -65,7 +65,7 @@
 }
 
 .workout-timer { padding: 16px; }
-.workout-time { font-size: 1.25rem; }
+.workout-time { font-size: 1.625rem; }
 .timer-toggle { min-width: 44px; padding-inline: 8px; color: var(--green); }
 .timer-adjust {
   display: grid;
@@ -100,3 +100,7 @@ button[data-action="add-set"] {
 .rest-option span { flex-shrink: 0; }
 .rest-option select { max-width: 73%; }
 .routine-rest-options summary { cursor: pointer; min-height: 44px; padding: 12px 0; }
+
+.card:has(button[data-action="rest"]) > h2 {
+  font-size: 1rem;
+}
