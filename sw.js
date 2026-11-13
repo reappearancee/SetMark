@@ -1,4 +1,4 @@
-const cacheName = 'setmark-pwa-v6';
+const cacheName = 'setmark-pwa-v7';
 const shell = ['./', './index.html', './launch.js', './app.js', './catalog.js', './style.css', './manifest.webmanifest', './icon.png', './icon-192.png', './poses.js',
   './install-step-1.jpg', './install-step-2.jpg', './install-step-3.jpg', './install-step-4.jpg'];
 self.addEventListener('install', event => {

@@ -24,3 +24,32 @@
 .install-guide .install-steps li + li {
   margin-top: 20px;
 }
+
+.rest-sound {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  gap: 12px;
+}
+.rest-sound input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  min-height: 0;
+  margin: 0 4px;
+  padding: 0;
+  accent-color: var(--green);
+}
+.rest-controls { display: inline-flex; align-items: center; gap: 8px; }
+.rest-controls button { min-width: 44px; }
+.rest-controls output { min-width: 48px; text-align: center; }
+.routine-set {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+}
+.routine-set input { width: 100%; }
+.update-banner { background: #e8f5ea; }
