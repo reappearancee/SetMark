@@ -53,3 +53,41 @@
 }
 .routine-set input { width: 100%; }
 .update-banner { background: #e8f5ea; }
+
+.workout-start { margin: 10px 0; }
+#app button:disabled {
+  background: #e9eeea;
+  border-color: #dce4dd;
+  color: #68766e;
+  cursor: default;
+  opacity: 1;
+}
+
+.workout-guide {
+  margin: 14px 0 16px;
+  padding: 12px 14px;
+  border-left: 3px solid #75b596;
+  border-radius: 10px;
+  background: #102d24;
+  color: #f0faf4;
+}
+.workout-guide > strong {
+  display: block;
+  color: #b6efaa;
+  font-size: .8rem;
+}
+.workout-guide p {
+  margin: 4px 0 0;
+  font-size: .875rem;
+}
+
+.workout-timer { padding: 16px; }
+.workout-time { font-size: 1.25rem; }
+.timer-toggle { min-width: 44px; padding-inline: 8px; color: var(--green); }
+.timer-adjust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.timer-adjust button { font-variant-numeric: tabular-nums; }

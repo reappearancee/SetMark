@@ -31,7 +31,7 @@ const duration = ms => { const s = Math.floor(Math.max(0,ms)/1000); const m = Ma
 const vol = workout => workout.exercises.flatMap(x=>x.sets).reduce((total,s)=>total+s.weightKg*s.repetitions,0);
 const number = x => Number(x).toLocaleString('ko-KR',{maximumFractionDigits:2});
 const sorted = () => [...state.workouts].sort((a,b)=>new Date(b.finishedAt)-new Date(a.finishedAt));
-const btn = (label, action, css='', value='') => '<button type="button" data-action="'+action+'" data-value="'+esc(value)+'" class="'+css+'">'+label+'</button>';
+const btn = (label, action, css='', value='', disabled=false) => '<button type="button" data-action="'+action+'" data-value="'+esc(value)+'" class="'+css+'"'+(disabled?' disabled':'')+'>'+label+'</button>';
 
 function notice(message) {
   const node = document.querySelector('#notice');
@@ -55,7 +55,7 @@ function recordList(records) {
 function home() {
   const today = new Date();
   const plans = state.routines.filter(r=>r.weekdays.includes(today.getDay()+1));
-  return '<h1>세트마크</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><h2>오늘의 운동</h2>'+(state.draft?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?'운동 이어서 기록':'▶ 자유 운동 시작','start','primary wide')+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
+  return '<h1>세트마크</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><h2>오늘의 운동</h2>'+(state.draft?.startedAt?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?.startedAt?'운동 이어서 기록':state.draft?'운동 준비 이어서':'▶ 자유 운동 시작','start','primary wide')+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
 }
 function restControls(seconds, action) {
   return '<div class="rest-controls" role="group" aria-label="휴식 시간">'
@@ -80,9 +80,47 @@ function validSet(entry, optional = false) {
   return weight >= 0 && weight <= 10000
     && ((optional && !entry.reps.trim()) || (Number.isInteger(reps) && reps >= 1 && reps <= 999));
 }
+function workoutElapsed(draft, now = Date.now()) {
+  const runningSince = draft.timerRunningSince;
+  if (runningSince === undefined) return Math.max(0, now - Date.parse(draft.startedAt));
+  return draft.timerElapsedMs + (runningSince === null ? 0 : Math.max(0, now - runningSince));
+}
+function changeWorkoutTimer(draft, deltaMinutes) {
+  const now = Date.now();
+  const paused = draft.timerRunningSince === null;
+  const previous = { elapsed: draft.timerElapsedMs, since: draft.timerRunningSince };
+  draft.timerElapsedMs = Math.max(0, workoutElapsed(draft, now) + (deltaMinutes ?? 0) * 60000);
+  draft.timerRunningSince = (deltaMinutes === undefined ? !paused : paused) ? null : now;
+  if (!save()) {
+    draft.timerElapsedMs = previous.elapsed;
+    draft.timerRunningSince = previous.since;
+  }
+}
+function workoutTimer(draft) {
+  const paused = draft.timerRunningSince === null;
+  const label = paused ? '운동 타이머 재생' : '운동 타이머 일시정지';
+  const toggle = '<button type="button" class="timer-toggle" data-action="toggle-workout-timer" data-value="" aria-label="'+label+'">'+(paused?'▶':'Ⅱ')+'</button>';
+  const adjust = [1,5,10,-1,-5,-10].map(minutes => {
+    const signed = minutes > 0 ? '+'+minutes : '−'+Math.abs(minutes);
+    const label = '운동 시간 '+Math.abs(minutes)+'분 '+(minutes>0?'추가':'차감');
+    return '<button type="button" data-action="adjust-workout-timer" data-value="'+minutes+'" aria-label="'+label+'">'+signed+'m</button>';
+  }).join('');
+  return '<section class="card workout-timer"><div class="row"><strong>운동 시간</strong><strong class="clock workout-time" data-clock></strong>'+toggle+(paused?'<small>일시정지</small>':'')+'</div>'
+    + '<div class="timer-adjust" role="group" aria-label="운동 시간 조절">'+adjust+'</div></section>';
+}
 function workout() {
   const d = state.draft;
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('나중에','later')+'</header><div class="card row between"><strong>운동 시간 <span class="clock" data-clock></span></strong></div><section class="card"><h2>휴식 타이머</h2><div class="row between">'+restControls(d.restSeconds ?? state.rest,'workout-rest')+btn('휴식 시작','rest','primary')+'</div><small>세트를 체크하면 이 시간으로 휴식을 시작해요.</small></section>'+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary')+btn('운동 취소','cancel','danger')+'</div>';
+  const started = Boolean(d.startedAt);
+  const guide = '<aside class="workout-guide" aria-label="운동 안내">'
+    + '<strong>'+(started ? '운동 중' : '운동 준비')+'</strong>'
+    + (started
+      ? '<p>운동이 끝났다면 <b>운동 완료</b>를 눌러 기록을 저장해 주세요.</p><p>기록을 버리려면 <b>운동 취소</b>를 눌러 주세요.</p>'
+      : '<p>준비가 됐다면 <b>운동 시작</b> 버튼을 눌러 주세요.</p>')
+    + '</aside>';
+  const clock = started
+    ? workoutTimer(d)
+    : btn('운동 시작','begin-workout','primary wide workout-start');
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+'<section class="card"><h2>휴식 타이머</h2><div class="row between">'+restControls(d.restSeconds ?? state.rest,'workout-rest')+btn('휴식 시작','rest','primary','',!started)+'</div><small>세트를 체크하면 이 시간으로 휴식을 시작해요.</small></section>'+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
 }
 function routines() {
   return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><p>'+r.exercises.map(e=>esc(e.name)+' '+e.sets.length+'세트').join(' · ')+'</p><div class="row">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
@@ -90,7 +128,7 @@ function routines() {
 function history() {
   if (activeRecord) {
     const w = state.workouts.find(item=>item.id===activeRecord);
-    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(new Date(w.finishedAt)-new Date(w.startedAt))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>'<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('');
+    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(w.elapsedMs ?? (new Date(w.finishedAt)-new Date(w.startedAt)))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>'<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('');
   }
   const first = new Date(month.getFullYear(),month.getMonth(),1);
   const length = new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
@@ -148,7 +186,7 @@ function tick() {
   }
   capsule.querySelector('.ring').style.setProperty('--progress', (remaining ? Math.min(100,remaining/(d.restEnd-d.restStart)*100) : 0)+'%');
   app.querySelectorAll('[data-rest]').forEach(n=>n.textContent=duration(Math.ceil(remaining/1000)*1000));
-  if (d) app.querySelectorAll('[data-clock]').forEach(n=>n.textContent=duration(Date.now()-new Date(d.startedAt)));
+  if (d?.startedAt) app.querySelectorAll('[data-clock]').forEach(n=>n.textContent=duration(workoutElapsed(d)));
 }
 function prepareRestSound() {
   if (!state.restSound) return;
@@ -199,7 +237,8 @@ function finish() {
   if (!exercises.length) return notice('완료한 세트를 한 개 이상 체크해 주세요.');
   if (d.exercises.some(e=>e.sets.some(s=>!s.checked)) && !confirm('체크한 세트만 저장할까요?')) return;
   const {id,title,startedAt} = d;
-  const record = {id,title,startedAt,finishedAt:new Date().toISOString(),exercises};
+  const finishedAt = new Date();
+  const record = {id,title,startedAt,finishedAt:finishedAt.toISOString(),elapsedMs:workoutElapsed(d,finishedAt.getTime()),exercises};
   state.workouts.push(record);
   state.draft=null;
   if (!save()) { state.workouts.pop(); state.draft=d; return; }
@@ -221,19 +260,30 @@ app.addEventListener('click', async event=>{
     case 'tab': tab=value; editor=false; activeRecord=null; window.scrollTo(0,0); break;
     case 'start': {
       const template=state.routines.find(r=>r.id===value);
-      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:new Date().toISOString(),restSeconds:template?.restSeconds ?? state.rest,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps}))}))||[]};
+      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restSeconds:template?.restSeconds ?? state.rest,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps}))}))||[]};
       editor=true; window.scrollTo(0,0); save(); break;
     }
+    case 'begin-workout':
+      if (!d || d.startedAt) return;
+      d.startedAt = new Date().toISOString();
+      if (!save()) { d.startedAt = null; return; }
+      break;
+    case 'toggle-workout-timer':
+      if (d?.startedAt) changeWorkoutTimer(d);
+      break;
+    case 'adjust-workout-timer':
+      if (d?.startedAt) changeWorkoutTimer(d,i);
+      break;
     case 'later': editor=false; tab='홈'; break;
-    case 'cancel': if (confirm('진행 중인 운동을 삭제할까요?')) {state.draft=null; editor=false; save();} break;
-    case 'finish': finish(); break;
+    case 'cancel': if (d?.startedAt && confirm('진행 중인 운동을 삭제할까요?')) {state.draft=null; editor=false; save();} break;
+    case 'finish': if (d?.startedAt) finish(); break;
     case 'workout-rest':
       d.restSeconds = adjustedRest(d.restSeconds ?? state.rest, i);
       save(); break;
     case 'routine-rest':
       routine.restSeconds = adjustedRest(routine.restSeconds ?? state.rest, i);
       break;
-    case 'rest': startRest(); save(); break;
+    case 'rest': if (d?.startedAt) { startRest(); save(); } break;
     case 'rest-detail': dialog='rest'; break;
     case 'skip': if(d) d.restEnd=0; dialog=''; save(); break;
     case 'remove-exercise': if(confirm('이 종목을 삭제할까요?')) {d.exercises.splice(i,1);save();} break;
@@ -243,6 +293,7 @@ app.addEventListener('click', async event=>{
     }
     case 'remove-set': d.exercises[i].sets.splice(j,1);save();break;
     case 'check': {
+      if (!d?.startedAt) return;
       const s=d.exercises[i].sets[j];
       if (!s.checked && !validSet(s)) return notice('무게와 횟수를 확인해 주세요.');
       s.checked=!s.checked;
