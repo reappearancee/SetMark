@@ -182,3 +182,7 @@ dialog > #search + .chips {
 }
 .routine-exercise-title { min-width: 0; }
 .routine-exercise-title > strong { overflow-wrap: anywhere; }
+
+.routine-actions { gap: 6px; }
+.routine-actions > button { white-space: nowrap; }
+.routine-actions > button[data-action="routine-remove"] { margin-inline-start: auto; }

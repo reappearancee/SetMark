@@ -247,7 +247,11 @@ function modal() {
     +(routine.restEnabled?'checked':'')+'></label>'
     +(routine.restEnabled?restControls(routine.restSeconds ?? state.rest,'routine-rest'):'')
     +'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row routine-exercise-title">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge({...routine,restEnabled:routine.restEnabled === true},e))+'</div>'
-    +(isCardio(e)?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')+'</div><div data-routine-sets>'+routineSets(e,i)+'</div><div class="row">'+btn('−','routine-minus','',i)+'<span data-routine-count>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
+    +'</div><div data-routine-sets>'+routineSets(e,i)+'</div><div class="row routine-actions">'
+    +btn('−','routine-minus','',i)+'<span data-routine-count>'+e.sets.length+(isCardio(e)?'회차':'세트')+'</span>'
+    +btn('＋','routine-plus','',i)
+    +(isCardio(e)?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')
+    +btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
 }
