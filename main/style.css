@@ -145,3 +145,7 @@ dialog > header:has(+ .stack > #routine-title) {
 dialog > button[data-action="exercise-rest"].wide + button[data-action="close"].wide {
   margin-top: 12px;
 }
+
+dialog > header:has(+ #search) {
+  margin-bottom: 14px;
+}
