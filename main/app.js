@@ -30,6 +30,10 @@ const set = () => ({ id: id(), weight: '', reps: '', checked: false });
 const dateLabel = date => new Date(date).toLocaleString('ko-KR', {dateStyle:'medium',timeStyle:'short'});
 const dayKey = date => { const d = new Date(date); return [d.getFullYear(),d.getMonth(),d.getDate()].join('-'); };
 const duration = ms => { const s = Math.floor(Math.max(0,ms)/1000); const m = Math.floor(s/60); return (m >= 60 ? Math.floor(m/60)+':' : '') + String(m%60).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
+function recordElapsed(record) {
+  const elapsed = record.elapsedMs ?? (Date.parse(record.finishedAt) - Date.parse(record.startedAt));
+  return Number.isFinite(elapsed) ? Math.max(0, elapsed) : 0;
+}
 const isCardio = exercise => exercise.kind === 'cardio';
 const vol = workout => workout.exercises.filter(e=>!isCardio(e)).flatMap(e=>e.sets)
   .reduce((total,s)=>total+s.weightKg*s.repetitions,0);
@@ -202,7 +206,7 @@ function routines() {
 function history() {
   if (activeRecord) {
     const w = state.workouts.find(item=>item.id===activeRecord);
-    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(w.elapsedMs ?? (new Date(w.finishedAt)-new Date(w.startedAt)))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>isCardio(e) ? '<p>'+(i+1)+'회차 · '+number(s.minutes)+'분</p>' : '<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('');
+    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(recordElapsed(w))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>isCardio(e) ? '<p>'+(i+1)+'회차 · '+number(s.minutes)+'분</p>' : '<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('');
   }
   const first = new Date(month.getFullYear(),month.getMonth(),1);
   const length = new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
@@ -216,12 +220,15 @@ function statistics() {
   const timeline = Array.from({length:days},(_,i)=>{const d=new Date(); d.setDate(d.getDate()-days+1+i);return d;});
   const dateKeys = new Set(timeline.map(dayKey));
   const records = sorted().filter(w=>dateKeys.has(dayKey(w.finishedAt)));
+  const totalElapsed = records.reduce((total, workout) => total + recordElapsed(workout), 0);
+  const timeSummary = '<section class="card stats-time"><h2>최근 '+days+'일 운동한 시간</h2>'
+    +'<strong class="clock">'+duration(totalElapsed)+'</strong></section>';
   const names = [...new Set(records.flatMap(w=>w.exercises.filter(e=>!isCardio(e)).map(e=>e.name)))];
   const selected = names.includes(movement)?movement:names[0];
   const trend = timeline.map(d=>{ const sets=records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).flatMap(w=>w.exercises.filter(e=>!isCardio(e)&&e.name===selected).flatMap(e=>e.sets));return Math.max(0,...sets.map(s=>s.weightKg*(metric==='estimate'&&s.repetitions>1?1+s.repetitions/30:1))); });
   const cardioMinutes = records.reduce((total,w)=>total+cardioTotal(w),0);
   const bars = values => '<div class="bars">'+values.map((n,i)=>'<span title="'+esc(timeline[i].toLocaleDateString('ko-KR')+': '+number(n)+' kg')+'" style="height:'+Math.max(1,100*n/Math.max(1,...values))+'%"></span>').join('')+'</div>';
-  return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div><section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(cardioMinutes?'<section class="card"><h2>유산소 시간</h2><p>'+number(cardioMinutes)+'분</p></section>':'')+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
+  return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div>'+timeSummary+'<section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(cardioMinutes?'<section class="card"><h2>유산소 시간</h2><p>'+number(cardioMinutes)+'분</p></section>':'')+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
 }
 function settings() {
   return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';

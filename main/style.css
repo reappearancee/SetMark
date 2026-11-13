@@ -186,3 +186,7 @@ dialog > #search + .chips {
 .routine-actions { gap: 6px; }
 .routine-actions > button { white-space: nowrap; }
 .routine-actions > button[data-action="routine-remove"] { margin-inline-start: auto; }
+
+.stats-time { margin-block: 16px; }
+.stats-time h2 { font-size: 1rem; margin-bottom: 6px; }
+.stats-time .clock { font-size: 1.625rem; }
