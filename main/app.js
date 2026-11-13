@@ -2,7 +2,7 @@ import { catalog } from './catalog.js';
 import { poses, keywords } from './poses.js';
 
 const key = 'setmark.web.v1';
-const defaults = { name: null, rest: 90, restSound: true, draft: null, workouts: [], routines: [] };
+const defaults = { name: null, rest: 90, restEnabled: true, restSound: true, draft: null, workouts: [], routines: [] };
 const app = document.querySelector('#app');
 let state;
 try { state = { ...defaults, ...JSON.parse(localStorage.getItem(key) || '{}') }; }
@@ -11,6 +11,8 @@ let tab = '홈', editor = false, routine = null, dialog = '', category = '', que
 let activeRecord = null, day = new Date(), month = new Date(), days = 30, metric = 'weight', movement = '';
 let registration, applying = false, noticeTimer;
 let restAudio;
+let restExercise, restExerciseIndex, defaultRestDraft;
+let routineScroll = 0;
 let announcedRestEnd = 0;
 const tabs = ['홈', '루틴', '기록', '통계', '설정'];
 const paths = ['M3 10l9-7 9 7v10h-6v-6H9v6H3z','M4 5h16v14H4zM8 9h8m-8 5h8','M4 6h16v14H4zM8 3v6m8-6v6M4 11h16','M5 20V11m7 9V4m7 16v-7','M12 4v3m0 10v3M4 12h3m10 0h3M6 6l2 2m8 8 2 2M6 18l2-2m8-8 2-2M12 8a4 4 0 1 0 0 8 4 4 0 1 0 0-8'];
@@ -67,23 +69,45 @@ function adjustedRest(seconds, delta) {
   return Math.max(15, Math.min(300, seconds + delta));
 }
 function restFor(workout, exercise, entry) {
-  return entry?.restSeconds ?? exercise?.restSeconds ?? workout.restSeconds ?? state.rest;
+  if (exercise?.restSeconds === 0) return 0;
+  return entry?.restSeconds ?? exercise?.restSeconds ?? (state.restEnabled ? workout?.restSeconds ?? state.rest : 0);
 }
-function restSelect(label, selection, inherited, target, source) {
-  const options = Array.from({length:20}, (_,i) => {
-    const seconds = (i+1)*15;
-    return '<option value="'+seconds+'" '+(selection===seconds?'selected':'')+'>'+duration(seconds*1000)+'</option>';
-  }).join('');
-  return '<label class="rest-option"><span>'+label+'</span><select data-rest-setting="'+target+'">'
-    + '<option value="">'+source+' 따르기 ('+duration(inherited*1000)+')</option>'+options+'</select></label>';
+function restLabel(seconds) {
+  return seconds ? duration(seconds*1000) : 'OFF';
 }
-function routineRest(exercise, index) {
-  return '<div class="routine-rest-options">'
-    + restSelect('종목 휴식',exercise.restSeconds,restFor(routine),String(index),'루틴')
-    + '<details data-set-rest="'+exercise.id+'"><summary>세트별 휴식 설정</summary>'
-    + exercise.sets.map((entry,i)=>restSelect((i+1)+'세트',entry.restSeconds,restFor(routine,exercise),index+':'+i,
-        exercise.restSeconds == null ? '루틴' : '종목')).join('')
-    + '</details></div>';
+function restBadge(workout, exercise) {
+  return '<span class="rest-badge"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="14" r="7"/><path d="M12 14V9M9 3h6"/></svg>'
+    + restLabel(restFor(workout,exercise))+'</span>';
+}
+function timePicker(seconds, prefix) {
+  const select = (part, count, selected, unit) => '<label><span>'+unit+'</span><select id="'+prefix+'-'+part+'">'
+    + Array.from({length:count},(_,i)=>'<option value="'+i+'" '+(selected===i?'selected':'')+'>'+i+' '+unit+'</option>').join('')
+    + '</select></label>';
+  return '<div class="rest-time-picker">'+select('minutes',6,Math.floor(seconds/60),'분')
+    + select('seconds',60,seconds%60,'초')+'</div>';
+}
+function restSelect(entry, inherited, index) {
+  const values = new Set(Array.from({length:20},(_,i)=>(i+1)*15));
+  if (entry.restSeconds != null) values.add(entry.restSeconds);
+  const options = [...values].sort((a,b)=>a-b).map(seconds=>'<option value="'+seconds+'" '
+    +(entry.restSeconds===seconds?'selected':'')+'>'+restLabel(seconds)+'</option>').join('');
+  return '<label class="rest-option"><span>'+(index+1)+'세트</span><select data-rest-setting="'+index+'">'
+    + '<option value="">따르기 ('+restLabel(inherited)+')</option>'+options+'</select></label>';
+}
+function exerciseRestModal() {
+  const seconds = restExercise.restSeconds;
+  const mode = seconds === 0 ? 'off' : seconds == null ? 'inherit' : 'custom';
+  const option = (value,label) => '<label class="rest-option"><span>'+label+'</span><input type="radio" name="exercise-rest-mode" value="'+value+'" '+(mode===value?'checked':'')+'></label>';
+  return '<header class="row between"><h2>휴식 타이머 설정</h2>'+btn('닫기','close')+'</header>'
+    + '<p class="muted">'+esc(restExercise.name)+'</p>'
+    + btn('설정 ›','default-rest','wide')
+    + option('inherit','기본값 따르기 · '+restLabel(restFor(routine)))
+    + option('off','OFF')+option('custom','이 운동만')
+    + (mode==='custom'?timePicker(seconds,'exercise-rest'):'')
+    + (mode!=='off'&&restExercise.sets.length
+      ? '<details data-set-rest="'+esc(restExercise.id)+'"><summary>세트별 휴식 설정</summary>'
+        + restExercise.sets.map((entry,i)=>restSelect(entry,restFor(routine,restExercise),i)).join('')+'</details>' : '')
+    + btn('확인','exercise-rest-save','primary wide rest-confirm');
 }
 function routineSets(exercise, index) {
   return exercise.sets.map((entry, i) => {
@@ -139,7 +163,7 @@ function workout() {
   const clock = started
     ? workoutTimer(d)
     : btn('운동 시작','begin-workout','primary wide workout-start');
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+'<section class="card"><h2>휴식 타이머</h2><div class="row between">'+restControls(d.restSeconds ?? state.rest,'workout-rest')+btn('휴식 시작','rest','primary','',!started)+'</div><small>세트를 체크하면 세트별·종목별 설정을 우선 적용해요.</small></section>'+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+'<section class="card"><h2>휴식 타이머</h2><div class="row between">'+restControls(d.restSeconds ?? state.rest,'workout-rest')+btn('휴식 시작','rest','primary','',!started || !restFor(d))+'</div><small>세트를 체크하면 세트별·종목별 설정을 우선 적용해요.</small></section>'+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+restBadge(d,e)+'</div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
 }
 function routines() {
   return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><p>'+r.exercises.map(e=>esc(e.name)+' '+e.sets.length+'세트').join(' · ')+'</p><div class="row">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
@@ -168,7 +192,7 @@ function statistics() {
   return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div><section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
 }
 function settings() {
-  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2><label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';
+  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';
 }
 function pickerResults() {
   const q = query.trim().toLowerCase();
@@ -178,9 +202,16 @@ function pickerResults() {
   return (custom ? btn('＋ ‘'+esc(query.trim())+'’ 추가','choose','exercise',query.trim()) : '')+matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>btn(pose(n)+esc(n),'choose','exercise',n)).join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
 }
 function modal() {
+  if (dialog==='exercise-menu') return '<h2>'+esc(restExercise.name)+'</h2>'+btn('휴식 타이머 설정','exercise-rest','wide')+btn('닫기','close','wide');
+  if (dialog==='exercise-rest') return exerciseRestModal();
+  if (dialog==='default-rest') return '<header class="row between"><h2>기본 휴식 타이머</h2>'+btn('닫기','close')+'</header>'
+    + '<label class="rest-option"><span>기본 타이머 사용</span><input id="rest-enabled" type="checkbox" role="switch" '+(defaultRestDraft.enabled?'checked':'')+'></label>'
+    + (defaultRestDraft.enabled ? timePicker(defaultRestDraft.seconds,'default-rest') : '')
+    + btn('저장','default-rest-save','primary wide rest-confirm');
   if (dialog==='name') return '<h2>어떻게 불러 드릴까요?</h2><form id="profile" class="stack"><input name="name" aria-label="이름 또는 별명" placeholder="이름 또는 별명" maxlength="32" value="'+esc(state.name)+'"><div class="row"><button class="primary">저장</button>'+btn(state.name===null?'건너뛰기':'취소','close')+'</div></form>';
   if (dialog==='picker') return '<header class="row between"><h2>종목 추가</h2>'+btn('닫기','close')+'</header><input id="search" class="wide" type="search" placeholder="종목 검색 또는 직접 입력" aria-label="종목 검색" value="'+esc(query)+'"><div class="chips">'+['',...Object.keys(catalog)].map(c=>btn(c||'전체','category',c===category?'primary':'',c)).join('')+'</div><div id="results">'+pickerResults()+'</div>';
-  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+'</div><section class="card"><h2>루틴 기본 휴식</h2>'+restControls(routine.restSeconds ?? state.rest,'routine-rest')+'</section>'+routine.exercises.map((e,i)=>'<div class="card"><strong>'+esc(e.name)+'</strong>'+routineSets(e,i)+routineRest(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
+  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+'</div><section class="card"><h2>루틴 기본 휴식</h2>'+restControls(routine.restSeconds ?? state.rest,'routine-rest')+'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row"><strong>'+esc(e.name)+'</strong>'+restBadge(routine,e)+'</div>'
+    +'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button></div>'+routineSets(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
 }
@@ -197,7 +228,8 @@ function render() {
     for (const item of current.querySelectorAll('[data-set-rest]')) {
       item.open = openRest.has(item.dataset.setRest);
     }
-    current.scrollTop = dialogScroll;
+    current.scrollTop = dialog==='routine' && routineScroll ? routineScroll : dialogScroll;
+    if (dialog==='routine') routineScroll = 0;
   }
   scrollTo(0,y);
   showUpdate();
@@ -247,12 +279,22 @@ function playRestSound() {
   }
 }
 function startRest(seconds = restFor(state.draft)) {
+  if (seconds <= 0) return;
   prepareRestSound();
   state.draft.restStart = Date.now();
   state.draft.restEnd = state.draft.restStart + seconds*1000;
 }
 function openPicker() { category=''; query=''; dialog='picker'; }
 function closeDialog() {
+  if (dialog==='default-rest') {
+    dialog = restExercise ? 'exercise-rest' : '';
+    return;
+  }
+  if (dialog==='exercise-menu' || dialog==='exercise-rest') {
+    restExercise = null;
+    dialog = 'routine';
+    return;
+  }
   if (dialog==='picker' && routine) dialog='routine';
   else {
     if (dialog==='name' && state.name===null) { state.name=''; save(); }
@@ -289,7 +331,7 @@ app.addEventListener('click', async event=>{
     case 'tab': tab=value; editor=false; activeRecord=null; window.scrollTo(0,0); break;
     case 'start': {
       const template=state.routines.find(r=>r.id===value);
-      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restSeconds:template?.restSeconds ?? state.rest,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,restSeconds:s.restSeconds}))}))||[]};
+      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,restSeconds:s.restSeconds}))}))||[]};
       editor=true; window.scrollTo(0,0); save(); break;
     }
     case 'begin-workout':
@@ -339,7 +381,27 @@ app.addEventListener('click', async event=>{
       closeDialog(); break;
     }
     case 'close': closeDialog(); break;
-    case 'routine-new': routine={id:id(),title:'',weekdays:[],restSeconds:state.rest,exercises:[],createdAt:new Date().toISOString()};dialog='routine';break;
+    case 'routine-new': routine={id:id(),title:'',weekdays:[],exercises:[],createdAt:new Date().toISOString()};dialog='routine';break;
+    case 'exercise-menu':
+      restExerciseIndex = i;
+      restExercise = structuredClone(routine.exercises[i]);
+      routineScroll = app.querySelector('dialog').scrollTop;
+      dialog='exercise-menu'; break;
+    case 'exercise-rest': dialog='exercise-rest'; break;
+    case 'exercise-rest-save':
+      if (restExercise.restSeconds > 300) return notice('휴식 시간은 최대 5분이에요.');
+      routine.exercises[restExerciseIndex] = restExercise;
+      closeDialog(); break;
+    case 'default-rest':
+      defaultRestDraft = {enabled:state.restEnabled, seconds:state.rest};
+      dialog='default-rest'; break;
+    case 'default-rest-save': {
+      if (defaultRestDraft.seconds > 300) return notice('휴식 시간은 최대 5분이에요.');
+      const previous = {rest:state.rest,restEnabled:state.restEnabled};
+      Object.assign(state,{rest:defaultRestDraft.seconds,restEnabled:defaultRestDraft.enabled});
+      if (!save()) { Object.assign(state,previous); return; }
+      closeDialog(); break;
+    }
     case 'routine-edit': routine=structuredClone(state.routines.find(r=>r.id===value));dialog='routine';break;
     case 'weekday': routine.weekdays=routine.weekdays.includes(i)?routine.weekdays.filter(x=>x!==i):[...routine.weekdays,i].sort();break;
     case 'routine-minus': if(routine.exercises[i].sets.length>1) routine.exercises[i].sets.pop();break;
@@ -353,7 +415,6 @@ app.addEventListener('click', async event=>{
       }
       {
         const previous = state.routines;
-        routine.restSeconds ??= state.rest;
         state.routines = previous.some(r=>r.id===routine.id)
           ? previous.map(r=>r.id===routine.id ? routine : r)
           : [...previous,routine];
@@ -392,15 +453,31 @@ app.addEventListener('input', event=>{
   }
 });
 app.addEventListener('change',event=>{
-  const setting = event.target.dataset.restSetting;
-  if (setting !== undefined && routine) {
-    const [i,j] = setting.split(':').map(Number);
-    const exercise = routine.exercises[i];
-    const target = j === undefined ? exercise : exercise.sets[j];
-    if (event.target.value === '') delete target.restSeconds;
-    else target.restSeconds = Number(event.target.value);
-    render();
+  const input = event.target;
+  const setting = input.dataset.restSetting;
+  if (setting !== undefined && restExercise) {
+    const entry = restExercise.sets[Number(setting)];
+    if (input.value === '') delete entry.restSeconds;
+    else entry.restSeconds = Number(input.value);
     return;
+  }
+  if (input.name === 'exercise-rest-mode') {
+    if (input.value === 'inherit') delete restExercise.restSeconds;
+    else restExercise.restSeconds = input.value === 'off' ? 0 : restFor(routine) || state.rest;
+    render();
+  }
+  if (input.id === 'rest-enabled') {
+    defaultRestDraft.enabled = input.checked;
+    render();
+  }
+  const prefix = dialog === 'exercise-rest' ? 'exercise-rest' : 'default-rest';
+  if (input.id === prefix+'-minutes' || input.id === prefix+'-seconds') {
+    const minutes = Number(app.querySelector('#'+prefix+'-minutes').value);
+    const seconds = Number(app.querySelector('#'+prefix+'-seconds').value);
+    const total = minutes*60+seconds;
+    if (prefix === 'exercise-rest') restExercise.restSeconds = Math.max(1,total);
+    else defaultRestDraft.seconds = Math.max(1,total);
+    if (!total) app.querySelector('#'+prefix+'-seconds').value = '1';
   }
   if(event.target.id==='movement') {movement=event.target.value;render();}
   if(event.target.id==='rest-sound') {

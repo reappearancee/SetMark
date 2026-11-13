@@ -104,3 +104,36 @@ button[data-action="add-set"] {
 .card:has(button[data-action="rest"]) > h2 {
   font-size: 1rem;
 }
+
+.rest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 8px;
+  border-left: 1px solid var(--line);
+  color: var(--green);
+  font-size: .8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.rest-option input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  min-height: 0;
+  margin: 0 4px;
+  padding: 0;
+  accent-color: var(--green);
+}
+.rest-option:has(input) { min-height: 44px; }
+.rest-time-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f0f5f1;
+}
+.rest-time-picker label { display: grid; gap: 4px; }
+.rest-confirm { margin-top: 12px; }
