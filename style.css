@@ -8,3 +8,8 @@
 .install-guide li{padding-left:.25em}
 .install-guide li+li{margin-top:12px}
 .install-guide li::marker{font-weight:700;color:var(--green)}
+
+/* Disable double-tap zoom while keeping panning and pinch zoom. */
+#app, #app * {
+  touch-action: manipulation;
+}
