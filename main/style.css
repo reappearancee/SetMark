@@ -137,3 +137,11 @@ button[data-action="add-set"] {
 }
 .rest-time-picker label { display: grid; gap: 4px; }
 .rest-confirm { margin-top: 12px; }
+
+dialog > header:has(+ .stack > #routine-title) {
+  margin-bottom: 14px;
+}
+
+dialog > button[data-action="exercise-rest"].wide + button[data-action="close"].wide {
+  margin-top: 12px;
+}

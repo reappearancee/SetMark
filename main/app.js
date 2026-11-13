@@ -2,7 +2,7 @@ import { catalog } from './catalog.js';
 import { poses, keywords } from './poses.js';
 
 const key = 'setmark.web.v1';
-const defaults = { name: null, rest: 90, restEnabled: true, restSound: true, draft: null, workouts: [], routines: [] };
+const defaults = { name: null, rest: 90, restEnabled: false, restSound: true, draft: null, workouts: [], routines: [] };
 const app = document.querySelector('#app');
 let state;
 try { state = { ...defaults, ...JSON.parse(localStorage.getItem(key) || '{}') }; }
@@ -69,8 +69,8 @@ function adjustedRest(seconds, delta) {
   return Math.max(15, Math.min(300, seconds + delta));
 }
 function restFor(workout, exercise, entry) {
-  if (exercise?.restSeconds === 0) return 0;
-  return entry?.restSeconds ?? exercise?.restSeconds ?? (state.restEnabled ? workout?.restSeconds ?? state.rest : 0);
+  if (!(workout?.restEnabled ?? state.restEnabled) || exercise?.restSeconds === 0) return 0;
+  return entry?.restSeconds ?? exercise?.restSeconds ?? workout?.restSeconds ?? state.rest;
 }
 function restLabel(seconds) {
   return seconds ? duration(seconds*1000) : 'OFF';
@@ -96,17 +96,18 @@ function restSelect(entry, inherited, index) {
 }
 function exerciseRestModal() {
   const seconds = restExercise.restSeconds;
+  const routineRest = {...routine,restEnabled:routine.restEnabled === true};
   const mode = seconds === 0 ? 'off' : seconds == null ? 'inherit' : 'custom';
   const option = (value,label) => '<label class="rest-option"><span>'+label+'</span><input type="radio" name="exercise-rest-mode" value="'+value+'" '+(mode===value?'checked':'')+'></label>';
   return '<header class="row between"><h2>휴식 타이머 설정</h2>'+btn('닫기','close')+'</header>'
     + '<p class="muted">'+esc(restExercise.name)+'</p>'
     + btn('설정 ›','default-rest','wide')
-    + option('inherit','기본값 따르기 · '+restLabel(restFor(routine)))
+    + option('inherit','기본값 따르기 · '+restLabel(restFor(routineRest)))
     + option('off','OFF')+option('custom','이 운동만')
     + (mode==='custom'?timePicker(seconds,'exercise-rest'):'')
     + (mode!=='off'&&restExercise.sets.length
       ? '<details data-set-rest="'+esc(restExercise.id)+'"><summary>세트별 휴식 설정</summary>'
-        + restExercise.sets.map((entry,i)=>restSelect(entry,restFor(routine,restExercise),i)).join('')+'</details>' : '')
+        + restExercise.sets.map((entry,i)=>restSelect(entry,restFor(routineRest,restExercise),i)).join('')+'</details>' : '')
     + btn('확인','exercise-rest-save','primary wide rest-confirm');
 }
 function routineSets(exercise, index) {
@@ -160,10 +161,15 @@ function workout() {
       ? '<p>운동이 끝났다면 <b>운동 완료</b>를 눌러 기록을 저장해 주세요.</p><p>기록을 버리려면 <b>운동 취소</b>를 눌러 주세요.</p>'
       : '<p>준비가 됐다면 <b>운동 시작</b> 버튼을 눌러 주세요.</p>')
     + '</aside>';
+  const restPanel = (d.restEnabled ?? state.restEnabled)
+    ? '<section class="card"><h2>휴식 타이머</h2><div class="row between">'
+      + restControls(d.restSeconds ?? state.rest,'workout-rest') + btn('휴식 시작','rest','primary','',!started)
+      + '</div><small>세트를 체크하면 세트별·종목별 설정을 우선 적용해요.</small></section>'
+    : '';
   const clock = started
     ? workoutTimer(d)
     : btn('운동 시작','begin-workout','primary wide workout-start');
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+'<section class="card"><h2>휴식 타이머</h2><div class="row between">'+restControls(d.restSeconds ?? state.rest,'workout-rest')+btn('휴식 시작','rest','primary','',!started || !restFor(d))+'</div><small>세트를 체크하면 세트별·종목별 설정을 우선 적용해요.</small></section>'+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+restBadge(d,e)+'</div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+restBadge(d,e)+'</div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
 }
 function routines() {
   return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><p>'+r.exercises.map(e=>esc(e.name)+' '+e.sets.length+'세트').join(' · ')+'</p><div class="row">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
@@ -210,7 +216,10 @@ function modal() {
     + btn('저장','default-rest-save','primary wide rest-confirm');
   if (dialog==='name') return '<h2>어떻게 불러 드릴까요?</h2><form id="profile" class="stack"><input name="name" aria-label="이름 또는 별명" placeholder="이름 또는 별명" maxlength="32" value="'+esc(state.name)+'"><div class="row"><button class="primary">저장</button>'+btn(state.name===null?'건너뛰기':'취소','close')+'</div></form>';
   if (dialog==='picker') return '<header class="row between"><h2>종목 추가</h2>'+btn('닫기','close')+'</header><input id="search" class="wide" type="search" placeholder="종목 검색 또는 직접 입력" aria-label="종목 검색" value="'+esc(query)+'"><div class="chips">'+['',...Object.keys(catalog)].map(c=>btn(c||'전체','category',c===category?'primary':'',c)).join('')+'</div><div id="results">'+pickerResults()+'</div>';
-  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+'</div><section class="card"><h2>루틴 기본 휴식</h2>'+restControls(routine.restSeconds ?? state.rest,'routine-rest')+'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row"><strong>'+esc(e.name)+'</strong>'+restBadge(routine,e)+'</div>'
+  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+ '</div><section class="card"><label class="rest-option"><span>루틴 휴식 타이머</span><input id="routine-rest-enabled" type="checkbox" role="switch" '
+    +(routine.restEnabled?'checked':'')+'></label>'
+    +(routine.restEnabled?restControls(routine.restSeconds ?? state.rest,'routine-rest'):'')
+    +'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row"><strong>'+esc(e.name)+'</strong>'+restBadge({...routine,restEnabled:routine.restEnabled === true},e)+'</div>'
     +'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button></div>'+routineSets(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
@@ -331,7 +340,7 @@ app.addEventListener('click', async event=>{
     case 'tab': tab=value; editor=false; activeRecord=null; window.scrollTo(0,0); break;
     case 'start': {
       const template=state.routines.find(r=>r.id===value);
-      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,restSeconds:s.restSeconds}))}))||[]};
+      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restEnabled:template ? template.restEnabled === true : undefined,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,restSeconds:s.restSeconds}))}))||[]};
       editor=true; window.scrollTo(0,0); save(); break;
     }
     case 'begin-workout':
@@ -381,7 +390,7 @@ app.addEventListener('click', async event=>{
       closeDialog(); break;
     }
     case 'close': closeDialog(); break;
-    case 'routine-new': routine={id:id(),title:'',weekdays:[],exercises:[],createdAt:new Date().toISOString()};dialog='routine';break;
+    case 'routine-new': routine={id:id(),title:'',weekdays:[],restEnabled:false,exercises:[],createdAt:new Date().toISOString()};dialog='routine';break;
     case 'exercise-menu':
       restExerciseIndex = i;
       restExercise = structuredClone(routine.exercises[i]);
@@ -454,6 +463,11 @@ app.addEventListener('input', event=>{
 });
 app.addEventListener('change',event=>{
   const input = event.target;
+  if (input.id === 'routine-rest-enabled' && routine) {
+    routine.restEnabled = input.checked;
+    render();
+    return;
+  }
   const setting = input.dataset.restSetting;
   if (setting !== undefined && restExercise) {
     const entry = restExercise.sets[Number(setting)];
@@ -463,7 +477,7 @@ app.addEventListener('change',event=>{
   }
   if (input.name === 'exercise-rest-mode') {
     if (input.value === 'inherit') delete restExercise.restSeconds;
-    else restExercise.restSeconds = input.value === 'off' ? 0 : restFor(routine) || state.rest;
+    else restExercise.restSeconds = input.value === 'off' ? 0 : routine.restSeconds ?? state.rest;
     render();
   }
   if (input.id === 'rest-enabled') {
