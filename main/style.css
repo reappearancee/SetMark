@@ -75,15 +75,15 @@
 }
 .timer-adjust button { font-variant-numeric: tabular-nums; }
 
-button[data-action="add-set"] {
+.exercise-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   margin-top: 12px;
 }
+.card > .row:first-child + .exercise-actions { margin-top: 20px; }
 
-/* An empty exercise has no set rows between its heading and add button. */
-.card > .row:first-child + button[data-action="add-set"] {
-  display: block;
-  margin-top: 20px;
-}
 
 .routine-rest-options {
   margin: 12px 0;
