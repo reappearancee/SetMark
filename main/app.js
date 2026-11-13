@@ -1,4 +1,4 @@
-import { catalog } from './catalog.js';
+import { catalog, exerciseAliases } from './catalog.js';
 import { poses, keywords } from './poses.js';
 
 const key = 'setmark.web.v1';
@@ -30,7 +30,13 @@ const set = () => ({ id: id(), weight: '', reps: '', checked: false });
 const dateLabel = date => new Date(date).toLocaleString('ko-KR', {dateStyle:'medium',timeStyle:'short'});
 const dayKey = date => { const d = new Date(date); return [d.getFullYear(),d.getMonth(),d.getDate()].join('-'); };
 const duration = ms => { const s = Math.floor(Math.max(0,ms)/1000); const m = Math.floor(s/60); return (m >= 60 ? Math.floor(m/60)+':' : '') + String(m%60).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
-const vol = workout => workout.exercises.flatMap(x=>x.sets).reduce((total,s)=>total+s.weightKg*s.repetitions,0);
+const isCardio = exercise => exercise.kind === 'cardio';
+const vol = workout => workout.exercises.filter(e=>!isCardio(e)).flatMap(e=>e.sets)
+  .reduce((total,s)=>total+s.weightKg*s.repetitions,0);
+const cardioTotal = workout => workout.exercises.filter(isCardio).flatMap(e=>e.sets)
+  .reduce((total,s)=>total+s.minutes,0);
+const parseMinutes = value => Number(String(value ?? '').trim().replace(',','.'));
+const validMinutes = value => { const minutes = parseMinutes(value); return minutes > 0 && minutes <= 1440; };
 const number = x => Number(x).toLocaleString('ko-KR',{maximumFractionDigits:2});
 const sorted = () => [...state.workouts].sort((a,b)=>new Date(b.finishedAt)-new Date(a.finishedAt));
 const btn = (label, action, css='', value='', disabled=false) => '<button type="button" data-action="'+action+'" data-value="'+esc(value)+'" class="'+css+'"'+(disabled?' disabled':'')+'>'+label+'</button>';
@@ -46,6 +52,9 @@ function save() {
   catch { notice('기기에 저장할 수 없어요. 설정에서 기록을 내보내세요.'); return false; }
 }
 function pose(name) {
+  if (catalog['유산소'].includes(name)) {
+    return '<svg aria-hidden="true" class="pose" viewBox="0 0 48 48" fill="none" stroke="#25805a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="10" r="3" fill="#25805a"/><path d="m27 16-7 10 8 5 5 9m-12-14-4 9-8 3m17-21 6 6 8-2m-15-4-8-1-6 6"/></svg>';
+  }
   let motion = name.includes('케이블') ? 'cable' : name.includes('머신') && !name.includes('스미스') || name.includes('레그 컬') ? 'machine' : Object.keys(keywords).find(k=>keywords[k].some(word=>name.includes(word)));
   const [head,limbs,equipment] = poses[motion] || poses.standing;
   const lines = (items,color,width) => items.map(points=>'<polyline points="'+points.map(p=>p.join(',')).join(' ')+'" stroke="'+color+'" stroke-width="'+width+'"/>').join('');
@@ -114,7 +123,10 @@ function routineSets(exercise, index) {
   return exercise.sets.map((entry, i) => {
     const number = i + 1;
     const input = (field, title, mode) => '<input aria-label="'+number+'세트 '+title+'" placeholder="'+title+'" inputmode="'+mode+'" data-routine-set="'+index+':'+i+':'+field+'" value="'+esc(entry[field])+'">';
-    return '<div class="routine-set"><small>'+number+'세트</small>'
+    if (isCardio(exercise)) {
+      return '<div class="routine-set"><small>'+(i+1)+'회차</small>'+input('minutes','시간 (분)','decimal')+'</div>';
+    }
+    return '<div class="routine-set"><small>' +number+'세트</small>'
       + input('weight','무게 (kg)','decimal') + input('reps','횟수','numeric') + '</div>';
   }).join('');
 }
@@ -152,6 +164,12 @@ function workoutTimer(draft) {
   return '<section class="card workout-timer"><div class="row"><strong>운동 시간</strong><strong class="clock workout-time" data-clock></strong>'+toggle+(paused?'<small>일시정지</small>':'')+'</div>'
     + '<div class="timer-adjust" role="group" aria-label="운동 시간 조절">'+adjust+'</div></section>';
 }
+function cardioRow(entry, exercise, index, started) {
+  const position = exercise+':'+index;
+  return '<div class="set"><small>'+(index+1)+'</small><input aria-label="유산소 시간 (분)" placeholder="시간 (분)" inputmode="decimal" data-set="'+position+':minutes" value="'+esc(entry.minutes)+'" '+(entry.checked?'disabled':'')+'><span></span>'
+    +btn(entry.checked?'✓':'○','check',entry.checked?'checked':'',position,!started)
+    +btn('×','remove-set','danger',position)+'</div>';
+}
 function workout() {
   const d = state.draft;
   const started = Boolean(d.startedAt);
@@ -169,15 +187,15 @@ function workout() {
   const clock = started
     ? workoutTimer(d)
     : btn('운동 시작','begin-workout','primary wide workout-start');
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+restBadge(d,e)+'</div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge(d,e))+'</div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
 }
 function routines() {
-  return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><p>'+r.exercises.map(e=>esc(e.name)+' '+e.sets.length+'세트').join(' · ')+'</p><div class="row">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
+  return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><p>'+r.exercises.map(e=>esc(e.name)+' '+e.sets.length+(isCardio(e)?'회차':'세트')).join(' · ')+'</p><div class="row">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
 }
 function history() {
   if (activeRecord) {
     const w = state.workouts.find(item=>item.id===activeRecord);
-    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(w.elapsedMs ?? (new Date(w.finishedAt)-new Date(w.startedAt)))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>'<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('');
+    if (w) return btn('‹ 기록','back-record')+'<h1>'+esc(w.title)+'</h1><p class="muted">'+dateLabel(w.finishedAt)+'</p><div class="card">운동 시간 '+duration(w.elapsedMs ?? (new Date(w.finishedAt)-new Date(w.startedAt)))+' · 총 볼륨 '+number(vol(w))+' kg</div>'+w.exercises.map(e=>'<div class="card"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+e.sets.map((s,i)=>isCardio(e) ? '<p>'+(i+1)+'회차 · '+number(s.minutes)+'분</p>' : '<p>'+(i+1)+'세트 · '+number(s.weightKg)+' kg × '+s.repetitions+'회</p>').join('')+'</div>').join('');
   }
   const first = new Date(month.getFullYear(),month.getMonth(),1);
   const length = new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
@@ -191,20 +209,22 @@ function statistics() {
   const timeline = Array.from({length:days},(_,i)=>{const d=new Date(); d.setDate(d.getDate()-days+1+i);return d;});
   const dateKeys = new Set(timeline.map(dayKey));
   const records = sorted().filter(w=>dateKeys.has(dayKey(w.finishedAt)));
-  const names = [...new Set(records.flatMap(w=>w.exercises.map(e=>e.name)))];
+  const names = [...new Set(records.flatMap(w=>w.exercises.filter(e=>!isCardio(e)).map(e=>e.name)))];
   const selected = names.includes(movement)?movement:names[0];
-  const trend = timeline.map(d=>{ const sets=records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).flatMap(w=>w.exercises.filter(e=>e.name===selected).flatMap(e=>e.sets));return Math.max(0,...sets.map(s=>s.weightKg*(metric==='estimate'&&s.repetitions>1?1+s.repetitions/30:1))); });
+  const trend = timeline.map(d=>{ const sets=records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).flatMap(w=>w.exercises.filter(e=>!isCardio(e)&&e.name===selected).flatMap(e=>e.sets));return Math.max(0,...sets.map(s=>s.weightKg*(metric==='estimate'&&s.repetitions>1?1+s.repetitions/30:1))); });
+  const cardioMinutes = records.reduce((total,w)=>total+cardioTotal(w),0);
   const bars = values => '<div class="bars">'+values.map((n,i)=>'<span title="'+esc(timeline[i].toLocaleDateString('ko-KR')+': '+number(n)+' kg')+'" style="height:'+Math.max(1,100*n/Math.max(1,...values))+'%"></span>').join('')+'</div>';
-  return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div><section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
+  return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div><section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(cardioMinutes?'<section class="card"><h2>유산소 시간</h2><p>'+number(cardioMinutes)+'분</p></section>':'')+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
 }
 function settings() {
   return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';
 }
 function pickerResults() {
-  const q = query.trim().toLowerCase();
+  const normalize = value => value.toLowerCase().replace(/[\s-]+/g,'');
+  const q = normalize(query.trim());
   const matches = Object.entries(catalog).filter(([group])=>!category||group===category)
-    .map(([group,names])=>[group,names.filter(n=>n.toLowerCase().includes(q))]).filter(([,names])=>names.length);
-  const custom = !category && q && !Object.values(catalog).flat().some(n=>n.toLowerCase()===q);
+    .map(([group,names])=>[group,names.filter(n=>[n,...(exerciseAliases[n]||[])].some(label=>normalize(label).includes(q)))]).filter(([,names])=>names.length);
+  const custom = !category && q && !Object.values(catalog).flat().some(n=>[n,...(exerciseAliases[n]||[])].some(label=>normalize(label)===q));
   return (custom ? btn('＋ ‘'+esc(query.trim())+'’ 추가','choose','exercise',query.trim()) : '')+matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>btn(pose(n)+esc(n),'choose','exercise',n)).join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
 }
 function modal() {
@@ -219,8 +239,8 @@ function modal() {
   if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+ '</div><section class="card"><label class="rest-option"><span>루틴 휴식 타이머</span><input id="routine-rest-enabled" type="checkbox" role="switch" '
     +(routine.restEnabled?'checked':'')+'></label>'
     +(routine.restEnabled?restControls(routine.restSeconds ?? state.rest,'routine-rest'):'')
-    +'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row"><strong>'+esc(e.name)+'</strong>'+restBadge({...routine,restEnabled:routine.restEnabled === true},e)+'</div>'
-    +'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button></div>'+routineSets(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
+    +'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row"><strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge({...routine,restEnabled:routine.restEnabled === true},e))+'</div>'
+    +(isCardio(e)?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')+'</div>'+routineSets(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
 }
@@ -313,7 +333,7 @@ function closeDialog() {
 }
 function finish() {
   const d = state.draft;
-  const exercises = d.exercises.map(e=>({...e,sets:e.sets.filter(s=>s.checked).map(s=>({id:s.id,weightKg:Number(s.weight.trim().replace(',','.')),repetitions:Number(s.reps)}))})).filter(e=>e.sets.length);
+  const exercises = d.exercises.map(e=>({...e,sets:e.sets.filter(s=>s.checked).map(s=>isCardio(e)?{id:s.id,minutes:parseMinutes(s.minutes)}:{id:s.id,weightKg:Number(s.weight.trim().replace(',','.')),repetitions:Number(s.reps)})})).filter(e=>e.sets.length);
   if (!exercises.length) return notice('완료한 세트를 한 개 이상 체크해 주세요.');
   if (d.exercises.some(e=>e.sets.some(s=>!s.checked)) && !confirm('체크한 세트만 저장할까요?')) return;
   const {id,title,startedAt} = d;
@@ -325,7 +345,7 @@ function finish() {
   editor=false; tab='기록'; activeRecord=id;
 }
 function download() {
-  const data = {formatVersion:1, exportedAt:new Date().toISOString(), workouts:state.workouts, routines:state.routines.map(r=>({...r, exercises:r.exercises.map(e=>({...e,sets:e.sets.map(s=>({id:s.id,weightKg:Number(s.weight.trim().replace(',','.'))||0,repetitions:Number(s.reps)||0,restSeconds:s.restSeconds}))}))}))};
+  const data = {formatVersion:1, exportedAt:new Date().toISOString(), workouts:state.workouts, routines:state.routines.map(r=>({...r, exercises:r.exercises.map(e=>({...e,sets:e.sets.map(s=>isCardio(e)?{id:s.id,minutes:parseMinutes(s.minutes)||0}:{id:s.id,weightKg:Number(s.weight.trim().replace(',','.'))||0,repetitions:Number(s.reps)||0,restSeconds:s.restSeconds})}))}))};
   const url = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
   const link = document.createElement('a'); link.href=url; link.download='Setmark-'+new Date().toISOString().slice(0,10)+'.json'; link.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
@@ -340,7 +360,7 @@ app.addEventListener('click', async event=>{
     case 'tab': tab=value; editor=false; activeRecord=null; window.scrollTo(0,0); break;
     case 'start': {
       const template=state.routines.find(r=>r.id===value);
-      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restEnabled:template ? template.restEnabled === true : undefined,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,restSeconds:s.restSeconds}))}))||[]};
+      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restEnabled:template ? template.restEnabled === true : undefined,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,minutes:s.minutes,restSeconds:s.restSeconds}))}))||[]};
       editor=true; window.scrollTo(0,0); save(); break;
     }
     case 'begin-workout':
@@ -369,23 +389,27 @@ app.addEventListener('click', async event=>{
     case 'remove-exercise': if(confirm('이 종목을 삭제할까요?')) {d.exercises.splice(i,1);save();} break;
     case 'add-set': {
       const last=d.exercises[i].sets.at(-1);
-      d.exercises[i].sets.push({...set(),weight:last?.weight||'',reps:last?.reps||''});save();break;
+      d.exercises[i].sets.push({...set(),weight:last?.weight||'',reps:last?.reps||'',minutes:last?.minutes||''});save();break;
     }
     case 'remove-set': d.exercises[i].sets.splice(j,1);save();break;
     case 'check': {
       if (!d?.startedAt) return;
-      const s=d.exercises[i].sets[j];
-      if (!s.checked && !validSet(s)) return notice('무게와 횟수를 확인해 주세요.');
+      const exercise=d.exercises[i];
+      const s=exercise.sets[j];
+      if (!s.checked && (isCardio(exercise) ? !validMinutes(s.minutes) : !validSet(s))) {
+        return notice(isCardio(exercise) ? '유산소 시간을 분 단위로 입력해 주세요.' : '무게와 횟수를 확인해 주세요.');
+      }
       s.checked=!s.checked;
-      if (s.checked) startRest(restFor(d,d.exercises[i],s));
+      if (s.checked && !isCardio(exercise)) startRest(restFor(d,exercise,s));
       save(); break;
     }
     case 'picker': openPicker(); break;
     case 'category': category=value; break;
     case 'choose': {
-      const prior=sorted().flatMap(w=>w.exercises).find(e=>e.name.toLowerCase()===value.toLowerCase());
-      const sets=!routine && prior ? prior.sets.map(s=>({...set(),weight:String(s.weightKg),reps:String(s.repetitions)})) : [set()];
-      (routine||d).exercises.push({id:id(),name:value,sets});
+      const cardio = catalog['유산소'].includes(value);
+      const prior=sorted().flatMap(w=>w.exercises).find(e=>isCardio(e)===cardio && e.name.toLowerCase()===value.toLowerCase());
+      const sets=!routine && prior ? prior.sets.map(s=>cardio ? {...set(),minutes:String(s.minutes)} : {...set(),weight:String(s.weightKg),reps:String(s.repetitions)}) : [set()];
+      (routine||d).exercises.push({id:id(),name:value,kind:cardio?'cardio':undefined,sets});
       if(!routine) save();
       closeDialog(); break;
     }
@@ -419,8 +443,11 @@ app.addEventListener('click', async event=>{
     case 'routine-save':
       routine.title=routine.title.trim();
       if(!routine.title||!routine.exercises.length) return notice('루틴 이름과 종목을 입력해 주세요.');
-      if (routine.exercises.some(e=>e.sets.some(s=>!validSet(s,true)))) {
+      if (routine.exercises.some(e=>!isCardio(e)&&e.sets.some(s=>!validSet(s,true)))) {
         return notice('세트 무게는 0~10,000kg, 횟수는 1~999회로 입력해 주세요.');
+      }
+      if (routine.exercises.some(e=>isCardio(e)&&e.sets.some(s=>String(s.minutes ?? '').trim()&&!validMinutes(s.minutes)))) {
+        return notice('유산소 시간은 0분 초과, 1440분 이하로 입력해 주세요.');
       }
       {
         const previous = state.routines;
