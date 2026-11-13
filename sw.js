@@ -1,4 +1,4 @@
-const cacheName = 'setmark-pwa-v15';
+const cacheName = 'setmark-pwa-v16';
 const shell = [
   "./",
   "./index.html",

@@ -78,3 +78,9 @@
 button[data-action="add-set"] {
   margin-top: 12px;
 }
+
+/* An empty exercise has no set rows between its heading and add button. */
+.card > .row:first-child + button[data-action="add-set"] {
+  display: block;
+  margin-top: 20px;
+}
