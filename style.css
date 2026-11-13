@@ -13,3 +13,14 @@
 #app, #app * {
   touch-action: manipulation;
 }
+
+.install-steps img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-radius: 10px;
+}
+.install-guide .install-steps li + li {
+  margin-top: 20px;
+}
