@@ -91,7 +91,7 @@ function adjustedRest(seconds, delta) {
   return Math.max(15, Math.min(300, seconds + delta));
 }
 function restFor(workout, exercise, entry) {
-  if (!(workout?.restEnabled ?? state.restEnabled) || exercise?.restSeconds === 0) return 0;
+  if (!state.restEnabled || workout?.restEnabled === false || exercise?.restSeconds === 0) return 0;
   return entry?.restSeconds ?? exercise?.restSeconds ?? workout?.restSeconds ?? state.rest;
 }
 function restLabel(seconds) {
@@ -193,15 +193,17 @@ function workout() {
       ? '<p>운동이 끝났다면 <b>운동 완료</b>를 눌러 기록을 저장해 주세요.</p><p>기록을 버리려면 <b>운동 취소</b>를 눌러 주세요.</p>'
       : '<p>준비가 됐다면 <b>운동 시작</b> 버튼을 눌러 주세요.</p>')
     + '</aside>';
-  const restPanel = (d.restEnabled ?? state.restEnabled)
+  const restPanel = started && restFor(d)
     ? '<section class="card"><h2>휴식 타이머</h2><div class="row between">'
       + restControls(d.restSeconds ?? state.rest,'workout-rest') + btn('휴식 시작','rest','primary','',!started)
       + '</div><small>세트를 체크하면 세트별·종목별 설정을 우선 적용해요.</small></section>'
     : '';
-  const clock = started
-    ? workoutTimer(d)
-    : btn('운동 시작','begin-workout','primary wide workout-start');
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge(d,e))+'</div></div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started,e.name) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+'<div class="exercise-actions">'+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+btn('종목 삭제','remove-exercise','danger',i)+'</div></section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
+  const clock = started ? workoutTimer(d) : '';
+  const actions = started
+    ? btn('운동 완료','finish','primary') + btn('운동 취소','cancel','danger')
+    : '<hr style="width:100%;margin:4px 0;border:0;border-top:1px solid var(--line)">'
+      + btn('운동 시작','begin-workout','primary wide');
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge(d,e))+'</div></div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started,e.name) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+'<div class="exercise-actions">'+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+btn('종목 삭제','remove-exercise','danger',i)+'</div></section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+actions+'</div>';
 }
 function routinePreview(exercises) {
   const visibleCount = 5;
@@ -260,14 +262,14 @@ function modal() {
     + btn('저장','default-rest-save','primary wide rest-confirm');
   if (dialog==='name') return '<h2>어떻게 불러 드릴까요?</h2><form id="profile" class="stack"><input name="name" aria-label="이름 또는 별명" placeholder="이름 또는 별명" maxlength="32" value="'+esc(state.name)+'"><div class="row"><button class="primary">저장</button>'+btn(state.name===null?'건너뛰기':'취소','close')+'</div></form>';
   if (dialog==='picker') return '<header class="row between"><h2>종목 추가</h2>'+btn('닫기','close')+'</header><input id="search" class="wide" type="search" placeholder="종목 검색 또는 직접 입력" aria-label="종목 검색" value="'+esc(query)+'"><div class="chips">'+['',...Object.keys(catalog)].map(c=>btn(c||'전체','category',c===category?'primary':'',c)).join('')+'</div><div id="results">'+pickerResults()+'</div>';
-  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+ '</div><section class="card"><label class="rest-option"><span>루틴 휴식 타이머</span><input id="routine-rest-enabled" type="checkbox" role="switch" '
+  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+ '</div>' + (state.restEnabled ? '<section class="card"><label class="rest-option"><span>루틴 휴식 타이머</span><input id="routine-rest-enabled" type="checkbox" role="switch" '
     +(routine.restEnabled?'checked':'')+'></label>'
     +(routine.restEnabled?restControls(routine.restSeconds ?? state.rest,'routine-rest'):'')
-    +'</section>'+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row routine-exercise-title">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge({...routine,restEnabled:routine.restEnabled === true},e))+'</div>'
+    +'</section>' : '')+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row routine-exercise-title">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge({...routine,restEnabled:routine.restEnabled === true},e))+'</div>'
     +'</div><div data-routine-sets>'+routineSets(e,i)+'</div><div class="row routine-actions">'
     +btn('−','routine-minus','',i)+'<span data-routine-count>'+e.sets.length+(isCardio(e)?'회차':'세트')+'</span>'
     +btn('＋','routine-plus','',i)
-    +(isCardio(e)?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')
+    +(isCardio(e)||!state.restEnabled||!routine.restEnabled?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')
     +btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
@@ -294,10 +296,10 @@ function render() {
 }
 function tick() {
   const d = state.draft;
-  const remaining = Math.max(0,(d?.restEnd||0)-Date.now());
+  const remaining = state.restEnabled ? Math.max(0,(d?.restEnd||0)-Date.now()) : 0;
   const capsule = app.querySelector('.capsule');
   capsule.hidden = remaining===0;
-  if (d?.restEnd && remaining === 0 && !document.hidden && announcedRestEnd !== d.restEnd) {
+  if (state.restEnabled && d?.restEnd && remaining === 0 && !document.hidden && announcedRestEnd !== d.restEnd) {
     announcedRestEnd = d.restEnd;
     notice('휴식이 끝났어요. 다음 세트를 시작하세요.');
     playRestSound();
@@ -460,8 +462,15 @@ app.addEventListener('click', async event=>{
     case 'default-rest-save': {
       if (defaultRestDraft.seconds > 300) return notice('휴식 시간은 최대 5분이에요.');
       const previous = {rest:state.rest,restEnabled:state.restEnabled};
+      const draft = state.draft;
+      const previousRestEnd = draft?.restEnd;
       Object.assign(state,{rest:defaultRestDraft.seconds,restEnabled:defaultRestDraft.enabled});
-      if (!save()) { Object.assign(state,previous); return; }
+      if (!state.restEnabled && draft?.restEnd) draft.restEnd = 0;
+      if (!save()) {
+        Object.assign(state,previous);
+        if (draft) draft.restEnd = previousRestEnd;
+        return;
+      }
       closeDialog(); break;
     }
     case 'routine-edit': routine=structuredClone(state.routines.find(r=>r.id===value));dialog='routine';break;
