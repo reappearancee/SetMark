@@ -66,6 +66,25 @@ function restControls(seconds, action) {
 function adjustedRest(seconds, delta) {
   return Math.max(15, Math.min(300, seconds + delta));
 }
+function restFor(workout, exercise, entry) {
+  return entry?.restSeconds ?? exercise?.restSeconds ?? workout.restSeconds ?? state.rest;
+}
+function restSelect(label, selection, inherited, target, source) {
+  const options = Array.from({length:20}, (_,i) => {
+    const seconds = (i+1)*15;
+    return '<option value="'+seconds+'" '+(selection===seconds?'selected':'')+'>'+duration(seconds*1000)+'</option>';
+  }).join('');
+  return '<label class="rest-option"><span>'+label+'</span><select data-rest-setting="'+target+'">'
+    + '<option value="">'+source+' 따르기 ('+duration(inherited*1000)+')</option>'+options+'</select></label>';
+}
+function routineRest(exercise, index) {
+  return '<div class="routine-rest-options">'
+    + restSelect('종목 휴식',exercise.restSeconds,restFor(routine),String(index),'루틴')
+    + '<details data-set-rest="'+exercise.id+'"><summary>세트별 휴식 설정</summary>'
+    + exercise.sets.map((entry,i)=>restSelect((i+1)+'세트',entry.restSeconds,restFor(routine,exercise),index+':'+i,
+        exercise.restSeconds == null ? '루틴' : '종목')).join('')
+    + '</details></div>';
+}
 function routineSets(exercise, index) {
   return exercise.sets.map((entry, i) => {
     const number = i + 1;
@@ -120,7 +139,7 @@ function workout() {
   const clock = started
     ? workoutTimer(d)
     : btn('운동 시작','begin-workout','primary wide workout-start');
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+'<section class="card"><h2>휴식 타이머</h2><div class="row between">'+restControls(d.restSeconds ?? state.rest,'workout-rest')+btn('휴식 시작','rest','primary','',!started)+'</div><small>세트를 체크하면 이 시간으로 휴식을 시작해요.</small></section>'+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+'<section class="card"><h2>휴식 타이머</h2><div class="row between">'+restControls(d.restSeconds ?? state.rest,'workout-rest')+btn('휴식 시작','rest','primary','',!started)+'</div><small>세트를 체크하면 세트별·종목별 설정을 우선 적용해요.</small></section>'+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong></div>'+btn('종목 삭제','remove-exercise','danger',i)+'</div>'+e.sets.map((s,j)=>'<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+btn('＋ 세트 추가','add-set','',i)+'</section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+btn('운동 완료','finish','primary','',!started)+btn('운동 취소','cancel','danger','',!started)+'</div>';
 }
 function routines() {
   return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><p>'+r.exercises.map(e=>esc(e.name)+' '+e.sets.length+'세트').join(' · ')+'</p><div class="row">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
@@ -161,15 +180,25 @@ function pickerResults() {
 function modal() {
   if (dialog==='name') return '<h2>어떻게 불러 드릴까요?</h2><form id="profile" class="stack"><input name="name" aria-label="이름 또는 별명" placeholder="이름 또는 별명" maxlength="32" value="'+esc(state.name)+'"><div class="row"><button class="primary">저장</button>'+btn(state.name===null?'건너뛰기':'취소','close')+'</div></form>';
   if (dialog==='picker') return '<header class="row between"><h2>종목 추가</h2>'+btn('닫기','close')+'</header><input id="search" class="wide" type="search" placeholder="종목 검색 또는 직접 입력" aria-label="종목 검색" value="'+esc(query)+'"><div class="chips">'+['',...Object.keys(catalog)].map(c=>btn(c||'전체','category',c===category?'primary':'',c)).join('')+'</div><div id="results">'+pickerResults()+'</div>';
-  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+'</div><section class="card"><h2>세트 간 휴식</h2>'+restControls(routine.restSeconds ?? state.rest,'routine-rest')+'</section>'+routine.exercises.map((e,i)=>'<div class="card"><strong>'+esc(e.name)+'</strong>'+routineSets(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
+  if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+'</div><section class="card"><h2>루틴 기본 휴식</h2>'+restControls(routine.restSeconds ?? state.rest,'routine-rest')+'</section>'+routine.exercises.map((e,i)=>'<div class="card"><strong>'+esc(e.name)+'</strong>'+routineSets(e,i)+routineRest(e,i)+'<div class="row">'+btn('−','routine-minus','',i)+'<span>'+e.sets.length+'세트</span>'+btn('＋','routine-plus','',i)+btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
 }
 function render() {
   const y = scrollY;
+  const oldDialog = app.querySelector('dialog');
+  const openRest = new Set(Array.from(app.querySelectorAll('[data-set-rest][open]'), item=>item.dataset.setRest));
+  const dialogScroll = oldDialog?.scrollTop ?? 0;
   const active = tabs.indexOf(tab);
   app.innerHTML = '<main><button type="button" class="capsule" data-action="rest-detail" hidden><span class="ring"></span><span>휴식 <strong data-rest></strong></span></button><section class="update-banner card row between" data-update-banner hidden><strong>새 버전이 준비됐어요</strong>'+btn('업데이트','apply','primary')+'</section>'+ (editor&&state.draft ? workout() : [home,routines,history,statistics,settings][active]())+'</main><nav class="tabbar" aria-label="주 메뉴" style="--tab:'+active+'">'+tabs.map((name,i)=>'<button type="button" data-action="tab" data-value="'+name+'" '+(!editor&&i===active?'aria-current="page"':'')+'><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="'+paths[i]+'"/></svg>'+name+'</button>').join('')+'</nav>'+(dialog?'<dialog>'+modal()+'</dialog>':'');
-  if (dialog) app.querySelector('dialog').showModal();
+  if (dialog) {
+    const current = app.querySelector('dialog');
+    current.showModal();
+    for (const item of current.querySelectorAll('[data-set-rest]')) {
+      item.open = openRest.has(item.dataset.setRest);
+    }
+    current.scrollTop = dialogScroll;
+  }
   scrollTo(0,y);
   showUpdate();
   tick();
@@ -217,10 +246,10 @@ function playRestSound() {
     tone.onended = () => { tone.disconnect(); gain.disconnect(); };
   }
 }
-function startRest() {
+function startRest(seconds = restFor(state.draft)) {
   prepareRestSound();
   state.draft.restStart = Date.now();
-  state.draft.restEnd = state.draft.restStart + (state.draft.restSeconds ?? state.rest)*1000;
+  state.draft.restEnd = state.draft.restStart + seconds*1000;
 }
 function openPicker() { category=''; query=''; dialog='picker'; }
 function closeDialog() {
@@ -245,7 +274,7 @@ function finish() {
   editor=false; tab='기록'; activeRecord=id;
 }
 function download() {
-  const data = {formatVersion:1, exportedAt:new Date().toISOString(), workouts:state.workouts, routines:state.routines.map(r=>({...r, exercises:r.exercises.map(e=>({...e,sets:e.sets.map(s=>({id:s.id,weightKg:Number(s.weight.trim().replace(',','.'))||0,repetitions:Number(s.reps)||0}))}))}))};
+  const data = {formatVersion:1, exportedAt:new Date().toISOString(), workouts:state.workouts, routines:state.routines.map(r=>({...r, exercises:r.exercises.map(e=>({...e,sets:e.sets.map(s=>({id:s.id,weightKg:Number(s.weight.trim().replace(',','.'))||0,repetitions:Number(s.reps)||0,restSeconds:s.restSeconds}))}))}))};
   const url = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
   const link = document.createElement('a'); link.href=url; link.download='Setmark-'+new Date().toISOString().slice(0,10)+'.json'; link.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
@@ -260,7 +289,7 @@ app.addEventListener('click', async event=>{
     case 'tab': tab=value; editor=false; activeRecord=null; window.scrollTo(0,0); break;
     case 'start': {
       const template=state.routines.find(r=>r.id===value);
-      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restSeconds:template?.restSeconds ?? state.rest,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps}))}))||[]};
+      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restSeconds:template?.restSeconds ?? state.rest,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,restSeconds:s.restSeconds}))}))||[]};
       editor=true; window.scrollTo(0,0); save(); break;
     }
     case 'begin-workout':
@@ -297,7 +326,7 @@ app.addEventListener('click', async event=>{
       const s=d.exercises[i].sets[j];
       if (!s.checked && !validSet(s)) return notice('무게와 횟수를 확인해 주세요.');
       s.checked=!s.checked;
-      if (s.checked) startRest();
+      if (s.checked) startRest(restFor(d,d.exercises[i],s));
       save(); break;
     }
     case 'picker': openPicker(); break;
@@ -363,6 +392,16 @@ app.addEventListener('input', event=>{
   }
 });
 app.addEventListener('change',event=>{
+  const setting = event.target.dataset.restSetting;
+  if (setting !== undefined && routine) {
+    const [i,j] = setting.split(':').map(Number);
+    const exercise = routine.exercises[i];
+    const target = j === undefined ? exercise : exercise.sets[j];
+    if (event.target.value === '') delete target.restSeconds;
+    else target.restSeconds = Number(event.target.value);
+    render();
+    return;
+  }
   if(event.target.id==='movement') {movement=event.target.value;render();}
   if(event.target.id==='rest-sound') {
     state.restSound = event.target.checked;

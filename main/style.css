@@ -84,3 +84,19 @@ button[data-action="add-set"] {
   display: block;
   margin-top: 20px;
 }
+
+.routine-rest-options {
+  margin: 12px 0;
+  padding-block: 8px;
+  border-block: 1px solid var(--line);
+}
+.rest-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 6px 0;
+}
+.rest-option span { flex-shrink: 0; }
+.rest-option select { max-width: 73%; }
+.routine-rest-options summary { cursor: pointer; min-height: 44px; padding: 12px 0; }
