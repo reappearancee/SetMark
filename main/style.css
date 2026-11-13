@@ -149,3 +149,8 @@ dialog > button[data-action="exercise-rest"].wide + button[data-action="close"].
 dialog > header:has(+ #search) {
   margin-bottom: 14px;
 }
+
+.chips > button[data-action="category"] {
+  min-height: 38px;
+  padding-block: 6px;
+}
