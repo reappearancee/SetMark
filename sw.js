@@ -1,6 +1,24 @@
-const cacheName = 'setmark-pwa-v13';
-const shell = ['./', './index.html', './launch.js', './app.js', './catalog.js', './style.css', './manifest.webmanifest', './icon.png', './icon-192.png', './poses.js',
-  './install-step-1.jpg', './install-step-share.jpg', './install-step-2.jpg', './install-step-3.jpg', './install-step-4.jpg'];
+const cacheName = 'setmark-pwa-v14';
+const shell = [
+  "./",
+  "./index.html",
+  "./manifest.webmanifest",
+  "./install/",
+  "./install/index.html",
+  "./install/install-step-1.jpg",
+  "./install/install-step-2.jpg",
+  "./install/install-step-3.jpg",
+  "./install/install-step-4.jpg",
+  "./install/install-step-share.jpg",
+  "./install/style.css",
+  "./main/app.js",
+  "./main/catalog.js",
+  "./main/icon-192.png",
+  "./main/icon.png",
+  "./main/launch.js",
+  "./main/poses.js",
+  "./main/style.css"
+];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(cacheName).then(cache => cache.addAll(shell.map(url => new Request(url, {cache: 'reload'})))));
 });
