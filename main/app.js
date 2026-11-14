@@ -332,7 +332,7 @@ function statistics() {
   return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div>'+timeSummary+'<section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(cardioMinutes?'<section class="card"><h2>유산소 시간</h2><p>'+number(cardioMinutes)+'분</p></section>':'')+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
 }
 function settings() {
-  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';
+  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section>';
 }
 function exerciseInfo(name, content = esc(name)) {
   return '<button type="button" class="exercise-info" data-action="exercise-info" data-value="'+esc(name)+'" aria-label="'+esc(name)+' 운동 방법">'+content+'</button>';
@@ -470,6 +470,59 @@ function download() {
   const url = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
   const link = document.createElement('a'); link.href=url; link.download='Setmark-'+new Date().toISOString().slice(0,10)+'.json'; link.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function readBackup(data) {
+  const validId = id => typeof id==='string' && id.trim().length>0;
+  const validDate = value => typeof value==='string' && Number.isFinite(Date.parse(value));
+  if (data?.formatVersion!==1 || !Array.isArray(data.workouts) || !Array.isArray(data.routines)) {
+    throw new Error('세트마크에서 내보낸 JSON 파일을 선택해 주세요.');
+  }
+  function records(items, routine) {
+    const ids = new Set();
+    return items.map(record=>{
+      if (!validId(record?.id) || ids.has(record.id) || typeof record.title!=='string' || !Array.isArray(record.exercises)
+        || (routine ? !Array.isArray(record.weekdays) || !record.weekdays.every(day=>Number.isInteger(day)&&day>=1&&day<=7)
+          : !validDate(record.startedAt)||!validDate(record.finishedAt)
+            || (record.elapsedMs!=null && (!Number.isSafeInteger(record.elapsedMs)||record.elapsedMs<0)))) {
+        throw new Error('기록 또는 루틴의 형식이 올바르지 않아요.');
+      }
+      ids.add(record.id);
+      const exercises = record.exercises.map(exercise=>{
+        if (typeof exercise?.name!=='string' || !Array.isArray(exercise.sets)) throw new Error('운동 종목의 형식이 올바르지 않아요.');
+        const sets = exercise.sets.map(entry=>{
+          if (!entry || typeof entry!=='object') throw new Error('세트 정보가 올바르지 않아요.');
+          if (isCardio(exercise)) {
+            if (!(routine && entry.minutes===0) && !validMinutes(entry.minutes)) throw new Error('유산소 시간 정보가 올바르지 않아요.');
+            if (entry.pace!=null && !validPace(entry.pace)) throw new Error('유산소 속도 정보가 올바르지 않아요.');
+            if (!routine) return {...entry,minutes:parseMinutes(entry.minutes),pace:entry.pace==null?undefined:parseMinutes(entry.pace)};
+            return {...entry,minutes:entry.minutes===0?'':String(entry.minutes),pace:String(entry.pace ?? '')};
+          }
+          const weight = String(entry.weightKg ?? '');
+          const reps = routine && entry.repetitions===0 ? '' : String(entry.repetitions ?? '');
+          if (!validSet({weight,reps},routine)) throw new Error('세트의 무게 또는 횟수가 올바르지 않아요.');
+          return routine ? {...entry,weight,reps,checked:false} : {...entry,weightKg:parseMinutes(weight),repetitions:Number(reps)};
+        });
+        return {...exercise,sets};
+      });
+      return {...record,exercises};
+    });
+  }
+  return {workouts:records(data.workouts,false),routines:records(data.routines,true)};
+}
+async function applyBackup(file) {
+  try {
+    const backup = readBackup(JSON.parse(await file.text()));
+    if (!confirm('운동 기록 '+backup.workouts.length+'개와 루틴 '+backup.routines.length+'개를 적용할까요? 같은 기록은 파일 내용으로 갱신돼요.')) return;
+    const previous = {workouts:state.workouts,routines:state.routines};
+    const merge = (current,incoming) => [...new Map([...current,...incoming].map(record=>[record.id,record])).values()];
+    state.workouts = merge(previous.workouts,backup.workouts);
+    state.routines = merge(previous.routines,backup.routines);
+    if (!save()) { Object.assign(state,previous); return; }
+    render();
+    notice('JSON 파일을 적용했어요.');
+  } catch (error) {
+    notice(error instanceof SyntaxError ? 'JSON 파일을 읽을 수 없어요.' : error.message);
+  }
 }
 app.addEventListener('click', async event=>{
   const target=event.target.closest('[data-action]');
@@ -644,6 +697,7 @@ app.addEventListener('click', async event=>{
     case 'period': days=i;break;
     case 'metric': metric=value;break;
     case 'name': dialog='name';break;
+    case 'import': app.querySelector('#backup-file').click(); return;
     case 'export': return download();
     case 'apply':
       if (applying || !registration?.waiting || !save()) return;
@@ -677,6 +731,12 @@ app.addEventListener('input', event=>{
   }
 });
 app.addEventListener('change',event=>{
+  if (event.target.id==='backup-file') {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (file) void applyBackup(file);
+    return;
+  }
   const input = event.target;
   if (input.id === 'routine-rest-enabled' && routine) {
     routine.restEnabled = input.checked;
