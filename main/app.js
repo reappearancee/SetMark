@@ -26,7 +26,7 @@ document.addEventListener('touchmove', event => {
 }, {passive:false});
 
 
-const defaults = { name: null, rest: 90, restEnabled: false, restSound: true, draft: null, manualDraft: null, workouts: [], routines: [] };
+const defaults = { appearance: 'system', name: null, rest: 90, restEnabled: false, restSound: true, draft: null, manualDraft: null, workouts: [], routines: [] };
 const app = document.querySelector('#app');
 let storage;
 try {
@@ -44,6 +44,18 @@ try {
   app.replaceChildren(panel);
 }
 const state = {...defaults,...storage?.data};
+const appearanceModes = { light: '라이트', dark: '다크', system: '시스템' };
+const systemAppearance = matchMedia('(prefers-color-scheme: dark)');
+
+function applyAppearance() {
+  const dark = state.appearance === 'dark' || (state.appearance === 'system' && systemAppearance.matches);
+  document.documentElement.dataset.appearance = dark ? 'dark' : 'light';
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#111a16' : '#f4f7f4');
+}
+
+applyAppearance();
+systemAppearance.addEventListener('change', applyAppearance);
+
 let tab = '홈', editor = false, routine = null, dialog = '', category = '', query = '';
 let recordDraft = null;
 const currentDraft = () => editor === 'manual' ? state.manualDraft : state.draft;
@@ -406,7 +418,12 @@ function releaseBoard() {
       +release.changes.map(change=>'<li>'+esc(change)+'</li>').join('')+'</ul></article>').join('');
 }
 function settings() {
-  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>득근일지 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card">'+btn('수정사항'+(hasUnreadReleases()?newBadge:''),'releases','wide release-link')+'</section>';
+  const appearanceOptions = Object.entries(appearanceModes).map(([mode,label]) =>
+    '<option value="'+mode+'"'+(state.appearance===mode?' selected':'')+'>'+label+'</option>').join('');
+  const appearance = '<section class="card"><h2>화면</h2><label for="appearance-mode" class="row between">'
+    +'<span>화면 모드</span><select id="appearance-mode">'+appearanceOptions+'</select></label></section>';
+
+  return '<h1>설정</h1>'+appearance+'<section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>득근일지 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card">'+btn('수정사항'+(hasUnreadReleases()?newBadge:''),'releases','wide release-link')+'</section>';
 }
 function exerciseInfo(name, content = esc(name)) {
   return '<button type="button" class="exercise-info" data-action="exercise-info" data-value="'+esc(name)+'" aria-label="'+esc(name)+' 운동 방법">'+content+'</button>';
@@ -954,7 +971,7 @@ app.addEventListener('input', event=>{
     save();
   }
 });
-app.addEventListener('change',event=>{
+app.addEventListener('change',async event=>{
   if (savingAction) return;
   if (event.target.id==='backup-file') {
     const file = event.target.files?.[0];
@@ -966,6 +983,24 @@ app.addEventListener('change',event=>{
     return;
   }
   const input = event.target;
+  if (input.id === 'appearance-mode' && Object.hasOwn(appearanceModes,input.value)) {
+    const previous = state.appearance;
+    savingAction = true;
+    input.disabled = true;
+    try {
+      state.appearance = input.value;
+      applyAppearance();
+      if (!await save()) {
+        state.appearance = previous;
+        input.value = previous;
+        applyAppearance();
+      }
+    } finally {
+      input.disabled = false;
+      savingAction = false;
+    }
+    return;
+  }
   if (input.id === 'routine-rest-enabled' && routine) {
     routine.restEnabled = input.checked;
     render();
