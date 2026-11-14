@@ -1,3 +1,4 @@
+import { openStorage } from './storage.js';
 import { releases } from './changelog.js';
 import { showExerciseGuide } from './exercise-guide.js';
 import { catalog } from './catalog.js';
@@ -25,12 +26,24 @@ document.addEventListener('touchmove', event => {
 }, {passive:false});
 
 
-const key = 'setmark.web.v1';
 const defaults = { name: null, rest: 90, restEnabled: false, restSound: true, draft: null, workouts: [], routines: [] };
 const app = document.querySelector('#app');
-let state;
-try { state = { ...defaults, ...JSON.parse(localStorage.getItem(key) || '{}') }; }
-catch { state = { ...defaults }; }
+let storage;
+try {
+  storage = await openStorage();
+} catch (error) {
+  const title = document.createElement('h2');
+  title.textContent = '운동 데이터를 열 수 없어요.';
+  const message = document.createElement('p');
+  message.textContent = error.message;
+  const retry = document.createElement('button');
+  retry.textContent = '다시 시도';
+  retry.onclick = () => location.reload();
+  const panel = document.createElement('main');
+  panel.append(title,message,retry);
+  app.replaceChildren(panel);
+}
+const state = {...defaults,...storage?.data};
 let tab = '홈', editor = false, routine = null, dialog = '', category = '', query = '';
 let recordDraft = null;
 let activeRecord = null, day = new Date(), month = new Date(), days = 30, metric = 'weight', movement = '';
@@ -85,9 +98,15 @@ function notice(message) {
   clearTimeout(noticeTimer);
   noticeTimer = setTimeout(()=>node.textContent='',3800);
 }
-function save() {
-  try { localStorage.setItem(key, JSON.stringify(state)); return true; }
-  catch { notice('기기에 저장할 수 없어요. 설정에서 기록을 내보내세요.'); return false; }
+async function save(changes) {
+  const {workouts, routines, ...profile} = state;
+  try {
+    await storage.save(profile, changes);
+    return true;
+  } catch {
+    notice('기기에 저장할 수 없어요. 다시 시도해 주세요.');
+    return false;
+  }
 }
 function pose(name) {
   if (catalog['유산소'].includes(name)) {
@@ -180,13 +199,13 @@ function workoutElapsed(draft, now = Date.now()) {
   if (runningSince === undefined) return Math.max(0, now - Date.parse(draft.startedAt));
   return draft.timerElapsedMs + (runningSince === null ? 0 : Math.max(0, now - runningSince));
 }
-function changeWorkoutTimer(draft, deltaMinutes) {
+async function changeWorkoutTimer(draft, deltaMinutes) {
   const now = Date.now();
   const paused = draft.timerRunningSince === null;
   const previous = { elapsed: draft.timerElapsedMs, since: draft.timerRunningSince };
   draft.timerElapsedMs = Math.max(0, workoutElapsed(draft, now) + (deltaMinutes ?? 0) * 60000);
   draft.timerRunningSince = (deltaMinutes === undefined ? !paused : paused) ? null : now;
-  if (!save()) {
+  if (!await save()) {
     draft.timerElapsedMs = previous.elapsed;
     draft.timerRunningSince = previous.since;
   }
@@ -272,7 +291,7 @@ function recordDetail(record) {
       :'<p>'+esc(record.memo || '작성한 메모가 없어요.')+'</p>')+'</div></section>'+details
     +(editing?btn('변경 저장','save-record','primary wide',record.id):btn('기록 삭제','delete-record','danger wide',record.id));
 }
-function saveRecordEdit() {
+async function saveRecordEdit() {
   const minutes = Number(recordDraft.durationMinutes);
   const seconds = Number(recordDraft.durationSeconds);
   const index = state.workouts.findIndex(w=>w.id===recordDraft.id);
@@ -304,7 +323,7 @@ function saveRecordEdit() {
   delete edited.durationSeconds;
   const previous = state.workouts[index];
   state.workouts[index] = edited;
-  if (!save()) { state.workouts[index] = previous; return; }
+  if (!await save({workouts:{put:[edited]}})) { state.workouts[index] = previous; return; }
   recordDraft = null;
   window.scrollTo(0,0);
   notice('운동 기록을 수정했어요.');
@@ -317,9 +336,14 @@ function history() {
   const first = new Date(month.getFullYear(),month.getMonth(),1);
   const length = new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
   const marked = new Set(state.workouts.map(w=>dayKey(w.finishedAt)));
+  const today = new Date();
+  today.setHours(0,0,0,0);
   return '<h1>기록</h1><section class="card"><div class="row between">'+btn('‹','month','',-1)+'<strong>'+month.toLocaleDateString('ko-KR',{year:'numeric',month:'long'})+'</strong>'+btn('›','month','',1)+'</div><div class="calendar">'+weekday.map(x=>'<small>'+x+'</small>').join('')+'<span></span>'.repeat(first.getDay())+Array.from({length},(_,i)=>{
     const d = new Date(first.getFullYear(),first.getMonth(),i+1);
-    return btn((i+1)+(marked.has(dayKey(d))?'<i></i>':''),'day',dayKey(d)===dayKey(day)?'primary':'',i+1);
+    const hasWorkout = marked.has(dayKey(d));
+    const selected = dayKey(d)===dayKey(day);
+    const style = selected ? 'primary' : d<today && !hasWorkout ? 'calendar-past' : '';
+    return btn((i+1)+(hasWorkout?'<i></i>':''),'day',style,i+1);
   }).join('')+'</div></section><h2>'+day.toLocaleDateString('ko-KR',{month:'long',day:'numeric'})+'</h2>'+recordList(sorted().filter(w=>dayKey(w.finishedAt)===dayKey(day)));
 }
 function statistics() {
@@ -476,7 +500,7 @@ function closeDialog() {
     dialog='';
   }
 }
-function finish() {
+async function finish() {
   const d = state.draft;
   const exercises = d.exercises.map(e=>({...e,sets:e.sets.filter(s=>s.checked).map(s=>isCardio(e)?cardioEntry(s):{id:s.id,weightKg:Number(s.weight.trim().replace(',','.')),repetitions:Number(s.reps)})})).filter(e=>e.sets.length);
   if (!exercises.length) return notice('완료한 세트를 한 개 이상 체크해 주세요.');
@@ -486,7 +510,7 @@ function finish() {
   const record = {id,title,startedAt,finishedAt:finishedAt.toISOString(),elapsedMs:workoutElapsed(d,finishedAt.getTime()),exercises};
   state.workouts.push(record);
   state.draft=null;
-  if (!save()) { state.workouts.pop(); state.draft=d; return; }
+  if (!await save({workouts:{put:[record]}})) { state.workouts.pop(); state.draft=d; return; }
   editor=false; tab='기록'; activeRecord=id;
 }
 function download() {
@@ -541,19 +565,23 @@ async function applyBackup(file) {
     const merge = (current,incoming) => [...new Map([...current,...incoming].map(record=>[record.id,record])).values()];
     state.workouts = merge(previous.workouts,backup.workouts);
     state.routines = merge(previous.routines,backup.routines);
-    if (!save()) { Object.assign(state,previous); return; }
+    if (!await save({workouts:{put:backup.workouts},routines:{put:backup.routines}})) { Object.assign(state,previous); return; }
     render();
     notice('JSON 파일을 적용했어요.');
   } catch (error) {
     notice(error instanceof SyntaxError ? 'JSON 파일을 읽을 수 없어요.' : error.message);
   }
 }
+let savingAction = false;
 app.addEventListener('click', async event=>{
+  if (savingAction) return;
   const target=event.target.closest('[data-action]');
   if (!target) return;
   const {action,value}=target.dataset;
   const [i,j]=value.split(':').map(Number);
   const d=state.draft;
+  savingAction = true;
+  try {
   switch (action) {
     case 'tab':
       if (recordDraft && !confirm('저장하지 않은 변경사항을 버릴까요?')) return;
@@ -566,17 +594,22 @@ app.addEventListener('click', async event=>{
     case 'begin-workout':
       if (!d || d.startedAt) return;
       d.startedAt = new Date().toISOString();
-      if (!save()) { d.startedAt = null; return; }
+      if (!await save()) { d.startedAt = null; return; }
       break;
     case 'toggle-workout-timer':
-      if (d?.startedAt) changeWorkoutTimer(d);
+      if (d?.startedAt) await changeWorkoutTimer(d);
       break;
     case 'adjust-workout-timer':
-      if (d?.startedAt) changeWorkoutTimer(d,i);
+      if (d?.startedAt) await changeWorkoutTimer(d,i);
       break;
     case 'later': editor=false; tab='홈'; break;
-    case 'cancel': if (d?.startedAt && confirm('진행 중인 운동을 삭제할까요?')) {state.draft=null; editor=false; save();} break;
-    case 'finish': if (d?.startedAt) finish(); break;
+    case 'cancel':
+      if (!d?.startedAt || !confirm('진행 중인 운동을 삭제할까요?')) return;
+      state.draft = null;
+      if (!await save()) { state.draft = d; return; }
+      editor = false;
+      break;
+    case 'finish': if (d?.startedAt) await finish(); break;
     case 'workout-rest':
       d.restSeconds = adjustedRest(d.restSeconds ?? state.rest, i);
       save(); break;
@@ -637,7 +670,7 @@ app.addEventListener('click', async event=>{
       const previousRestEnd = draft?.restEnd;
       Object.assign(state,{rest:defaultRestDraft.seconds,restEnabled:defaultRestDraft.enabled});
       if (!state.restEnabled && draft?.restEnd) draft.restEnd = 0;
-      if (!save()) {
+      if (!await save()) {
         Object.assign(state,previous);
         if (draft) draft.restEnd = previousRestEnd;
         return;
@@ -687,11 +720,17 @@ app.addEventListener('click', async event=>{
         state.routines = previous.some(r=>r.id===routine.id)
           ? previous.map(r=>r.id===routine.id ? routine : r)
           : [...previous,routine];
-        if (!save()) { state.routines = previous; return; }
+        if (!await save({routines:{put:[routine]}})) { state.routines = previous; return; }
         closeDialog();
       }
       break;
-    case 'routine-delete': if(confirm('이 루틴을 삭제할까요?')) {state.routines=state.routines.filter(r=>r.id!==value);save();}break;
+    case 'routine-delete': {
+      if (!confirm('이 루틴을 삭제할까요?')) return;
+      const previous = state.routines;
+      state.routines = previous.filter(r=>r.id!==value);
+      if (!await save({routines:{remove:[value]}})) state.routines = previous;
+      break;
+    }
     case 'record': tab='기록';activeRecord=value;window.scrollTo(0,0);break;
     case 'edit-record': {
       const record = state.workouts.find(w=>w.id===value);
@@ -704,14 +743,14 @@ app.addEventListener('click', async event=>{
       break;
     }
     case 'discard-record-edit': recordDraft=null; break;
-    case 'save-record': if (recordDraft?.id===value) saveRecordEdit(); break;
+    case 'save-record': if (recordDraft?.id===value) await saveRecordEdit(); break;
     case 'delete-record': {
       if (activeRecord !== value || !confirm('이 운동 기록을 삭제할까요? 삭제한 기록은 복구할 수 없어요.')) return;
       const previous = state.workouts;
       const record = previous.find(w=>w.id===value);
       if (!record) return;
       state.workouts = previous.filter(w=>w.id!==value);
-      if (!save()) { state.workouts = previous; return; }
+      if (!await save({workouts:{remove:[value]}})) { state.workouts = previous; return; }
       day = month = new Date(record.finishedAt);
       activeRecord = null;
       window.scrollTo(0,0);
@@ -727,19 +766,21 @@ app.addEventListener('click', async event=>{
     case 'releases': {
       const previous = state.seenRelease;
       state.seenRelease = latestRelease;
-      if (!save()) state.seenRelease = previous;
+      if (!await save()) state.seenRelease = previous;
       dialog = 'releases';
       break;
     }
     case 'export': return download();
     case 'apply':
-      if (applying || !registration?.waiting || !save()) return;
+      if (applying || !registration?.waiting || !await save()) return;
       applying=true;registration.waiting.postMessage('apply-update');return notice('업데이트를 적용하고 있어요.');
     default: return;
   }
   render();
+  } finally { savingAction = false; }
 });
 app.addEventListener('input', event=>{
+  if (savingAction) return;
   const input=event.target;
   const recordField = input.dataset.recordField;
   if (recordField && recordDraft) {
@@ -764,10 +805,14 @@ app.addEventListener('input', event=>{
   }
 });
 app.addEventListener('change',event=>{
+  if (savingAction) return;
   if (event.target.id==='backup-file') {
     const file = event.target.files?.[0];
     event.target.value = '';
-    if (file) void applyBackup(file);
+    if (file) {
+      savingAction = true;
+      void applyBackup(file).finally(()=>{ savingAction=false; });
+    }
     return;
   }
   const input = event.target;
@@ -808,17 +853,24 @@ app.addEventListener('change',event=>{
     save();
   }
 });
-app.addEventListener('submit',event=>{
-  if(event.target.id!=='profile') return;
+app.addEventListener('submit',async event=>{
+  if(event.target.id!=='profile' || savingAction) return;
   event.preventDefault();
-  state.name=String(new FormData(event.target).get('name')).trim();
-  if(save()) {dialog='';render();}
+  savingAction = true;
+  const previous = state.name;
+  try {
+    state.name = String(new FormData(event.target).get('name')).trim();
+    if (await save()) { dialog=''; render(); }
+    else state.name = previous;
+  } finally { savingAction = false; }
 });
 app.addEventListener('cancel',event=>{event.preventDefault();closeDialog();render();},true);
-if(state.name===null) dialog='name';
-render();
-setInterval(tick,250);
-document.addEventListener('visibilitychange',tick);
+if (storage) {
+  if(state.name===null) dialog='name';
+  render();
+  setInterval(tick,250);
+  document.addEventListener('visibilitychange',tick);
+}
 function showUpdate() {
   const banner = app.querySelector('[data-update-banner]');
   if (banner) banner.hidden = !registration?.waiting || !navigator.serviceWorker.controller;
@@ -826,7 +878,7 @@ function showUpdate() {
 function checkForUpdate() {
   if (registration && !registration.waiting) registration.update().catch(() => {});
 }
-if ('serviceWorker' in navigator) {
+if (storage && 'serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     if (applying) location.reload();
     else showUpdate();

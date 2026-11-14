@@ -60,3 +60,8 @@ html.setmark-app textarea {
 .release-entry h3 { margin:0; font-size:1rem; }
 .release-entry time { font-size:.8rem; color:#5c7168; }
 .release-entry ul { margin:8px 0 0; padding-left:1.2em; line-height:1.6; }
+
+.calendar button.calendar-past {
+  color: #64736c;
+  background: #edf0ee;
+}
