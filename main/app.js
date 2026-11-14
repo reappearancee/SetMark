@@ -129,8 +129,9 @@ function workoutMilestone(workouts, today) {
     .map(workout=>dayKey(workout.finishedAt)));
   const completedToday = completedDays.has(dayKey(today));
   const count = completedDays.size + (completedToday ? 0 : 1);
+  const emoji = count >= 30 ? '🔥' : count >= 7 ? '💪' : '👊';
   return {
-    label: completedToday ? count+'일차 달성!' : '오늘 하면 '+count+'일 차에요',
+    label: (completedToday ? count+'일차 달성!' : '오늘 하면 '+count+'일 차에요')+' '+emoji,
     effect: count%30===0 ? ' milestone-fire' : count%7===0 ? ' milestone-glow' : '',
   };
 }
