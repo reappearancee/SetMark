@@ -130,7 +130,7 @@ function workoutMilestone(workouts, today) {
   const completedToday = completedDays.has(dayKey(today));
   const count = completedDays.size + (completedToday ? 0 : 1);
   return {
-    label: completedToday ? count+'일차 달성!' : '오늘 하면 '+count+'일차예요',
+    label: completedToday ? count+'일차 달성!' : '오늘 하면 '+count+'일 차에요',
     effect: count%30===0 ? ' milestone-fire' : count%7===0 ? ' milestone-glow' : '',
   };
 }
