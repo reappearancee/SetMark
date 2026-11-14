@@ -27,3 +27,25 @@ html.setmark-app select,
 html.setmark-app textarea {
   font-size: max(16px, 1em);
 }
+
+.row.between > .rest-badge {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+}
+
+.record-heading { margin-top: 16px; }
+.record-heading h1 { font-size: 1.45rem; }
+.record-summary > .row { padding-block: 8px; }
+.record-summary > strong { display: block; margin-bottom: 8px; }
+.record-memo { margin-top: 12px; padding: 12px; border-radius: 12px; background: #edf5ee; }
+.record-memo p { white-space: pre-wrap; overflow-wrap: anywhere; margin-bottom: 0; }
+.record-memo textarea { display: block; width: 100%; min-height: 84px; margin-top: 6px; padding: 8px; font: inherit; }
+.record-exercise strong { display: block; overflow-wrap: anywhere; }
+.record-exercise-total { margin-block: 10px; padding-block: 8px; border-block: 1px solid var(--line); }
+.record-set { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr) minmax(0, 1fr) auto; align-items: center; gap: 8px; padding-block: 5px; }
+.record-set label { font-size: .8rem; }
+.record-set input { display: block; width: 100%; padding-inline: 6px; }
+.record-summary input { width: 6rem; margin-left: 4px; }
+.record-check { color: var(--green); font-weight: 700; }
