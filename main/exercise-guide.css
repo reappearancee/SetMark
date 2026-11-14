@@ -124,3 +124,6 @@ html.setmark-app :is(input, textarea, [contenteditable="true"]) {
 @media (prefers-reduced-motion:reduce) {
   .hero.milestone-glow, .hero.milestone-fire { animation:none; }
 }
+
+.record-day-heading { margin: 16px 0 10px; }
+.record-day-heading h2 { margin: 0; }
