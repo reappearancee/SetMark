@@ -49,3 +49,7 @@ html.setmark-app textarea {
 .record-set input { display: block; width: 100%; padding-inline: 6px; }
 .record-summary input { width: 6rem; margin-left: 4px; }
 .record-check { color: var(--green); font-weight: 700; }
+.record-duration-fields { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.record-duration-fields label { display: inline-flex; align-items: center; flex-direction: row-reverse; font-size: .875rem; gap: 4px; }
+.record-duration-fields input { width: 4.25rem; margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.record-duration-fields input[data-record-field="durationSeconds"] { width: 3.25rem; }

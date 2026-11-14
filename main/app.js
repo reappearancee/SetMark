@@ -263,7 +263,7 @@ function recordDetail(record) {
   return '<header class="row between">'+btn('‹ 기록','back-record','', '',editing)+'<strong>'+date+'</strong></header>'
     +'<div class="row between record-heading"><h1>운동 요약</h1>'+ (editing?btn('취소','discard-record-edit'):btn('편집','edit-record','',record.id))+'</div>'
     +'<section class="card record-summary"><strong>'+esc(record.title)+'</strong>'
-    +metric('운동 시간',editing?field('분','duration',workout.durationMinutes):duration(recordElapsed(record)))
+    +metric('운동 시간',editing?('<span class="record-duration-fields">'+field('분','durationMinutes',workout.durationMinutes,'numeric')+field('초','durationSeconds',workout.durationSeconds,'numeric')+'</span>'):duration(recordElapsed(record)))
     +metric('운동 개수',record.exercises.length+'개')+metric('전체 볼륨',number(vol(record))+' kg')
     +(cardioTotal(record)?metric('유산소 시간',number(cardioTotal(record))+'분'):'')
     +'<div class="record-memo"><strong>메모</strong>'
@@ -272,11 +272,12 @@ function recordDetail(record) {
     +(editing?btn('변경 저장','save-record','primary wide',record.id):btn('기록 삭제','delete-record','danger wide',record.id));
 }
 function saveRecordEdit() {
-  const minutes = parseMinutes(recordDraft.durationMinutes);
+  const minutes = Number(recordDraft.durationMinutes);
+  const seconds = Number(recordDraft.durationSeconds);
   const index = state.workouts.findIndex(w=>w.id===recordDraft.id);
   if (index<0) return;
-  if (!String(recordDraft.durationMinutes).trim() || !Number.isFinite(minutes) || minutes<0) {
-    return notice('운동 시간을 0 이상의 분으로 입력해 주세요.');
+  if (!/^\d+$/.test(recordDraft.durationMinutes.trim()) || !/^\d+$/.test(recordDraft.durationSeconds.trim()) || seconds>59) {
+    return notice('분은 0 이상의 정수, 초는 0~59로 입력해 주세요.');
   }
   const edited = structuredClone(recordDraft);
   for (const exercise of edited.exercises) {
@@ -293,10 +294,13 @@ function saveRecordEdit() {
       }
     }
   }
-  edited.elapsedMs = Math.round(minutes*60000);
+  const original = recordElapsed(state.workouts[index]);
+  const totalSeconds = minutes*60+seconds;
+  edited.elapsedMs = totalSeconds===Math.floor(original/1000) ? original : totalSeconds*1000;
   if (!Number.isSafeInteger(edited.elapsedMs)) return notice('운동 시간이 너무 길어요.');
   edited.memo = (edited.memo ?? '').trim();
   delete edited.durationMinutes;
+  delete edited.durationSeconds;
   const previous = state.workouts[index];
   state.workouts[index] = edited;
   if (!save()) { state.workouts[index] = previous; return; }
@@ -673,7 +677,9 @@ app.addEventListener('click', async event=>{
       const record = state.workouts.find(w=>w.id===value);
       if (!record || activeRecord!==value) return;
       recordDraft = structuredClone(record);
-      recordDraft.durationMinutes = String(recordElapsed(record)/60000);
+      const totalSeconds = Math.floor(recordElapsed(record)/1000);
+      recordDraft.durationMinutes = String(Math.floor(totalSeconds/60));
+      recordDraft.durationSeconds = String(totalSeconds%60).padStart(2,'0');
       window.scrollTo(0,0);
       break;
     }
@@ -711,7 +717,7 @@ app.addEventListener('input', event=>{
   const recordField = input.dataset.recordField;
   if (recordField && recordDraft) {
     if (recordField==='memo') recordDraft.memo=input.value;
-    else if (recordField==='duration') recordDraft.durationMinutes=input.value;
+    else if (recordField==='durationMinutes' || recordField==='durationSeconds') recordDraft[recordField]=input.value;
     else {
       const [exercise,entry,key] = recordField.split(':');
       recordDraft.exercises[exercise].sets[entry][key]=input.value;
