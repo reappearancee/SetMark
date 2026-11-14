@@ -1,3 +1,4 @@
+import { releases } from './changelog.js';
 import { showExerciseGuide } from './exercise-guide.js';
 import { catalog } from './catalog.js';
 import { poses, keywords } from './poses.js';
@@ -335,8 +336,26 @@ function statistics() {
   const bars = values => '<div class="bars">'+values.map((n,i)=>'<span title="'+esc(timeline[i].toLocaleDateString('ko-KR')+': '+number(n)+' kg')+'" style="height:'+Math.max(1,100*n/Math.max(1,...values))+'%"></span>').join('')+'</div>';
   return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div>'+timeSummary+'<section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(cardioMinutes?'<section class="card"><h2>유산소 시간</h2><p>'+number(cardioMinutes)+'분</p></section>':'')+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
 }
+const latestRelease = releases.at(-1).id;
+const hasUnreadReleases = () => (state.seenRelease ?? 0) < latestRelease;
+const newBadge = '<span class="release-new" aria-label="새 수정사항">N</span>';
+
+function releaseDate(value) {
+  const [,month,day,time] = value.match(/^\d{4}-(\d{2})-(\d{2})(?: (\d{2}:\d{2}))?$/);
+  if (!time) return Number(month)+'월 '+Number(day)+'일';
+  const [hour,minute] = time.split(':');
+  return Number(month)+'월 '+Number(day)+'일 '+(Number(hour)<12?'AM':'PM')+(Number(hour)%12||12)+':'+minute;
+}
+
+function releaseBoard() {
+  return '<header class="row between"><h2>수정사항</h2>'+btn('닫기','close')+'</header>'
+    +'<small>한국 시간 · 확인된 시각은 패치 파일 생성 기준</small>'
+    +[...releases].reverse().map(release=>'<article class="card release-entry"><div class="row between"><h3>'
+      +esc(release.title)+'</h3><time>'+releaseDate(release.date)+'</time></div><ul>'
+      +release.changes.map(change=>'<li>'+esc(change)+'</li>').join('')+'</ul></article>').join('');
+}
 function settings() {
-  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section>';
+  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card">'+btn('수정사항'+(hasUnreadReleases()?newBadge:''),'releases','wide release-link')+'</section>';
 }
 function exerciseInfo(name, content = esc(name)) {
   return '<button type="button" class="exercise-info" data-action="exercise-info" data-value="'+esc(name)+'" aria-label="'+esc(name)+' 운동 방법">'+content+'</button>';
@@ -349,6 +368,7 @@ function pickerResults() {
   return matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>'<div class="picker-exercise">'+exerciseInfo(n,pose(n)+'<span>'+esc(n)+'</span>')+'<button type="button" data-action="choose" data-value="'+esc(n)+'" aria-label="'+esc(n)+' 추가">＋</button>'+'</div>').join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
 }
 function modal() {
+  if (dialog==='releases') return releaseBoard();
   if (dialog==='exercise-menu') return '<h2>'+esc(restExercise.name)+'</h2>'+btn('휴식 타이머 설정','exercise-rest','wide')+btn('닫기','close','wide');
   if (dialog==='exercise-rest') return exerciseRestModal();
   if (dialog==='default-rest') return '<header class="row between"><h2>기본 휴식 타이머</h2>'+btn('닫기','close')+'</header>'
@@ -375,7 +395,7 @@ function render() {
   const openRest = new Set(Array.from(app.querySelectorAll('[data-set-rest][open]'), item=>item.dataset.setRest));
   const dialogScroll = oldDialog?.scrollTop ?? 0;
   const active = tabs.indexOf(tab);
-  app.innerHTML = '<main><button type="button" class="capsule" data-action="rest-detail" hidden><span class="ring"></span><span>휴식 <strong data-rest></strong></span></button><section class="update-banner card row between" data-update-banner hidden><strong>새 버전이 준비됐어요</strong>'+btn('업데이트','apply','primary')+'</section>'+ (editor&&state.draft ? workout() : [home,routines,history,statistics,settings][active]())+'</main><nav class="tabbar" aria-label="주 메뉴" style="--tab:'+active+'">'+tabs.map((name,i)=>'<button type="button" data-action="tab" data-value="'+name+'" '+(!editor&&i===active?'aria-current="page"':'')+'><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="'+paths[i]+'"/></svg>'+name+'</button>').join('')+'</nav>'+(dialog?'<dialog>'+modal()+'</dialog>':'');
+  app.innerHTML = '<main><button type="button" class="capsule" data-action="rest-detail" hidden><span class="ring"></span><span>휴식 <strong data-rest></strong></span></button><section class="update-banner card row between" data-update-banner hidden><strong>새 버전이 준비됐어요</strong>'+btn('업데이트','apply','primary')+'</section>'+ (editor&&state.draft ? workout() : [home,routines,history,statistics,settings][active]())+'</main><nav class="tabbar" aria-label="주 메뉴" style="--tab:'+active+'">'+tabs.map((name,i)=>'<button type="button" data-action="tab" data-value="'+name+'" '+(!editor&&i===active?'aria-current="page"':'')+'><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="'+paths[i]+'"/></svg>'+name+(name==='설정'&&hasUnreadReleases()?newBadge:'')+'</button>').join('')+'</nav>'+(dialog?'<dialog>'+modal()+'</dialog>':'');
   if (dialog) {
     const current = app.querySelector('dialog');
     current.showModal();
@@ -704,6 +724,13 @@ app.addEventListener('click', async event=>{
     case 'metric': metric=value;break;
     case 'name': dialog='name';break;
     case 'import': app.querySelector('#backup-file').click(); return;
+    case 'releases': {
+      const previous = state.seenRelease;
+      state.seenRelease = latestRelease;
+      if (!save()) state.seenRelease = previous;
+      dialog = 'releases';
+      break;
+    }
     case 'export': return download();
     case 'apply':
       if (applying || !registration?.waiting || !save()) return;

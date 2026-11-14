@@ -53,3 +53,10 @@ html.setmark-app textarea {
 .record-duration-fields label { display: inline-flex; align-items: center; flex-direction: row-reverse; font-size: .875rem; gap: 4px; }
 .record-duration-fields input { width: 4.25rem; margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
 .record-duration-fields input[data-record-field="durationSeconds"] { width: 3.25rem; }
+
+.release-new { display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:#176448; color:white; font-size:11px; font-weight:800; }
+.release-link { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.tabbar .release-new { position:absolute; top:1px; right:calc(50% - 23px); }
+.release-entry h3 { margin:0; font-size:1rem; }
+.release-entry time { font-size:.8rem; color:#5c7168; }
+.release-entry ul { margin:8px 0 0; padding-left:1.2em; line-height:1.6; }
