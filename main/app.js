@@ -419,6 +419,7 @@ function render() {
   const openRest = new Set(Array.from(app.querySelectorAll('[data-set-rest][open]'), item=>item.dataset.setRest));
   const dialogScroll = oldDialog?.scrollTop ?? 0;
   const active = tabs.indexOf(tab);
+  document.documentElement.classList.toggle('hide-page-scrollbar', !editor && (tab==='통계' || tab==='설정'));
   app.innerHTML = '<main><button type="button" class="capsule" data-action="rest-detail" hidden><span class="ring"></span><span>휴식 <strong data-rest></strong></span></button><section class="update-banner card row between" data-update-banner hidden><strong>새 버전이 준비됐어요</strong>'+btn('업데이트','apply','primary')+'</section>'+ (editor&&state.draft ? workout() : [home,routines,history,statistics,settings][active]())+'</main><nav class="tabbar" aria-label="주 메뉴" style="--tab:'+active+'">'+tabs.map((name,i)=>'<button type="button" data-action="tab" data-value="'+name+'" '+(!editor&&i===active?'aria-current="page"':'')+'><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="'+paths[i]+'"/></svg>'+name+(name==='설정'&&hasUnreadReleases()?newBadge:'')+'</button>').join('')+'</nav>'+(dialog?'<dialog>'+modal()+'</dialog>':'');
   if (dialog) {
     const current = app.querySelector('dialog');

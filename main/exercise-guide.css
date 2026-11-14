@@ -65,3 +65,6 @@ html.setmark-app textarea {
   color: #64736c;
   background: #edf0ee;
 }
+
+html.hide-page-scrollbar { scrollbar-width: none; }
+html.hide-page-scrollbar::-webkit-scrollbar { display: none; }
