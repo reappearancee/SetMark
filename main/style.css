@@ -238,3 +238,6 @@ dialog > #search + .chips {
 }
 [data-appearance="dark"] dialog::backdrop { background: #08090ac9; }
 [data-appearance="dark"] .bars span { background: #65b88e; }
+
+.page-heading { margin-block-end: 10px; }
+.page-heading + :is(.card, .muted) { margin-block-start: 0; }

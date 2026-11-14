@@ -294,7 +294,7 @@ function routinePreview(exercises) {
     + icons + (extra > 0 ? '<span class="routine-preview-more">+'+extra+'</span>' : '') + '</div>';
 }
 function routines() {
-  return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><div class="routine-card-footer">'+routinePreview(r.exercises)+'<div class="routine-card-buttons">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
+  return '<header class="page-heading row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</header>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><div class="routine-card-footer">'+routinePreview(r.exercises)+'<div class="routine-card-buttons">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
 }
 function recordDetail(record) {
   const date = new Date(record.finishedAt).toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'});
@@ -377,7 +377,7 @@ function history() {
   const dateAction = day <= new Date()
     ? btn(state.manualDraft && dayKey(state.manualDraft.recordedAt)===dayKey(day) ? '작성 이어서' : '＋ 기록 추가','add-record','primary')
     : '';
-  return '<h1>기록</h1><section class="card"><div class="row between">'+btn('‹','month','',-1)+'<strong>'+month.toLocaleDateString('ko-KR',{year:'numeric',month:'long'})+'</strong>'+btn('›','month','',1)+'</div><div class="calendar">'+weekday.map(x=>'<small>'+x+'</small>').join('')+'<span></span>'.repeat(first.getDay())+Array.from({length},(_,i)=>{
+  return '<header class="page-heading row"><h1>기록</h1></header><section class="card"><div class="row between">'+btn('‹','month','',-1)+'<strong>'+month.toLocaleDateString('ko-KR',{year:'numeric',month:'long'})+'</strong>'+btn('›','month','',1)+'</div><div class="calendar">'+weekday.map(x=>'<small>'+x+'</small>').join('')+'<span></span>'.repeat(first.getDay())+Array.from({length},(_,i)=>{
     const d = new Date(first.getFullYear(),first.getMonth(),i+1);
     const hasWorkout = marked.has(dayKey(d));
     const selected = dayKey(d)===dayKey(day);
@@ -397,7 +397,7 @@ function statistics() {
   const trend = timeline.map(d=>{ const sets=records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).flatMap(w=>w.exercises.filter(e=>!isCardio(e)&&e.name===selected).flatMap(e=>e.sets));return Math.max(0,...sets.map(s=>s.weightKg*(metric==='estimate'&&s.repetitions>1?1+s.repetitions/30:1))); });
   const cardioMinutes = records.reduce((total,w)=>total+cardioTotal(w),0);
   const bars = values => '<div class="bars">'+values.map((n,i)=>'<span title="'+esc(timeline[i].toLocaleDateString('ko-KR')+': '+number(n)+' kg')+'" style="height:'+Math.max(1,100*n/Math.max(1,...values))+'%"></span>').join('')+'</div>';
-  return '<h1>통계</h1><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div>'+timeSummary+'<section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(cardioMinutes?'<section class="card"><h2>유산소 시간</h2><p>'+number(cardioMinutes)+'분</p></section>':'')+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
+  return '<header class="page-heading row"><h1>통계</h1></header><div class="row">'+[7,30,90].map(d=>btn('최근 '+d+'일','period',d===days?'primary':'',d)).join('')+'</div>'+timeSummary+'<section class="card"><h2>운동 볼륨</h2><p>'+number(records.reduce((a,w)=>a+vol(w),0))+' kg · '+records.length+'회</p>'+bars(timeline.map(d=>records.filter(w=>dayKey(w.finishedAt)===dayKey(d)).reduce((a,w)=>a+vol(w),0)))+'</section>'+(cardioMinutes?'<section class="card"><h2>유산소 시간</h2><p>'+number(cardioMinutes)+'분</p></section>':'')+(selected?'<section class="card"><h2>종목별 중량</h2><select aria-label="종목" id="movement">'+names.map(n=>'<option '+(n===selected?'selected':'')+'>'+esc(n)+'</option>').join('')+'</select><div class="row section">'+btn('최고 중량','metric',metric==='weight'?'primary':'','weight')+btn('예상 1RM','metric',metric==='estimate'?'primary':'','estimate')+'</div><p>기간 최고 '+number(Math.max(...trend))+' kg</p>'+bars(trend)+'</section>':'');
 }
 const latestRelease = releases.at(-1).id;
 const hasUnreadReleases = () => (state.seenRelease ?? 0) < latestRelease;
@@ -423,7 +423,7 @@ function settings() {
   const appearance = '<section class="card"><h2>화면</h2><label for="appearance-mode" class="row between">'
     +'<span>화면 모드</span><select id="appearance-mode">'+appearanceOptions+'</select></label></section>';
 
-  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>득근일지 화면을 보고 있을 때 재생돼요.</small></section>'+appearance+'<section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card">'+btn('수정사항'+(hasUnreadReleases()?newBadge:''),'releases','wide release-link')+'</section>';
+  return '<header class="page-heading row"><h1>설정</h1></header><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>득근일지 화면을 보고 있을 때 재생돼요.</small></section>'+appearance+'<section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card">'+btn('수정사항'+(hasUnreadReleases()?newBadge:''),'releases','wide release-link')+'</section>';
 }
 function exerciseInfo(name, content = esc(name)) {
   return '<button type="button" class="exercise-info" data-action="exercise-info" data-value="'+esc(name)+'" aria-label="'+esc(name)+' 운동 방법">'+content+'</button>';
