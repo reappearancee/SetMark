@@ -1,4 +1,4 @@
-const cacheName = 'setmark-pwa-v37';
+const cacheName = 'setmark-pwa-v39';
 const shell = [
   "./",
   "./index.html",
@@ -13,6 +13,7 @@ const shell = [
   "./install/style.css",
   "./main/app.js",
   "./main/exercise-guide.js",
+  "./main/burnfit-guides.js",
   "./main/exercise-guide.css",
   "./main/catalog.js",
   "./main/icon-192.png",

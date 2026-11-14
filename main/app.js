@@ -7,6 +7,23 @@ guideStyles.rel = 'stylesheet';
 guideStyles.href = new URL('./exercise-guide.css', import.meta.url).href;
 document.head.append(guideStyles);
 
+// The app module only loads in standalone mode. Keep the install page zoomable.
+document.documentElement.classList.add('setmark-app');
+const viewport = document.querySelector('meta[name="viewport"]');
+viewport?.setAttribute('content',
+  'width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover');
+
+const preventZoom = event => {
+  if (event.cancelable) event.preventDefault();
+};
+for (const type of ['gesturestart', 'gesturechange']) {
+  document.addEventListener(type, preventZoom, {passive:false});
+}
+document.addEventListener('touchmove', event => {
+  if (event.touches.length > 1) preventZoom(event);
+}, {passive:false});
+
+
 const key = 'setmark.web.v1';
 const defaults = { name: null, rest: 90, restEnabled: false, restSound: true, draft: null, workouts: [], routines: [] };
 const app = document.querySelector('#app');
@@ -209,7 +226,7 @@ function workout() {
     ? btn('운동 완료','finish','primary') + btn('운동 취소','cancel','danger')
     : '<hr style="width:100%;margin:4px 0;border:0;border-top:1px solid var(--line)">'
       + btn('운동 시작','begin-workout','primary wide');
-  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge(d,e))+'</div>'+exerciseInfo(e.name)+'</div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started,e.name) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+'<div class="exercise-actions">'+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+btn('종목 삭제','remove-exercise','danger',i)+'</div></section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+actions+'</div>';
+  return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+exerciseInfo(e.name)+(isCardio(e)?'':restBadge(d,e))+'</div>'+'</div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started,e.name) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+'<div class="exercise-actions">'+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+btn('종목 삭제','remove-exercise','danger',i)+'</div></section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+actions+'</div>';
 }
 function routinePreview(exercises) {
   const visibleCount = 5;
@@ -251,8 +268,8 @@ function statistics() {
 function settings() {
   return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+'<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card"><h2>홈 화면에 추가</h2><p>iPhone Safari의 공유 메뉴에서 <strong>홈 화면에 추가</strong>를 선택하세요. 표시되면 <strong>웹 앱으로 열기</strong>를 켜세요.</p></section>';
 }
-function exerciseInfo(name) {
-  return '<button type="button" class="exercise-info" data-action="exercise-info" data-value="'+esc(name)+'" aria-label="'+esc(name)+' 운동 방법">ⓘ</button>';
+function exerciseInfo(name, content = esc(name)) {
+  return '<button type="button" class="exercise-info" data-action="exercise-info" data-value="'+esc(name)+'" aria-label="'+esc(name)+' 운동 방법">'+content+'</button>';
 }
 function pickerResults() {
   const normalize = value => value.toLowerCase().replace(/[\s-]+/g,'');
@@ -260,7 +277,7 @@ function pickerResults() {
   const matches = Object.entries(catalog).filter(([group])=>!category||group===category)
     .map(([group,names])=>[group,names.filter(n=>[n,...(exerciseAliases[n]||[])].some(label=>normalize(label).includes(q)))]).filter(([,names])=>names.length);
   const custom = !category && q && !Object.values(catalog).flat().some(n=>[n,...(exerciseAliases[n]||[])].some(label=>normalize(label)===q));
-  return (custom ? btn('＋ ‘'+esc(query.trim())+'’ 추가','choose','exercise',query.trim()) : '')+matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>'<div class="picker-exercise">'+btn(pose(n)+esc(n),'choose','exercise',n)+exerciseInfo(n)+'</div>').join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
+  return (custom ? btn('＋ ‘'+esc(query.trim())+'’ 추가','choose','exercise',query.trim()) : '')+matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>'<div class="picker-exercise">'+exerciseInfo(n,pose(n)+'<span>'+esc(n)+'</span>')+'<button type="button" data-action="choose" data-value="'+esc(n)+'" aria-label="'+esc(n)+' 추가">＋</button>'+'</div>').join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
 }
 function modal() {
   if (dialog==='exercise-menu') return '<h2>'+esc(restExercise.name)+'</h2>'+btn('휴식 타이머 설정','exercise-rest','wide')+btn('닫기','close','wide');
@@ -274,7 +291,7 @@ function modal() {
   if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+ '</div>' + (state.restEnabled ? '<section class="card"><label class="rest-option"><span>루틴 휴식 타이머</span><input id="routine-rest-enabled" type="checkbox" role="switch" '
     +(routine.restEnabled?'checked':'')+'></label>'
     +(routine.restEnabled?restControls(routine.restSeconds ?? state.rest,'routine-rest'):'')
-    +'</section>' : '')+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row routine-exercise-title">'+pose(e.name)+'<strong>'+esc(e.name)+'</strong>'+(isCardio(e)?'':restBadge({...routine,restEnabled:routine.restEnabled === true},e))+'</div>'+exerciseInfo(e.name)
+    +'</section>' : '')+routine.exercises.map((e,i)=>'<div class="card"><div class="row between"><div class="row routine-exercise-title">'+pose(e.name)+exerciseInfo(e.name)+(isCardio(e)?'':restBadge({...routine,restEnabled:routine.restEnabled === true},e))+'</div>'
     +'</div><div data-routine-sets>'+routineSets(e,i)+'</div><div class="row routine-actions">'
     +btn('−','routine-minus','',i)+'<span data-routine-count>'+e.sets.length+(isCardio(e)?'회차':'세트')+'</span>'
     +btn('＋','routine-plus','',i)
