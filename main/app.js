@@ -120,10 +120,24 @@ function pose(name) {
 function recordList(records) {
   return records.length ? records.map(w=>btn('<strong>'+esc(w.title)+'</strong><small>'+dateLabel(w.finishedAt)+' · '+w.exercises.flatMap(x=>x.sets).length+'세트</small>','record','exercise row between',w.id)).join('') : '<p class="muted">운동 기록이 없어요.</p>';
 }
+function workoutMilestone(workouts, today) {
+  const end = new Date(today);
+  end.setHours(23, 59, 59, 999);
+  const completedDays = new Set(workouts
+    .filter(workout=>Date.parse(workout.finishedAt)<=end.getTime())
+    .map(workout=>dayKey(workout.finishedAt)));
+  const completedToday = completedDays.has(dayKey(today));
+  const count = completedDays.size + (completedToday ? 0 : 1);
+  return {
+    label: completedToday ? count+'일차 달성!' : '오늘 하면 '+count+'일차예요',
+    effect: count%30===0 ? ' milestone-fire' : count%7===0 ? ' milestone-glow' : '',
+  };
+}
 function home() {
   const today = new Date();
+  const milestone = workoutMilestone(state.workouts, today);
   const plans = state.routines.filter(r=>r.weekdays.includes(today.getDay()+1));
-  return '<h1>세트마크</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><h2>오늘의 운동</h2>'+(state.draft?.startedAt?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?.startedAt?'운동 이어서 기록':state.draft?'운동 준비 이어서':'▶ 자유 운동 시작','start','primary wide')+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
+  return '<h1>세트마크</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero'+milestone.effect+'"><div class="hero-date"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><small class="hero-milestone">'+milestone.label+'</small></div><h2>오늘의 운동</h2>'+(state.draft?.startedAt?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?.startedAt?'운동 이어서 기록':state.draft?'운동 준비 이어서':'▶ 자유 운동 시작','start','primary wide')+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
 }
 function restControls(seconds, action) {
   return '<div class="rest-controls" role="group" aria-label="휴식 시간">'
