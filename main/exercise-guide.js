@@ -1,4 +1,32 @@
 const smithPress = '스미스 머신 숄더 프레스';
+const burnFitLibrary = 'https://burnfit.io/라이브러리/';
+const burnFitPages = new Map([
+  ['벤치 프레스', '벤치프레스/'],
+  [smithPress, '스미스머신-오버헤드-프레스/'],
+  ['인클라인 덤벨 프레스', '인클라인-덤벨-벤치프레스/'],
+]);
+
+
+const burnFitAnimations = new Map([
+  ['벤치 프레스', 'BB_BP-1.gif'],
+  [smithPress, 'SM_PRESS.gif'],
+]);
+
+function showInlineAnimation(dialog, name, file) {
+  const figure = document.createElement('figure');
+  figure.className = 'exercise-inline-demo';
+  const image = document.createElement('img');
+  image.alt = name + ' 운동 동작';
+  const caption = document.createElement('figcaption');
+  caption.textContent = '동작 이미지 · 번핏';
+  image.addEventListener('error', () => {
+    image.remove();
+    caption.textContent = '동작 이미지를 불러오지 못했어요. 아래에서 원본을 열 수 있어요.';
+  }, {once:true});
+  image.src = new URL(file, 'https://burnfit.io/wp-content/uploads/').href;
+  figure.append(image, caption);
+  dialog.append(figure);
+}
 
 function mountPress(canvas) {
   const ctx = canvas.getContext('2d');
@@ -140,12 +168,20 @@ export function showExerciseGuide(name, catalog) {
   dialog.querySelector('h2').textContent = name;
   dialog.querySelector('[data-guide-category]').textContent = group || '직접 추가한 종목';
   dialog.querySelector('header button').onclick = () => dialog.close();
-  const demo = name === smithPress;
+  const animation = burnFitAnimations.get(name);
+  if (animation) showInlineAnimation(dialog, name, animation);
+  const demo = name === smithPress && !animation;
   if (demo) {
     dialog.insertAdjacentHTML('beforeend','<section class="exercise-demo"><canvas width="540" height="490" tabindex="0" aria-label="스미스 머신 숄더 프레스 3D 모델. 방향키로 회전"></canvas><div class="row between"><small>드래그해서 각도 바꾸기</small><button type="button">일시정지</button></div></section><h3>운동 방법</h3><p>스미스 머신 · 어깨와 삼두근</p><ol><li>벤치에 앉아 발을 바닥에 두고 바를 어깨 높이에서 잡아요.</li><li>몸통을 안정적으로 유지하면서 바를 위로 밀어요.</li><li>바를 천천히 시작 높이로 내려요.</li></ol>');
-  } else {
-    dialog.insertAdjacentHTML('beforeend','<p>이 종목의 3D 동작은 아직 준비되지 않았어요.</p>');
   }
+  const page = burnFitPages.get(name);
+  const reference = document.createElement('a');
+  reference.className = 'exercise-reference';
+  reference.href = new URL(page ?? '', burnFitLibrary).href;
+  reference.target = '_blank';
+  reference.rel = 'noopener noreferrer';
+  reference.textContent = page ? '번핏에서 이 운동 동작 보기 ↗' : '번핏 운동 라이브러리 열기 ↗';
+  dialog.append(reference);
   const trigger = document.activeElement;
   document.body.append(dialog);
   dialog.showModal();
