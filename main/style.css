@@ -191,37 +191,43 @@ dialog > #search + .chips {
 .stats-time h2 { font-size: 1rem; margin-bottom: 6px; }
 .stats-time .clock { font-size: 1.625rem; }
 
-/* Keep the home card and exercise illustrations in their original palettes. */
+/* Charcoal surfaces with green accents in dark mode. */
 :root[data-appearance="dark"] {
   color-scheme: dark;
-  color: #edf6f0;
-  background: #111a16;
-  --card: #1b2822;
-  --line: #384b41;
+  color: #f0f1f2;
+  background: #151618;
+  --card: #222326;
+  --line: #3e4045;
   --green: #83d9b1;
-  --surface-muted: #26382f;
-  --text-muted: #afc4b8;
+  --surface-muted: #2c2e32;
+  --text-muted: #b9bcc3;
 }
 
 [data-appearance="dark"] :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
   color: inherit;
-  background-color: #15211b;
+  background-color: #191a1d;
 }
-[data-appearance="dark"] :is(input, textarea)::placeholder { color: #9db1a5; }
+[data-appearance="dark"] :is(input, textarea)::placeholder { color: #a3a7af; }
 [data-appearance="dark"] :is(.muted, small, .exercise-inline-demo figcaption, .release-entry time) {
   color: var(--text-muted);
 }
-[data-appearance="dark"] .hero small { color: #b4d5c5; }
+[data-appearance="dark"] .hero:not(.milestone-fire),
+[data-appearance="dark"] :is(.workout-guide, .capsule, #notice),
+[data-appearance="dark"] .ring::after {
+  background: var(--card);
+}
+[data-appearance="dark"] .hero small { color: #c6c8cc; }
 [data-appearance="dark"] .hero .hero-milestone { color: #d2f7c7; }
 [data-appearance="dark"] .hero.milestone-fire .hero-milestone { color: #ffdab0; }
 [data-appearance="dark"] :is(.primary, .release-new) { background: #226c51; color: #fff; }
 [data-appearance="dark"] .hero button { background: #b6efaa; color: #0d3425; }
 [data-appearance="dark"] .tabbar {
   border-color: var(--line);
-  background: #1b2822ec;
+  background: #222326ec;
   box-shadow: 0 5px 24px #0005;
 }
-[data-appearance="dark"] .tabbar::before { background: #304c3e; }
+[data-appearance="dark"] .tabbar::before { background: #34363b; }
+[data-appearance="dark"] .checked { color: var(--green); }
 [data-appearance="dark"] .danger { color: #ffabb4; }
 [data-appearance="dark"] :is(.update-banner, .checked, .rest-time-picker, .record-memo, .exercise-demo, .routine-order li.dragging, .calendar button.calendar-past) {
   background: var(--surface-muted);
@@ -230,7 +236,7 @@ dialog > #search + .chips {
 [data-appearance="dark"] #app button:disabled {
   background: var(--surface-muted);
   border-color: var(--line);
-  color: #a0b2a7;
+  color: #a4a7ae;
 }
-[data-appearance="dark"] dialog::backdrop { background: #060b08c9; }
+[data-appearance="dark"] dialog::backdrop { background: #08090ac9; }
 [data-appearance="dark"] .bars span { background: #65b88e; }
