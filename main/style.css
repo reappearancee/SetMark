@@ -211,12 +211,10 @@ dialog > #search + .chips {
 [data-appearance="dark"] :is(.muted, small, .exercise-inline-demo figcaption, .release-entry time) {
   color: var(--text-muted);
 }
-[data-appearance="dark"] .hero:not(.milestone-fire),
 [data-appearance="dark"] :is(.workout-guide, .capsule, #notice),
 [data-appearance="dark"] .ring::after {
   background: var(--card);
 }
-[data-appearance="dark"] .hero small { color: #c6c8cc; }
 [data-appearance="dark"] .hero .hero-milestone { color: #d2f7c7; }
 [data-appearance="dark"] .hero.milestone-fire .hero-milestone { color: #ffdab0; }
 [data-appearance="dark"] :is(.primary, .release-new) { background: #226c51; color: #fff; }
