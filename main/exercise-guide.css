@@ -1,0 +1,8 @@
+.exercise-info { flex: none; padding: 0; width: 44px; color: var(--green); font-size: 1.3rem; }
+.picker-exercise { display: grid; grid-template-columns: minmax(0,1fr) 44px; align-items: center; gap: 8px; }
+.exercise-guide-dialog h2 { margin: 0; overflow-wrap: anywhere; }
+.exercise-guide-dialog header { flex-wrap: nowrap; }
+.exercise-guide-dialog header button { flex: none; }
+.exercise-demo { background: #edf5ee; padding: 8px; border-radius: 14px; }
+.exercise-demo canvas { display: block; width: 100%; height: auto; touch-action: none; }
+.exercise-guide-dialog ol { padding-left: 1.45em; line-height: 1.6; }

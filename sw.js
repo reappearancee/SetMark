@@ -1,4 +1,4 @@
-const cacheName = 'setmark-pwa-v34';
+const cacheName = 'setmark-pwa-v35';
 const shell = [
   "./",
   "./index.html",
@@ -12,6 +12,8 @@ const shell = [
   "./install/install-step-share.jpg",
   "./install/style.css",
   "./main/app.js",
+  "./main/exercise-guide.js",
+  "./main/exercise-guide.css",
   "./main/catalog.js",
   "./main/icon-192.png",
   "./main/icon.png",
