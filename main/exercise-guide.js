@@ -1,7 +1,5 @@
 import { burnFitGuides } from './burnfit-guides.js';
 
-const burnFitLibrary = 'https://burnfit.io/라이브러리/';
-
 function showInlineAnimation(dialog, name, file) {
   const figure = document.createElement('figure');
   figure.className = 'exercise-inline-demo';
@@ -11,7 +9,7 @@ function showInlineAnimation(dialog, name, file) {
   caption.textContent = '동작 이미지 · 번핏';
   image.addEventListener('error', () => {
     image.remove();
-    caption.textContent = '동작 이미지를 불러오지 못했어요. 아래에서 원본을 열 수 있어요.';
+    caption.textContent = '동작 이미지를 불러오지 못했어요.';
   }, {once:true});
   image.src = file;
   figure.append(image, caption);
@@ -30,14 +28,23 @@ export function showExerciseGuide(name, catalog) {
   const guide = burnFitGuides.get(name);
   if (guide?.gif) showInlineAnimation(dialog, name, guide.gif);
   else dialog.insertAdjacentHTML('beforeend','<p class="muted">연결된 동작 이미지가 없어요.</p>');
-  const page = guide?.page;
-  const reference = document.createElement('a');
-  reference.className = 'exercise-reference';
-  reference.href = new URL(page ?? '', burnFitLibrary).href;
-  reference.target = '_blank';
-  reference.rel = 'noopener noreferrer';
-  reference.textContent = page ? '번핏에서 이 운동 동작 보기 ↗' : '번핏 운동 라이브러리 열기 ↗';
-  dialog.append(reference);
+  const heading = document.createElement('h3');
+  heading.textContent = '운동 방법';
+  dialog.append(heading);
+  if (guide?.steps?.length) {
+    const list = document.createElement('ol');
+    for (const step of guide.steps) {
+      const item = document.createElement('li');
+      item.textContent = step;
+      list.append(item);
+    }
+    dialog.append(list);
+  } else {
+    const message = document.createElement('p');
+    message.className = 'muted';
+    message.textContent = '이 종목의 단계별 안내는 아직 준비되지 않았어요.';
+    dialog.append(message);
+  }
   const trigger = document.activeElement;
   document.body.append(dialog);
   dialog.showModal();

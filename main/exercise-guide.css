@@ -9,19 +9,6 @@
 .exercise-demo { background: #edf5ee; padding: 8px; border-radius: 14px; }
 .exercise-demo canvas { display: block; width: 100%; height: auto; touch-action: none; }
 .exercise-guide-dialog ol { padding-left: 1.45em; line-height: 1.6; }
-.exercise-reference {
-  display: grid;
-  min-height: 44px;
-  place-items: center;
-  margin-top: 16px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  background: #edf5ee;
-  color: var(--green, #185a3b);
-  font-weight: 650;
-  text-decoration: none;
-}
-
 .exercise-inline-demo { margin: 0 0 16px; }
 .exercise-inline-demo img { display: block; width: 100%; max-height: 360px; object-fit: contain; border-radius: 14px; background: #fff; }
 .exercise-inline-demo figcaption { margin-top: 8px; color: #5c7168; font-size: .8rem; }

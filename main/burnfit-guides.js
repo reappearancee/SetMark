@@ -1,1668 +1,2945 @@
 export const burnFitGuides = new Map([
   [
-    "바벨 스쿼트",
+    "바벨 백스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-백스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_BSQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_BSQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 바벨을 등 뒤 어깨 위에 올려요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
-    "프런트 스쿼트",
+    "프론트 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/프론트-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_FSQ.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_FSQ.gif",
+      "steps": [
+        "바벨을 어깨 폭로 잡고 쇄골 위에 올려둡니다.",
+        "시선은 정면을 유지하면서, 엉덩이를 뒤로 빼며 앉습니다.",
+        "가슴을 펴고 허리를 곧게 세워 상체를 편 상태로, 발바닥으로 바닥을 지그시 누르며 일어납니다."
+      ]
     }
   ],
   [
     "저처 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/저처-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/ZER_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ZER_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 양팔을 펴서 바를 팔이 접히는 부분에 위치시킵니다.",
+        "가슴은 활짝 편 상태를 유지하면서, 엉덩이를 뒤로 빼면서 앉습니다.",
+        "어깨가 앞으로 구부려지지 않도록 유의하면서, 발바닥으로 바닥을 지그시 누르며 일어납니다."
+      ]
     }
   ],
   [
     "바벨 불가리안 스플릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-불가리안-스플릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_SPLIT_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_SPLIT_SQT.gif",
+      "steps": [
+        "바벨을 어깨 폭로 잡아 등 위에 올리고, 양발을 골반 너비로 벌리고 서요.",
+        "한 쪽 다리를 뒤로 빼서 의자 위에 올려요.",
+        "무게를 앞다리에 실은 상태로, 뒷다리의 무릎이 직각이 될때까지 자세를 낮춥니다.",
+        "엉덩이에 힘을 주고 앞발로 무게를 지탱하면서 2번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "덤벨 불가리안 스플릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-불가리안-스플릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_BULSPLIT_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_BULSPLIT_SQT.gif",
+      "steps": [
+        "덤벨을 양손에 잡고 서서, 한 쪽 다리를 뒤로 빼서 의자 위에 올려요.",
+        "무게를 앞다리에 실은 상태로, 뒷다리의 무릎이 직각이 될때까지 자세를 낮춥니다.",
+        "엉덩이에 힘을 주고 앞발로 무게를 지탱하면서 2번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "덤벨 고블릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-고블릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/GOBLET_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/GOBLET_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭 보다 넓게 벌리고, 두 손으로 덤벨을 잡고 턱 아래 위치시킵니다.",
+        "양손으로 잡은 중량을 고정시킨 상태에서, 엉덩이를 뒤로 빼면서 스쿼트 자세로 내려갑니다.",
+        "발바닥으로 바닥을 밀고 일어나면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "맨몸 스플릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/맨몸-스플릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BW_SPLIT_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BW_SPLIT_SQT.gif",
+      "steps": [
+        "양발을 앞뒤로 벌리고 상체를 곧게 펴고 서요.",
+        "시선은 정면을 향한 상태에서, 두 무릎이 90도를 이룰때까지 엉덩이를 낮춰 줘요.",
+        "무게중심을 어느 한방향으로 쏠리지 않게 유지하면서 무릎을 피며 올라옵니다."
+      ]
     }
   ],
   [
     "에어 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/에어-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/AIR_SQT-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/AIR_SQT-1.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고 허리를 펴고 곧게 서요.",
+        "가슴을 편 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "발바닥으로 바닥을 밀고 일어나면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "점프 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/점프-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/JUMP_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/JUMP_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고 허리를 펴고 곧게 서요.",
+        "가슴을 편 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "복근에 힘을 주고 골반을 밀어 올리면서 최대한 높이 뛰어오릅니다.",
+        "착지하면서 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "덤벨 스플릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스플릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SPLIT_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SPLIT_SQT.gif",
+      "steps": [
+        "덤벨을 양손에 들고 상체를 곧게 편 상태로, 양발을 앞뒤로 벌리고 서요.",
+        "시선은 정면을 향한 상태에서, 두 무릎이 90도를 이룰때까지 엉덩이를 낮춰 줘요.",
+        "무게중심을 어느 한방향으로 쏠리지 않게 유지하면서 무릎을 피며 올라옵니다."
+      ]
     }
   ],
   [
     "케틀벨 고블릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-고블릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_GOBLET_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_GOBLET_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭 보다 넓게 벌리고, 두 손으로 케틀벨을 잡고 턱 아래 위치시킵니다.",
+        "양손으로 잡은 중량을 고정시킨 상태에서, 엉덩이를 뒤로 빼면서 스쿼트 자세로 내려갑니다.",
+        "발바닥으로 바닥을 밀고 일어나면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "데드리프트",
+    "컨벤셔널(바벨) 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/컨벤셔널-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_DL.gif",
+      "steps": [
+        "양발을 골반보다 약간 넓게 벌리고, 바벨의 그립을 어깨보다 조금 넓게하여 무릎과 팔이 겹치지 않도록 해요.",
+        "등이 굽지 않도록 상체를 곧게 유지하면서, 발바닥으로 바닥을 밀어올린다는 느낌으로 바벨을 들어 올립니다.",
+        "몸을 완전히 쭉 피고 엉덩이 근육을 수축해요.",
+        "바벨을 들어올린 역순서대로 바닥으로 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "루마니안 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/루마니안-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/RM_BB_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/RM_BB_DL.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 양손은 다리보다 살짝 넓게 벌려 바벨을 잡고 서요.",
+        "시선은 전방을 향한 상태에서 바벨을 들어올려 골반 높이에 위치시킵니다.",
+        "허리와 등을 편 상태로 상체를 숙여 바벨을 무릎 높이까지 속도를 조절해 내립니다.",
+        "바벨이 내려간 역순서대로 들어올려 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "스모 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/스모-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_BB_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_BB_DL.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌리고 바벨 앞에 서요.",
+        "허벅지가 바닥에 수평이 될 때까지 엉덩이를 뒤로 뺀 상태에서, 양팔은 어깨 폭보다 좁게 바벨을 잡아요.",
+        "복압을 유지한채로 엉덩이에 힘을 주며 다리를 펴요.",
+        "상체를 포함한 온몸이 펴바닥 동작을 완료하고, 바벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "레그 프레스",
     {
       "page": "https://burnfit.io/라이브러리/레그-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/LEG_PRESS-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LEG_PRESS-1.gif",
+      "steps": [
+        "엉덩이와 허리가 의자에 완전히 붙도록 밀착하여 앉고, 두 발을 어깨 폭만큼 벌려줘요.",
+        "",
+        "안전핀을 제거하고, 중량의 자극을 느끼며 무릎을 굽혀요.",
+        "복부에 힘을 유지한채로, 중량판을 지그시 밀어 올립니다."
+      ]
     }
   ],
   [
     "레그 컬",
     {
       "page": "https://burnfit.io/라이브러리/레그-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/LEG_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LEG_CURL.gif",
+      "steps": [
+        "머신에 엎드린 상태에서, 종아리 쪽의 패드가 아킬레스건 바로 위쪽에 위치하도록 머신을 조정해요.",
+        "발목을 세운 상태에서, 무릎을 굽혀 기구를 올려요.",
+        "허리, 엉덩이, 햄스트링에 긴장감을 유지하면서 기구를 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "레그 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/레그-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/LGE_EXT-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LGE_EXT-1.gif",
+      "steps": [
+        "의자는 무릎 바로 아래에 올 수 있게, 패드는 발목 살짝 위에 위치할 수 있도록 머신을 조정해요.",
+        "엉덩이가 떨어지지 않게 유지하면서, 허벅지의 힘으로 고정부위를 지그시 밀어올립니다.",
+        "근육의 긴장을 유지하면서 속도를 조절해 무릎을 굽혀요."
+      ]
     }
   ],
   [
     "스탠딩 카프 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/스탠딩-카프-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/STD_CALF_RAISE-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/STD_CALF_RAISE-1.gif",
+      "steps": [
+        "어깨 위에 무게를 위치시키고, 양손으로 머신을 잡고 받침대 위에 서요.",
+        "종아리의 힘을 이용하여 몸 전체를 위로 들어 올려요.",
+        "종아리의 자극을 유지하면서 속도를 조절해 몸을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "힙 어덕션 머신",
     {
       "page": "https://burnfit.io/라이브러리/힙-어덕션-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/힙-어덕션-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/힙-어덕션-머신.gif",
+      "steps": [
+        "허벅지 안쪽 받침대의 넓이를 적당하게 조절하고 머신에 앉습니다.",
+        "호흡을 내쉬면서 양 다리를 안쪽으로 모아줘요.",
+        "호흡을 들이마시면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "힙 어브덕션 머신",
     {
       "page": "https://burnfit.io/라이브러리/힙-어브덕션-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/HIP_ABD_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HIP_ABD_MC.gif",
+      "steps": [
+        "의자에 앉아 무릎 바깥쪽에 패드를 밀착한 상태로 상체를 머신쪽으로 살짝 숙여줘요.",
+        "상,하체가 움직이지 않게 고정된 상태에서 엉덩이 바깥쪽 근육의 힘을 사용하여 양쪽 허벅지를 속도를 조절해 옆으로 벌려줘요.",
+        "바깥쪽 엉덩이에 자극을 느끼며 속도를 조절해 처음의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "런지",
     {
       "page": "https://burnfit.io/라이브러리/런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/LUNGE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LUNGE.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뻗어 앞으로 나가면서 두 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞발의 뒤꿈치에 무게 중심을 실어서 몸을 위쪽으로 밀어주며 원래 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 런지",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_LUNGE-2.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_LUNGE-2.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 덤벨을 양손에 든 상태로 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뻗어 앞으로 나가면서 두 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞발의 뒤꿈치에 무게 중심을 실어서 몸을 위쪽으로 밀어주며 원래 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스텝업",
     {
       "page": "https://burnfit.io/라이브러리/스텝업/",
-      "gif": "https://burnfit.io/wp-content/uploads/STEP_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/STEP_UP.gif",
+      "steps": [
+        "몸을 곧게 펴고 구조물 앞에 서요.",
+        "시선은 정면을 유지한 상태에서 한발을 구조물에 먼저 올리고, 올려놓은 다리의 힘으로 구조물 위로 올라서요.",
+        "구조물 위에서 몸을 완전히 쭉 피고 서요.",
+        "한발을 먼저 바닥으로 내린 뒤에 반대편 발도 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "중량 스텝업",
     {
       "page": "https://burnfit.io/라이브러리/중량-스텝업/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_STEP_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_STEP_UP.gif",
+      "steps": [
+        "양손에 덤벨을 잡고 구조물 앞에 서요.",
+        "시선은 정면을 유지한 상태에서 한발을 구조물에 먼저 올리고, 올려놓은 다리의 힘으로 구조물 위로 올라서요.",
+        "구조물 위에서 몸을 완전히 쭉 피고 서요.",
+        "한발을 먼저 바닥으로 내린 뒤에 반대편 발도 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "힙 쓰러스트",
     {
       "page": "https://burnfit.io/라이브러리/힙-쓰러스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/HIP_THRUST.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HIP_THRUST.gif",
+      "steps": [
+        "등 상부를 벤치에 기댄 상태에서 발바닥을 바닥에 단단히 고정해요.",
+        "엉덩이 힘으로 몸을 윗 방향으로 밀어 올립니다.",
+        "속도를 조절해 엉덩이를 내려 수축된 엉덩이 근육을 이완시킵니다."
+      ]
     }
   ],
   [
     "바벨 힙 쓰러스트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-힙-쓰러스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_HIP_THRUST.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_HIP_THRUST.gif",
+      "steps": [
+        "바벨을 골반 위에 위치시킨 상태에서, 등 상부를 벤치에 기대고 발바닥을 바닥에 고정해요.",
+        "엉덩이 힘으로 몸을 윗 방향으로 밀어 올립니다.",
+        "속도를 조절해 엉덩이를 내려 수축된 엉덩이 근육을 이완시킵니다."
+      ]
     }
   ],
   [
     "브이 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/브이-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/V_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/V_SQT.gif",
+      "steps": [
+        "머신에 허리를 붙인 상태에서 기본 스쿼트 보폭으로 곧게 서요.",
+        "허리가 굽지 않도록 배에 힘을 준 상태로 다리가 ㄱ자 모양이 될때까지 내려갑니다.",
+        "대퇴사두와 힙의 자극을 느끼면서, 양발바닥을 지그시 누르며 올라옵니다."
+      ]
     }
   ],
   [
     "리버스 브이 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/리버스-브이-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_V_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_V_SQT.gif",
+      "steps": [
+        "머신을 어깨에 올린 상태에서 발판에 발을 짚고 섰을때 몸이 일직선이 되도록 자세를 잡아요.",
+        "",
+        "허리가 굽지 않도록 배에 힘을 준 상태로 다리가 ㄱ자 모양이 될때까지 내려갑니다.",
+        "대퇴사두와 힙의 자극을 느끼면서, 양발바닥을 지그시 누르며 올라옵니다."
+      ]
     }
   ],
   [
     "글루트 킥백 머신",
     {
       "page": "https://burnfit.io/라이브러리/글루트-킥백-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/GLUTE_KB_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/GLUTE_KB_MC.gif",
+      "steps": [
+        "발판에 서서 앞쪽의 손잡이를 잡고, 패드 위에 운동할 종아리의 뒷부분을 위치시킵니다.",
+        "골반을 움직이지 않게 둔근에 집중하면서 다리를 뒤로 쭈욱 밀어줘요.",
+        "속도를 조절해 둔근에 자극을 느끼며 처음의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "시티드 카프 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/시티드-카프-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEAT_CALF_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEAT_CALF_RAISE.gif",
+      "steps": [
+        "발 받침대 위에 양발을 올리고 머신에 앉습니다.",
+        "발 뒷꿈치를 최대한의 높이로 속도를 조절해 올려요.",
+        "속도를 조절해 발 뒷꿈치를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "정지 백 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/정지-백-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 바벨을 등 뒤 어깨 위에 올려요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "앉은 상태의 자세를 2~3초간 유지해요.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
     "트랩바 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/트랩바-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/TRAP_DL-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/TRAP_DL-1.gif",
+      "steps": [
+        "양발을 어깨 폭만큼 벌리고, 내전근 개입을 위해 발을 바깥 방향으로 조금 벌려줘요.",
+        "등이 굽지 않도록 상체를 곧게 유지하면서, 무릎을 굽혀 트랩 바를 양손으로 잡아줘요.",
+        "",
+        "복압을 단단하게 유지한채로 발바닥으로 바닥을 밀어올린다는 느낌으로 바를 들어 올립니다.",
+        "바를 들어올린 역순서대로 바닥으로 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스미스머신 스플릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-스플릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_SPLIT_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_SPLIT_SQT.gif",
+      "steps": [
+        "바벨을 어깨 폭로 잡아 등 위에 올리고 양발을 골반 너비만큼 벌리고 서요.",
+        "한쪽 다리를 뻗어 앞으로 나가면서 두 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞발의 뒤꿈치에 무게 중심을 실어서 몸을 위쪽으로 밀어주며 원래 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스미스머신 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_DL.gif",
+      "steps": [
+        "양발을 골반보다 약간 넓게 벌리고, 바벨의 그립을 어깨보다 조금 넓게하여 무릎과 팔이 겹치지 않도록 해요.",
+        "등이 굽지 않도록 상체를 곧게 유지하면서, 발바닥으로 바닥을 밀어올린다는 느낌으로 바벨을 들어 올립니다.",
+        "몸을 완전히 쭉 피고 엉덩이 근육을 수축해요.",
+        "바벨을 들어올린 역순서대로 바닥으로 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "스미스 머신 스쿼트",
+    "스미스머신 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭 만큼 벌리고, 바벨을 등 뒤 어깨 위에 올려요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
     "케이블 힙 어브덕션",
     {
       "page": "https://burnfit.io/라이브러리/케이블-힙-어브덕션/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_HIP_ABD.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_HIP_ABD.gif",
+      "steps": [
+        "케이블 머신 옆에서 한발로 몸을 지탱하고 선 상태로, 반대쪽 발목에 케이블을 연결해요.",
+        "케이블에 연결된 발을 상체의 옆 방향으로 최대한 높게 들어 올립니다.",
+        "엉덩이의 자극을 느끼며 속도를 조절해 버티며 내립니다."
+      ]
     }
   ],
   [
     "핵 스쿼트 머신",
     {
       "page": "https://burnfit.io/라이브러리/핵-스쿼트-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/HACK_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HACK_SQT.gif",
+      "steps": [
+        "기구의 발판에 올라가 양발의 간격을 스쿼트 간격으로 벌리고 서요.",
+        "패드에 등과 어깨를 기댄 상태로 다리를 속도를 조절해 굽히면서 내려갑니다.",
+        "발바닥으로 발판을 지그시 누르면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "정지 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/정지-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_DL.gif",
+      "steps": [
+        "양발을 골반보다 약간 넓게 벌리고, 바벨의 그립을 어깨보다 조금 넓게하여 무릎과 팔이 겹치지 않도록 해요.",
+        "등이 굽지 않도록 상체를 곧게 유지하면서, 발바닥으로 바닥을 밀어올린다는 느낌으로 바벨을 살짝 들어 올립니다.",
+        "바벨이 바닥과 분리된 상태의 자세를 2~3초정도 유지해요.",
+        "복압을 단단히 유지한채 몸을 완전히 쭉 피며 엉덩이 근육을 수축해요.",
+        "바벨을 들어올린 역순서대로 바닥으로 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "정지 스모 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/정지-스모-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_SM_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_SM_DL.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌리고 바벨 앞에 서요.",
+        "허벅지가 바닥에 수평이 될 때까지 엉덩이를 뒤로 뺀 상태에서, 양팔은 어깨 폭보다 좁게 바벨을 잡아요.",
+        "복압을 유지한채로 엉덩이에 힘을 주며 다리를 펴요.",
+        "바벨이 바닥과 분리된 상태의 자세를 2~3초정도 유지해요.",
+        "상체를 포함한 온몸이 펴바닥 동작을 완료하고, 바벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 박스 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-박스-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_BOX_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_BOX_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 바벨을 등 뒤 어깨 위에 올려요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 엉덩이를 뒤로 빼며 박스에 앉습니다.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
     "바벨 프론트 랙 런지",
     {
       "page": "https://burnfit.io/라이브러리/바벨-프론트-랙-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_FR_LUNGE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_FR_LUNGE.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 상체를 곧게 핀 상태에서, 바벨을 쇄골 위에 올립니다.",
+        "한쪽 다리를 뻗어 앞으로 나가면서 두 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞발의 뒤꿈치에 무게 중심을 실어서 몸을 위쪽으로 밀어주며 원래 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 점프 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-점프-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_JUMP_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_JUMP_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 바벨을 등 뒤 어깨 위에 올려요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 스쿼트를 수행해요.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 박차면서 점프해요.",
+        "점프하면서 펴졌던 무릎과 고관절을 다시 접으면서 스쿼트 자세를 취해요.",
+        "발이 땅에 닿기전에 무릎을 살짝 구부려서 하반신 전체로 중량을 분산시킬 수 있도록 주의해요."
+      ]
     }
   ],
   [
     "바벨 런지",
     {
       "page": "https://burnfit.io/라이브러리/바벨-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_LUNGE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_LUNGE.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 바벨을 등뒤에 얹은 상태로 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뻗어 앞으로 나가면서 두 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞발의 뒤꿈치에 무게 중심을 실어서 몸을 위쪽으로 밀어주며 원래 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 레터럴 런지",
     {
       "page": "https://burnfit.io/라이브러리/바벨-레터럴-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_LAT_LUNGE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_LAT_LUNGE.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 바벨을 등뒤에 얹은 상태로 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 측면으로 크게 내딛은 후, 엉덩이를 뒤로 밀면서 앉습니다.",
+        "내딛었던 한쪽 다리를 몸의 중앙으로 가져온 뒤, 반대쪽 다리를 동일한 방법으로 수행해요."
+      ]
     }
   ],
   [
     "바벨 스플릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-스플릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_SPLIT_SQT_REAL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_SPLIT_SQT_REAL.gif",
+      "steps": [
+        "바벨을 등 뒤 어깨 위에 올려둔 상태로 양발을 앞뒤로 벌리고 서요.",
+        "시선은 정면을 향한 상태에서, 두 무릎이 90도를 이룰때까지 엉덩이를 낮춰 줘요.",
+        "무게중심을 어느 한방향으로 쏠리지 않게 유지하면서 무릎을 피며 올라옵니다."
+      ]
     }
   ],
   [
     "바벨 스탠딩 카프 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/바벨-스탠딩-카프-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_STD_CALF_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_STD_CALF_RAISE.gif",
+      "steps": [
+        "바벨을 등 뒤 어깨 위에 올려둔 상태로, 단차가 있는 받침대 위에 올라서요.",
+        "양발을 골반 너비만큼 벌린 상태에서, 발 뒷꿈치가 바닥에 닿지 않게 위치해요.",
+        "뒷꿈치를 최대한의 높이로 속도를 조절해 올려요.",
+        "속도를 조절해 발 뒷꿈치를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스티프 레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/스티프-레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/STIFF_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/STIFF_DL.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌린 상태에서, 양손으로 바벨을 잡고 곧게 서요.",
+        "허리가 구부러지지 않도록 복압을 유지하면서, 엉덩이를 뒤로 빼면서 몸을 숙입니다.",
+        "",
+        "허리가 각도를 유지할 수 있는 한도내에서 최대한 몸을 굽힙니다.",
+        "이완된 엉덩이를 수축시킨다는 생각으로 몸을 세워 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "맨몸 오버헤드 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/맨몸-오버헤드-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BW_OH_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BW_OH_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌린 상태에서, 양손을 위로 곧게 뻗고 서요.",
+        "상체가 구부려지지 않도록 유지하면서 엉덩이를 낮추며 스쿼트를 해요.",
+        "발바닥으로 바닥을 밀고 일어나면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 스모 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스모-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SM_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SM_SQT.gif",
+      "steps": [
+        "양손으로 덤벨을 잡고, 발끝이 바깥을 향한 상태로 다리를 넓게 벌리고 서요.",
+        "팔꿈치를 펴고 등을 긴장시킨 상태로, 엉덩이를 뒤로 빼며 앉습니다.",
+        "복압을 유지한채로 엉덩이에 힘을 주며 다리를 펴요."
+      ]
     }
   ],
   [
     "덤벨 레그 컬",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-레그-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_LEG_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_LEG_CURL.gif",
+      "steps": [
+        "벤치에 엎드린 상태에서 양발로 덤벨을 고정시켜줘요.",
+        "발목을 세운 상태에서, 무릎을 굽혀 덤벨을 올려요.",
+        "허리, 엉덩이, 햄스트링에 긴장감을 유지하면서 덤벨을 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "덤벨 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SQT.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 덤벨을 양손으로 잡고 곧게 서요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
     "바벨 핵 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-핵-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_HACK_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_HACK_SQT.gif",
+      "steps": [
+        "양손으로 골반 바로 바깥쪽에서 바벨을 언더그립으로 잡아요.",
+        "양발을 골반 너비만큼 벌린 상태에서, 엉덩이를 뒤로 빼며 앉습니다.",
+        "허리가 굽지 않도록 주의하면서 허벅지를 바닥과 수평을 이루는 지점까지 앉습니다.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
     "시티드 레그 컬",
     {
       "page": "https://burnfit.io/라이브러리/시티드-레그-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEAT_LEG_CURL-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEAT_LEG_CURL-1.gif",
+      "steps": [
+        "머신에 앉은 상태에서, 종아리 쪽의 패드가 아킬레스건 바로 위쪽에 위치하도록 머신을 조정해요.",
+        "발목을 세운 상태에서, 무릎을 최대한 굽혀 뒷 허벅지를 수축시킵니다.",
+        "대퇴 이두의 긴장감을 유지하면서 속도를 조절해 무릎을 펴요."
+      ]
     }
   ],
   [
     "힙 쓰러스트 머신",
     {
       "page": "https://burnfit.io/라이브러리/힙-쓰러스트-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/HIP_THRUST_MAC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HIP_THRUST_MAC.gif",
+      "steps": [
+        "등 상부를 벤치에 기댄 상태에서 발바닥을 바닥에 단단히 고정해요.",
+        "엉덩이 힘으로 몸을 윗 방향으로 밀어 올립니다.",
+        "속도를 조절해 엉덩이를 내려 수축된 엉덩이 근육을 이완시킵니다."
+      ]
     }
   ],
   [
     "맨몸 카프 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/맨몸-카프-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/BW_CALF_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BW_CALF_RAISE.gif",
+      "steps": [
+        "계단과 같이 단차가 있는곳에 발뒤꿈치를 뗀 상태로 곧게 서요.",
+        "종아리의 힘을 이용하여 몸 전체를 위로 들어 올려요.",
+        "종아리의 자극을 유지하면서 속도를 조절해 몸을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "글루트 브리지",
+    "글루트 브릿지",
     {
       "page": "https://burnfit.io/라이브러리/글루트-브릿지/",
-      "gif": "https://burnfit.io/wp-content/uploads/GLUTE_BRDG.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/GLUTE_BRDG.gif",
+      "steps": [
+        "바닥에 누워 무릎을 구부린 상태에서, 양 발바닥면 전체가 바닥에 닿게해요.",
+        "무릎, 엉덩이, 어깨가 일직선이 될때까지 바닥에서 엉덩이를 들어 올립니다.",
+        "최고점에서 약 2초간 자세를 유지하고 시작자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "덤벨 루마니안 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-루마니안-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_RM_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_RM_DL.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌린 상태에서 양손으로 덤벨을 잡고 서요.",
+        "시선은 전방을 향한 상태에서 덤벨을 들어올려 골반 높이에 위치시킵니다.",
+        "허리와 등을 편 상태로 상체를 숙여 덤벨을 무릎 높이까지 속도를 조절해 내립니다.",
+        "덤벨이 내려간 역순서대로 들어올려 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "라잉 힙 어브덕션",
     {
       "page": "https://burnfit.io/라이브러리/라잉-힙-어브덕션/",
-      "gif": "https://burnfit.io/wp-content/uploads/LYING_HIP_ABD.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LYING_HIP_ABD.gif",
+      "steps": [
+        "옆으로 곧게 누워 한팔은 머리를 다른 한팔은 상체를 지지해요.",
+        "몸의 중심을 잡은 상태에서 위쪽 다리를 상체와 일직선이 되도록 몸을 정렬해요.",
+        "아래쪽 다리는 바닥을 지지한 상태로 위쪽 다리를 속도를 조절해 들어 올려요.",
+        "올린 다리를 속도를 조절해 내려 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "싱글 레그 글루트 브릿지",
     {
       "page": "https://burnfit.io/라이브러리/싱글-레그-글루트-브릿지/",
-      "gif": "https://burnfit.io/wp-content/uploads/SL_GLUTE_BRDG.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SL_GLUTE_BRDG.gif",
+      "steps": [
+        "바닥에 누워 한쪽발 바닥면은 바닥에 닿게 무릎을 구부리고 다른쪽 발은 곧게 펴요.",
+        "양팔로 상체가 움직이지않게 고정한 상태에서, 바닥에 닿은 발의 뒤꿈치를 밀면서 엉덩이를 들어 올립니다.",
+        "최고점에서 약 2초간 자세를 유지하고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "피스톨 박스 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/피스톨-박스-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/PISTOL_BOX_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PISTOL_BOX_SQT.gif",
+      "steps": [
+        "적당한 높이의 박스 앞으로 가서 양손을 앞으로 내밀고 한발을 살짝 들어줘요.",
+        "코어에 힘을 준 상태로 엉덩이를 뒤로빼면서 속도를 조절해 앉아줘요.",
+        "박스가 엉덩이에 닿으면 둔근과 햄스트링에 힘을 주면서 몸을 속도를 조절해 일으켜 세웁니다."
+      ]
     }
   ],
   [
     "사이드 라잉 클램",
     {
       "page": "https://burnfit.io/라이브러리/사이드-라잉-클램/",
-      "gif": "https://burnfit.io/wp-content/uploads/SIDE_LYING_CLAM.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SIDE_LYING_CLAM.gif",
+      "steps": [
+        "옆으로 곧게 누워 한팔은 머리를 다른 한팔은 상체를 지지해요.",
+        "양쪽 무릎을 앞으로 구부리고 양다리를 모아줘요.",
+        "양발이 떨어지지 않도록 유지하면서 윗 무릎을 들어 올려요.",
+        "최고점에서 약 2초간 자세를 유지하고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "맨몸 원레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/맨몸-원레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BW_SL_DEAD.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BW_SL_DEAD.gif",
+      "steps": [
+        "한발로 균형을 잡은 상태로 척추를 곧게 펴고 서요.",
+        "고관절을 접으며 상체를 속도를 조절해 숙여줘요.",
+        "반대쪽 다리를 들어 균형을 잡으면서 상체의 균형을 유지할 수 있는 지점까지 내려갑니다.",
+        "한발로 바닥을 지그시 누르며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 원레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-원레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_SL_DEAD.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_SL_DEAD.gif",
+      "steps": [
+        "양손으로 바벨을 들고 한발로 균형을 잡은 상태로 척추를 곧게 펴고 서요.",
+        "고관절을 접으며 상체를 속도를 조절해 숙여줘요.",
+        "반대쪽 다리를 들어 균형을 잡으면서 상체의 균형을 유지할 수 있는 지점까지 내려갑니다.",
+        "한발로 바닥을 지그시 누르며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 원레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-원레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SL_DEAD.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SL_DEAD.gif",
+      "steps": [
+        "양손으로 덤벨을 들고 한발로 균형을 잡은 상태로 척추를 곧게 펴고 서요.",
+        "고관절을 접으며 상체를 속도를 조절해 숙여줘요.",
+        "반대쪽 다리를 들어 균형을 잡으면서 상체의 균형을 유지할 수 있는 지점까지 내려갑니다.",
+        "한발로 바닥을 지그시 누르며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케틀벨 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_DL.gif",
+      "steps": [
+        "양발을 골반보다 약간 넓게 벌리고, 케틀벨을 양손으로 잡아요.",
+        "등이 굽지 않도록 상체를 곧게 유지하면서, 발바닥으로 바닥을 밀어올린다는 느낌으로 케틀벨을 들어 올립니다.",
+        "몸을 완전히 쭉 피고 엉덩이 근육을 수축해요.",
+        "케틀벨을 들어올린 역순서대로 바닥으로 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케틀벨 스모 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-스모-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_SM_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_SM_DL.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌리고 케틀벨 앞에 서요.",
+        "허벅지가 바닥에 수평이 될 때까지 엉덩이를 뒤로 뺀 상태에서, 양손으로 케틀벨을 잡아요.",
+        "복압을 유지한채로 엉덩이에 힘을 주며 다리를 펴요.",
+        "상체를 포함한 온몸이 펴바닥 동작을 완료하고, 케틀벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 스모 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스모-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SM_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SM_DL.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌린상태로 덤벨 앞에 서요.",
+        "허벅지가 바닥에 수평이 될 때까지 엉덩이를 뒤로 뺀 상태에서, 양손으로 덤벨을 잡아요.",
+        "복압을 유지한채로 엉덩이에 힘을 주며 다리를 펴요.",
+        "상체를 포함한 온몸이 펴바닥 동작을 완료하고, 덤벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 스티프 레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스티프-레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_STIFF_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_STIFF_DL.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌린 상태에서, 양손으로 덤벨을 잡고 곧게 서요.",
+        "허리가 구부러지지 않도록 복압을 유지하면서, 엉덩이를 뒤로 빼면서 몸을 숙입니다.",
+        "허리가 각도를 유지할 수 있는 한도내에서 최대한 몸을 굽힙니다.",
+        "이완된 엉덩이를 수축시킨다는 생각으로 몸을 세워 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 레터럴 런지",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-레터럴-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_LAT_LUNGE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_LAT_LUNGE.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 양손으로 덤벨을 들고 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 측면으로 크게 내딛은 후, 엉덩이를 뒤로 밀면서 앉습니다.",
+        "내딛었던 한쪽 다리를 몸의 중앙으로 가져온 뒤, 반대쪽 다리를 동일한 방법으로 수행해요."
+      ]
     }
   ],
   [
     "케틀벨 레터럴 런지",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-레터럴-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_LAT_LUNGE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_LAT_LUNGE.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 양손으로 케틀벨을 들고 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 측면으로 크게 내딛은 후, 엉덩이를 뒤로 밀면서 앉습니다.",
+        "내딛었던 한쪽 다리를 몸의 중앙으로 가져온 뒤, 반대쪽 다리를 동일한 방법으로 수행해요."
+      ]
     }
   ],
   [
     "맨몸 레터럴 런지",
     {
       "page": "https://burnfit.io/라이브러리/맨몸-레터럴-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/BW_LAT_LUNGE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BW_LAT_LUNGE.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 측면으로 크게 내딛은 후, 엉덩이를 뒤로 밀면서 앉습니다.",
+        "내딛었던 한쪽 다리를 몸의 중앙으로 가져온 뒤, 반대쪽 다리를 동일한 방법으로 수행해요."
+      ]
     }
   ],
   [
     "원레그 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/원레그-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/SL_LEG_EXT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SL_LEG_EXT.gif",
+      "steps": [
+        "의자는 무릎 바로 아래에 올 수 있게, 패드는 발목 살짝 위에 위치할 수 있도록 머신을 조정해요.",
+        "엉덩이가 떨어지지 않게 유지하면서, 한쪽 허벅지의 힘으로 고정부위를 지그시 밀어올립니다.",
+        "근육의 긴장을 유지하면서 속도를 조절해 무릎을 굽혀요."
+      ]
     }
   ],
   [
     "원레그 컬",
     {
       "page": "https://burnfit.io/라이브러리/원레그-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/SL_LEG_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SL_LEG_CURL.gif",
+      "steps": [
+        "머신에 엎드린 상태에서, 종아리 쪽의 패드가 아킬레스건 바로 위쪽에 위치하도록 머신을 조정해요.",
+        "발목을 세운 상태에서, 한쪽 무릎을 굽혀 기구를 올려요.",
+        "허리, 엉덩이, 햄스트링에 긴장감을 유지하면서 기구를 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "원레그 프레스",
     {
       "page": "https://burnfit.io/라이브러리/원레그-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/SL_LEG_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SL_LEG_PRESS.gif",
+      "steps": [
+        "엉덩이와 허리가 의자에 완전히 붙도록 밀착하여 앉은 상태에서 한 발을 중량판에 올려둡니다.",
+        "안전핀을 제거하고, 중량의 자극을 느끼며 무릎을 굽혀요.",
+        "엉덩이와 허리가 뜨지않을 깊이까지 중량판을 내립니다.",
+        "복부에 힘을 유지한채로, 중량판을 지그시 밀어 올립니다."
+      ]
     }
   ],
   [
     "수평 레그 프레스",
     {
       "page": "https://burnfit.io/라이브러리/수평-레그-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/HZ_LEG_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HZ_LEG_PRESS.gif",
+      "steps": [
+        "엉덩이와 허리가 의자에 완전히 붙도록 밀착하여 앉고, 두 발을 어깨 폭만큼 벌려줘요.",
+        "엉덩이와 허리가 뜨지 않도록 유의하면서 굽혀있던 무릎을 펴요.",
+        "중량의 자극을 느끼며 무릎을 굽혀 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "수평 원레그 프레스",
     {
       "page": "https://burnfit.io/라이브러리/수평-원레그-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/HZ_SL_LEG_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HZ_SL_LEG_PRESS.gif",
+      "steps": [
+        "엉덩이와 허리가 의자에 완전히 붙도록 밀착하여 앉고, 한 발을 어깨 폭만큼 벌려줘요.",
+        "엉덩이와 허리가 뜨지 않도록 유의하면서 굽혀있던 무릎을 펴요.",
+        "중량의 자극을 느끼며 무릎을 굽혀 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "시티드 원레그 컬",
     {
       "page": "https://burnfit.io/라이브러리/시티드-원레그-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEAT_SL_LEG_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEAT_SL_LEG_CURL.gif",
+      "steps": [
+        "머신에 앉은 상태에서, 종아리 쪽의 패드가 아킬레스건 바로 위쪽에 위치하도록 머신을 조정해요.",
+        "발목을 세운 상태에서, 한쪽 무릎을 최대한 굽혀 뒷 허벅지를 수축시킵니다.",
+        "대퇴 이두의 긴장감을 유지하면서 속도를 조절해 무릎을 펴요."
+      ]
     }
   ],
   [
     "노르딕 햄스트링 컬",
     {
       "page": "https://burnfit.io/라이브러리/노르딕-햄스트링-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/NOR_HAM_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/NOR_HAM_CURL.gif",
+      "steps": [
+        "양발을 고정한 상태로 무릎 바닥에 대고 곧게 서요.",
+        "몸이 일직선이 되도록 유지하면서 속도를 조절해 아래로 내려갑니다.",
+        "햄스트링의 자극을 느끼면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 스모 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-스모-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_SM_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_SM_SQT.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌리고, 바벨을 등 뒤 어깨 위에 올려요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
     "케틀벨 스모 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-스모-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_SM_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_SM_SQT.gif",
+      "steps": [
+        "양손으로 케틀벨을 잡고, 발끝이 바깥을 향한 상태로 다리를 넓게 벌리고 서요.",
+        "팔꿈치를 펴고 등을 긴장시킨 상태로, 엉덩이를 뒤로 빼며 앉습니다.",
+        "복압을 유지한채로 엉덩이에 힘을 주며 다리를 펴요."
+      ]
     }
   ],
   [
     "스모 에어 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/스모-에어-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_SM_AIR_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_SM_AIR_SQT.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌리고 서요.",
+        "복압을 유지한채로 엉덩이를 뒤로 빼며 앉습니다.",
+        "발바닥으로 바닥을 밀고 일어나면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "피스톨 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/피스톨-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/PISTOL_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PISTOL_SQT.gif",
+      "steps": [
+        "양발을 어깨 폭로 벌린 상태에서 한발을 살짝 들어줘요.",
+        "바닥을 지지하고 있는 다리의 무릎을 서서히 굽혀 엉덩이가 바닥에 닿는다는 느낌으로 앉습니다.",
+        "상체의 균형을 유지한 상태로 무릎을 펴면서 일어납니다."
+      ]
     }
   ],
   [
     "덩키 킥",
     {
       "page": "https://burnfit.io/라이브러리/덩키-킥/",
-      "gif": "https://burnfit.io/wp-content/uploads/DONK_KICK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DONK_KICK.gif",
+      "steps": [
+        "바닥에 손바닥과 무릎을 대고 엎드립니다.",
+        "신체가 흔들리지 않도록 몸을 고정시킨 상태에서, 한쪽 다리의 무릎을 90도로 유지하면서 위로 힘차게 킥해요.",
+        "둔근의 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 킥백",
     {
       "page": "https://burnfit.io/라이브러리/케이블-킥백/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_DONK_KICK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_DONK_KICK.gif",
+      "steps": [
+        "스트랩을 통해 발목에 케이블을 연결해요.",
+        "신체가 흔들리지 않도록 몸을 고정시킨 상태에서, 한쪽 다리를 뒤쪽으로 힘차게 킥해요.",
+        "둔근의 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "데피싯 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/데피싯-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/DEFICIT_DL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DEFICIT_DL.gif",
+      "steps": [
+        "플레이트 혹은 스텝 박스 위에 올라간 상태에서, 바벨의 그립을 어깨보다 조금 넓게하여 무릎과 팔이 겹치지 않도록 해요.",
+        "등이 굽지 않도록 상체를 곧게 유지하면서, 발바닥으로 바닥을 밀어올린다는 느낌으로 바벨을 들어 올립니다.",
+        "몸을 완전히 쭉 피고 엉덩이 근육을 수축해요.",
+        "바벨을 들어올린 역순서대로 바닥으로 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "런지 트위스트",
     {
       "page": "https://burnfit.io/라이브러리/런지-트위스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/LUNGE_TWIST.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LUNGE_TWIST.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뻗어 앞으로 나가면서 두 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "엉덩이를 낮춤과 동시에 상체를 무릎이 나온 방향으로 트위스트 해줘요.",
+        "앞발의 뒤꿈치에 무게 중심을 실어서 몸을 위쪽으로 밀어주며 원래 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케틀벨 런지 트위스트",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-런지-트위스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_LUNGE_TWIST.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_LUNGE_TWIST.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 양손으로 케틀벨을 잡은 상태에서 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뻗어 앞으로 나가면서 두 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "엉덩이를 낮춤과 동시에 상체를 무릎이 나온 방향으로 트위스트 해줘요.",
+        "앞발의 뒤꿈치에 무게 중심을 실어서 몸을 위쪽으로 밀어주며 원래 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "케이블 풀스루",
+    "케이블 풀 스루",
     {
       "page": "https://burnfit.io/라이브러리/케이블-풀-스루/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_PULL_THRU.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_PULL_THRU.gif",
+      "steps": [
+        "케이블 머신의 높이를 가장 낮게 맞추고 다리사이로 양손으로 케이블을 잡은 상태에서 머신을 등지고 서요.",
+        "고관절을 접으면서 골반을 뒤로 속도를 조절해 밀어줘요.",
+        "골반을 앞으로 밀어 엉덩이 근육을 수축하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "몬스터 글루트 머신",
     {
       "page": "https://burnfit.io/라이브러리/몬스터-글루트-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/MON_GLUTE_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/MON_GLUTE_MC.gif",
+      "steps": [
+        "머신에 앉은 상태에서 발판에 발을 올려놓습니다.",
+        "다리를 최대한 벌리면서 엉덩이 근육을 수축시킵니다.",
+        "속도를 조절해 다리를 모으면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "펜듈럼 스쿼트 머신",
     {
       "page": "https://burnfit.io/라이브러리/펜듈럼-스쿼트-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/펜듈럼-스쿼트-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/펜듈럼-스쿼트-머신.gif",
+      "steps": [
+        "어깨 패드에 어깨를 고정하고 발판에 발을 어깨 폭로 올립니다.",
+        "허리를 곧게 유지한 상태에서 엉덩이를 뒤로 밀어내며 앉습니다.",
+        "발판을 강하게 밀어내며 몸을 속도를 조절해 위로 밀어 올립니다."
+      ]
     }
   ],
   [
     "리니어 핵 스쿼트 머신",
     {
       "page": "https://burnfit.io/라이브러리/리니어-핵-스쿼트-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/리니어-핵-스쿼트-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/리니어-핵-스쿼트-머신.gif",
+      "steps": [
+        "기구에 앉아 양발의 간격을 스쿼트 간격으로 벌리고 서요.",
+        "패드에 등을 기댄 상태로 다리를 속도를 조절해 굽히면서 내려갑니다.",
+        "발바닥으로 발판을 지그시 누르면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스미스머신 카프 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-카프-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-카프-레이즈.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-카프-레이즈.gif",
+      "steps": [
+        "바벨을 등 뒤 어깨 위에 올려둔 상태로, 단차가 있는 받침대 위에 올라서요.",
+        "양발을 골반 너비만큼 벌린 상태에서, 발 뒷꿈치가 바닥에 닿지 않게 위치해요.",
+        "뒷꿈치를 최대한의 높이로 속도를 조절해 올려요.",
+        "속도를 조절해 발 뒷꿈치를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 스탠딩 카프 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스탠딩-카프-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-스탠딩-카프-레이즈.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-스탠딩-카프-레이즈.gif",
+      "steps": [
+        "덤벨을 양손에 들고, 단차가 있는 받침대 위에 올라서요.",
+        "양발을 골반 너비만큼 벌린 상태에서, 발 뒷꿈치가 바닥에 닿지 않게 위치해요.",
+        "뒷꿈치를 최대한의 높이로 속도를 조절해 올려요.",
+        "속도를 조절해 발 뒷꿈치를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 백워드 런지",
     {
       "page": "https://burnfit.io/라이브러리/바벨-백워드-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/바벨-백워드-런지.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/바벨-백워드-런지.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 바벨을 등뒤에 얹은 상태로 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뒤로 내딛으며, 앞쪽 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞쪽 다리의 힘으로 바닥을 밀어내며 속도를 조절해 처음 위치로 복귀해요.",
+        "반대쪽 발로 동일한 동작을 반복해요."
+      ]
     }
   ],
   [
     "케틀벨 백워드 런지",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-백워드-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/케틀벨-백워드-런지.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케틀벨-백워드-런지.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 케틀벨을 양손에 든 상태로 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뒤로 내딛으며, 앞쪽 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞쪽 다리의 힘으로 바닥을 밀어내며 속도를 조절해 처음 위치로 복귀해요.",
+        "반대쪽 발로 동일한 동작을 반복해요."
+      ]
     }
   ],
   [
     "맨몸 백워드 런지",
     {
       "page": "https://burnfit.io/라이브러리/맨몸-백워드-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/맨몸-백워드-런지.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/맨몸-백워드-런지.gif",
+      "steps": [
+        "양발을 골반 너비만큼 벌리고 상체를 곧게 펴고 서요.",
+        "한쪽 다리를 뒤로 내딛으며, 앞쪽 무릎이 90도 각도를 이룰 때까지 엉덩이를 낮춰줘요.",
+        "앞쪽 다리의 힘으로 바닥을 밀어내며 속도를 조절해 처음 위치로 복귀해요.",
+        "반대쪽 발로 동일한 동작을 반복해요."
+      ]
     }
   ],
   [
     "스탠딩 햄스트링 컬 머신",
     {
       "page": "https://burnfit.io/라이브러리/스탠딩-햄스트링-컬-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/스탠딩-햄스트링-컬-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스탠딩-햄스트링-컬-머신.gif",
+      "steps": [
+        "패드가 다리에 잘 맞도록 조정한 후, 손잡이를 잡아 몸을 안정화해요.",
+        "햄스트링의 힘으로 패드를 뒤로 밀며 다리를 굽힙니다.",
+        "속도를 조절해 다리를 펴면서 패드에 원래 위치로 되돌려요."
+      ]
     }
   ],
   [
     "글루트 햄 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/글루트-햄-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/글루트-햄-레이즈.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/글루트-햄-레이즈.gif",
+      "steps": [
+        "패드 위에 무릎을 대고 발목을 고정한 상태에서, 허리와 코어에 힘을 주어 몸을 안정화해요.",
+        "허리와 둔근의 힘으로 상체를 속도를 조절해 앞으로 내립니다.",
+        "상체가 바닥과 평행이 되거나 그보다 약간 아래로 내려갈 때까지 움직입니다.",
+        "둔근과 햄스트링의 힘으로 상체를 속도를 조절해 들어 올립니다."
+      ]
     }
   ],
   [
     "스미스머신 불가리안 스플릿 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-불가리안-스플릿-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-불가리안-스플릿-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-불가리안-스플릿-스쿼트.gif",
+      "steps": [
+        "스미스머신의 바벨을 어깨 폭로 잡아 등 위에 올리고, 양발을 골반 너비로 벌리고 서요.",
+        "한 쪽 다리를 뒤로 빼서 의자 위에 올려요.",
+        "무게를 앞다리에 실은 상태로, 뒷다리의 무릎이 직각이 될때까지 자세를 낮춥니다.",
+        "엉덩이에 힘을 주고 앞발로 무게를 지탱하면서 2번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "벨트 스쿼트 머신",
     {
       "page": "https://burnfit.io/라이브러리/벨트-스쿼트-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/벨트-스쿼트-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/벨트-스쿼트-머신.gif",
+      "steps": [
+        "벨트 스쿼트 머신의 플랫폼 위에 발을 올리고 허리 벨트를 장착해요.",
+        "무릎을 구부리며 엉덩이를 속도를 조절해 뒤로 밀어내듯이 앉습니다.",
+        "발바닥으로 플랫폼을 밀어내며 몸을 일으킵니다."
+      ]
     }
   ],
   [
     "세이프티바 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/세이프티바-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/세이프티바-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/세이프티바-스쿼트.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌리고, 세이프티바의 패드 부분을 어깨 위에 얹고 양손으로 손잡이를 잡아요.",
+        "상체가 앞으로 숙여지지 않도록 코어에 힘을 준 상태로 엉덩이를 뒤로 빼며 앉습니다.",
+        "상체의 자세를 유지하면서, 발바닥으로 바닥을 밀고 일어납니다."
+      ]
     }
   ],
   [
-    "스미스 머신 힙 쓰러스트",
+    "스미스머신 힙 쓰러스트",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-힙-쓰러스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-힙-쓰러스트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-힙-쓰러스트.gif",
+      "steps": [
+        "스미스머신의 바벨을 골반 위에 위치시킨 상태에서, 등 상부를 벤치에 기대고 발바닥을 바닥에 고정해요.",
+        "엉덩이 힘으로 몸을 윗 방향으로 밀어 올립니다.",
+        "속도를 조절해 엉덩이를 내려 수축된 엉덩이 근육을 이완시킵니다."
+      ]
     }
   ],
   [
     "덩키 카프 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/덩키-카프-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/덩키-카프-레이즈.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덩키-카프-레이즈.gif",
+      "steps": [
+        "발뒤꿈치가 공중에 뜨도록 구조물 위에 올라가서, 상체를 앞으로 기대어 몸을 안정적으로 고정해요.",
+        "발뒤꿈치를 아래로 내리며 종아리가 최대한 늘어나도록 스트레칭해요.",
+        "종아리 근육의 자극을 느끼며, 발가락으로 바닥을 밀어 뒤꿈치를 최대한 높이 들어 올립니다.",
+        "속도를 조절해 뒤꿈치를 내려 종아리가 다시 늘어나도록 해요."
+      ]
     }
   ],
   [
     "트랩바 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/트랩바-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/트랩바-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/트랩바-스쿼트.gif",
+      "steps": [
+        "트랩바 안에서 발을 어깨 폭 정도로 벌리고 서요.",
+        "복압을 단단하게 유지한채로 무릎과 엉덩이를 동시에 굽혀 트랩바를 속도를 조절해 아래로 내립니다.",
+        "발바닥으로 바닥을 밀어올린다는 느낌으로 바를 다시 들어 올립니다."
+      ]
     }
   ],
   [
     "덤벨 프론트 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-프론트-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-프론트-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-프론트-스쿼트.gif",
+      "steps": [
+        "양손으로 덤벨을 들고 어깨 높이만큼 들어올린 상태에서 다리를 어깨 폭만큼 벌려줘요.",
+        "시선은 정면을 유지하면서, 엉덩이를 뒤로 빼며 앉습니다.",
+        "가슴을 펴고 허리를 곧게 세워 상체를 편 상태로, 발바닥으로 바닥을 지그시 누르며 일어납니다."
+      ]
     }
   ],
   [
     "보수볼 원레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/보수볼-원레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/보수볼-원레그-데드리프트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/보수볼-원레그-데드리프트.gif",
+      "steps": [
+        "보수볼 위에 한 발을 올리고 균형을 잡은 상태로 척추를 곧게 펴고 서요.",
+        "고관절을 접으며 상체를 속도를 조절해 숙입니다.",
+        "반대쪽 다리를 뒤로 들어 올리며 균형을 유지하고, 상체가 무너지지 않는 범위까지 내려갑니다.",
+        "보수볼 위에 둔 발로 바닥을 지그시 누르며 힘을 주고, 골반과 상체를 동시에 세우면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "보수볼 덤벨 원레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/보수볼-덤벨-원레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/보수볼-덤벨-원레그-데드리프트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/보수볼-덤벨-원레그-데드리프트.gif",
+      "steps": [
+        "보수볼 위에 한 발을 올리고 균형을 잡은 상태로, 양손에 덤벨을 들고 척추를 곧게 펴고 서요.",
+        "고관절을 접으며 상체를 속도를 조절해 숙입니다.",
+        "반대쪽 다리를 뒤로 들어 올리며 균형을 유지하고, 덤벨이 바닥 가까이 내려갈 수 있는 지점까지 상체를 낮춥니다.",
+        "보수볼 위에 둔 발로 바닥을 지그시 누르며 힘을 주고, 골반과 상체를 동시에 세우면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "레버리지 스쿼트 머신",
     {
       "page": "https://burnfit.io/라이브러리/레버리지-스쿼트-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/레버리지-스쿼트-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/레버리지-스쿼트-머신.gif",
+      "steps": [
+        "어깨 패드 아래에 어깨를 고정하고, 발판에 발을 어깨 폭로 올린 뒤 안정적으로 서줘요.",
+        "척추를 곧게 편 상태를 유지하며, 엉덩이를 뒤로 밀듯이 속도를 조절해 앉습니다.",
+        "발바닥 전체로 발판을 강하게 밀어내며, 엉덩이와 허벅지에 힘을 주어 속도를 조절해 몸을 위로 밀어 올립니다."
+      ]
     }
   ],
   [
     "파이어 하이드런트",
     {
       "page": "https://burnfit.io/라이브러리/파이어-하이드런트/",
-      "gif": "https://burnfit.io/wp-content/uploads/파이어-하이드런트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/파이어-하이드런트.gif",
+      "steps": [
+        "양손과 무릎을 바닥에 대고 네발 자세를 취해요.",
+        "복부에 힘을 주고 몸통을 고정한 상태에서, 한쪽 다리를 옆으로 들어 올려요.",
+        "엉덩이 근육의 수축을 느끼며, 무릎이 골반 높이 정도까지 올라오도록 들어 올려요.",
+        "속도를 조절해 다리를 내리며 처음 위치로 복귀해요.",
+        "반대쪽도 같은 방식으로 반복해요."
+      ]
     }
   ],
   [
     "와이드 에어 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/와이드-에어-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/와이드-에어-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/와이드-에어-스쿼트.gif",
+      "steps": [
+        "다리를 어깨 폭보다 넓게 벌리고, 발끝은 약간 바깥쪽을 향하도록 선 뒤, 허리를 곧게 펴고 서요.",
+        "가슴을 편 상태로 엉덩이를 뒤로 빼며 속도를 조절해 앉습니다.",
+        "발바닥 전체로 바닥을 밀어내며 무릎과 엉덩이를 동시에 펴 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스탠딩 힙 어브덕션",
     {
       "page": "https://burnfit.io/라이브러리/스탠딩-힙-어브덕션/",
-      "gif": "https://burnfit.io/wp-content/uploads/스탠딩-힙-어브덕션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스탠딩-힙-어브덕션.gif",
+      "steps": [
+        "벽이나 바 등 지지할 수 있는 물체 옆에 서서, 한 발로 몸을 지탱해요.",
+        "반대쪽 다리를 옆으로 들어 올리며, 엉덩이 바깥쪽의 수축을 느낍니다.",
+        "다리가 흔들리지 않도록 중심을 잡고, 가능한 범위 내에서 다리를 최대한 옆으로 들어 올립니다.",
+        "엉덩이 근육의 긴장을 유지하며, 다리를 속도를 조절해 내리며 처음 위치로 복귀해요.",
+        "정해진 횟수만큼 반복한 후 반대쪽 다리도 같은 방식으로 진행해요."
+      ]
     }
   ],
   [
     "로터리 카프 머신",
     {
       "page": "https://burnfit.io/라이브러리/로터리-카프-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/로터리-카프-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/로터리-카프-머신.gif",
+      "steps": [
+        "기계에 앉은 상태에서 발끝을 발판에 올립니다.",
+        "허리를 곧게 세운 상태에서, 발끝으로 발판을 밀어냅니다.",
+        "속도를 조절해 발을 위로 당기듯 올리며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케틀벨 원레그 데드리프트",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-원레그-데드리프트/",
-      "gif": "https://burnfit.io/wp-content/uploads/케틀벨-원레그-데드리프트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케틀벨-원레그-데드리프트.gif",
+      "steps": [
+        "양손으로 케틀벨을 들고 한발로 균형을 잡은 상태로 척추를 곧게 펴고 서요.",
+        "고관절을 접으며 상체를 속도를 조절해 숙여줘요.",
+        "반대쪽 다리를 들어 균형을 잡으면서 상체의 균형을 유지할 수 있는 지점까지 내려갑니다.",
+        "한발로 바닥을 지그시 누르며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 오버헤드 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/바벨-오버헤드-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_OH_SQT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_OH_SQT.gif",
+      "steps": [
+        "바벨을 넓게 잡고 머리 위로 들어 올려요.",
+        "견갑을 위로 밀어올리고 팔꿈치를 완전히 펴서 바벨을 안정적으로 고정해요.",
+        "엉덩이를 낮춰 스쿼트를 해요.",
+        "둔근과 하체의 힘을 사용하여 2번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "시시 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/시시-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/시시-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/시시-스쿼트.gif",
+      "steps": [
+        "고정된 지지물을 한손으로 가볍게 잡고 서서 준비해요.",
+        "상체는 곧게 세운 상태를 유지한 채, 엉덩이를 뒤로 빼지 않고 무릎을 앞으로 밀어내며 몸 전체가 일직선으로 뒤로 기울어지듯 내려갑니다.",
+        "무릎-엉덩이-어깨가 하나의 선을 이루는 느낌을 유지해요.",
+        "대퇴사두근의 긴장이 강하게 느껴지는 깊이까지 내려간 뒤, 숨을 내쉬며 대퇴사두근의 힘으로 무릎을 펴 몸을 다시 세웁니다.",
+        "동작 전 구간에서 엉덩이 개입은 최소화하고, 무릎 신전에 집중해요."
+      ]
     }
   ],
   [
     "중량 시시 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/중량-시시-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/중량-시시-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/중량-시시-스쿼트.gif",
+      "steps": [
+        "원판을 가슴 앞에 밀착해 안은 상태로, 폴이나 머신 손잡이 등 고정된 지지물을 한 손으로 가볍게 잡고 서서 준비해요.",
+        "상체를 곧게 세운 상태를 유지한 채, 엉덩이를 뒤로 빼지 않고 무릎을 앞으로 밀어내며 몸 전체가 일직선으로 뒤로 기울어지듯 속도를 조절해 내려갑니다.",
+        "무릎-엉덩이-어깨가 하나의 선을 이루는 느낌을 유지해요.",
+        "대퇴사두근의 긴장이 강하게 느껴지는 깊이까지 내려간 뒤, 숨을 내쉬며 대퇴사두근의 힘으로 무릎을 펴 몸을 다시 세웁니다.",
+        "동작 전 구간에서 엉덩이 개입은 최소화하고, 무릎 신전에 집중해요."
+      ]
     }
   ],
   [
     "스미스머신 핵 스쿼트",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-핵-스쿼트/",
-      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-핵-스쿼트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-핵-스쿼트.gif",
+      "steps": [
+        "스미스 머신 바를 어깨 뒤쪽에 올리고, 바 아래에 서서 발을 몸보다 앞쪽으로 내밀어 준비해요.",
+        "상체를 수직에 가깝게 세운 상태를 유지한 채, 숨을 들이마시며 무릎을 앞으로 굽혀 속도를 조절해 내려갑니다.",
+        "엉덩이를 과도하게 뒤로 빼지 않고, 무릎 전진 중심으로 내려가 대퇴사두근에 자극을 집중해요.",
+        "허벅지가 바닥과 평행 또는 그 이하까지 내려간 뒤, 숨을 내쉬며 대퇴사두근의 힘으로 무릎을 펴며 바를 위로 밀어 올립니다.",
+        "동작 전 구간에서 발뒤꿈치는 바닥에 고정하고, 상체가 뒤로 눕지 않도록 주의해요."
+      ]
     }
   ],
   [
     "덤벨 워킹 런지",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-워킹-런지/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-워킹-런지.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-워킹-런지.gif",
+      "steps": [
+        "양손에 덤벨을 들고 상체를 곧게 세운 상태로 서서 준비해요.",
+        "한쪽 다리를 앞으로 크게 내딛으며, 숨을 들이마시며 앞쪽 무릎을 굽혀 속도를 조절해 몸을 낮춥니다.",
+        "",
+        "앞쪽 발뒤꿈치로 바닥을 밀어내듯 힘을 주어 일어서며, 숨을 내쉬면서 뒷다리를 앞으로 가져와 다음 런지 동작으로 이어서 진행해요.",
+        "이 과정을 좌우 번갈아 반복하며 앞으로 이동해요."
+      ]
     }
   ],
   [
     "오버헤드 프레스",
     {
       "page": "https://burnfit.io/라이브러리/오버헤드-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_PRESS.gif",
+      "steps": [
+        "바벨을 어깨 폭로 잡고 쇄골 위에 올려둡니다.",
+        "등에 힘을 주고 가슴을 피면서 바벨을 위로 밀어올립니다.",
+        "바벨이 올라간 동선을 따라 속도를 조절해 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "스미스 머신 숄더 프레스",
+    "스미스머신 오버헤드 프레스",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-오버헤드-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_PRESS.gif",
+      "steps": [
+        "벤치에 앉아 발을 바닥에 두고, 어깨 높이의 바를 잡아요.",
+        "몸통을 안정시킨 상태에서 레일을 따라 바를 위로 밀어요.",
+        "바를 어깨 쪽으로 제어하며 내려요."
+      ]
     }
   ],
   [
     "스미스머신 슈러그",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-슈러그/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_SHRUG.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_SHRUG.gif",
+      "steps": [
+        "발을 어깨 폭 만큼 벌린 상태에서, 바벨을 어깨 폭 정도로 잡아 허벅지 앞에 위치시킵니다.",
+        "어깨를 귀에 붙인다는 느낌으로 최대한 어깨를 끌어올립니다.",
+        "승모근에 저항감을 느끼면서 어깨를 속도를 조절해 내리고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 숄더 프레스",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-숄더-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SHD_PRESS-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SHD_PRESS-1.gif",
+      "steps": [
+        "양손에 덤벨을 잡고 팔을 옆으로 벌려서, 덤벨을 머리와 나란히 위치시킵니다.",
+        "어깨를 아래방향으로 지그시 누르면서 덤벨을 수직 방향으로 밀어올립니다.",
+        "어깨의 자극을 느끼면서, 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 레터럴 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-레터럴-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_LAT_RAISE-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_LAT_RAISE-1.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌리고, 가슴을 편상태로 덤벨을 잡아요.",
+        "측면 어깨에 자극을 느끼면서 팔꿈치를 올린다는 생각으로 덤벨을 들어 올립니다.",
+        "측면 삼각근의 자극을 느끼면서 속도를 조절해 팔을 내립니다."
+      ]
     }
   ],
   [
     "벤트오버 덤벨 레터럴 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/벤트오버-덤벨-레터럴-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_BO_LAT_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_BO_LAT_RAISE.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌리고, 허리를 곧게 편 상태로 상체를 숙여줘요.",
+        "팔꿈치를 살짝 굽힌 상태에서, 덤벨을 든 양 손을 어깨와 1자가 되게끔 들어 올려요.",
+        "어깨 뒤편의 자극을 느끼면서 덤벨을 속도를 조절해 내려요."
+      ]
     }
   ],
   [
-    "아놀드 프레스",
+    "아놀드 덤벨 프레스",
     {
       "page": "https://burnfit.io/라이브러리/아놀드-덤벨-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/ARNOLD_DB_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ARNOLD_DB_PRESS.gif",
+      "steps": [
+        "덤벨을 양손에 들고, 손바닥이 자신을 바라보게 들어 가슴 앞에 위치시킵니다.",
+        "손바닥이 앞을 향하게 돌리면서, 덤벨을 위로 밀어올립니다.",
+        "어깨에 자극을 느끼면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "머신 숄더 프레스",
+    "숄더 프레스 머신",
     {
       "page": "https://burnfit.io/라이브러리/숄더-프레스-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/SHD_PRESS_MAC-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SHD_PRESS_MAC-1.gif",
+      "steps": [
+        "머신에 앉아 팔꿈치 각도가 90도가 되도록 팔의 넓이를 조절하여 손잡이를 잡아요.",
+        "어깨에 자극을 느끼면서 수직방향으로 팔을 밀어 올립니다.",
+        "어깨의 자극을 느끼며 손을 귀 옆까지 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "비하인드 넥 프레스",
     {
       "page": "https://burnfit.io/라이브러리/비하인드-넥-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_BHD_NECK_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_BHD_NECK_PRESS.gif",
+      "steps": [
+        "바벨을 어깨 폭 두배 정도로 넓게 잡고 위로 들어 올려요.",
+        "팔꿈치와 손목을 1자로 유지하면서, 바벨을 속도를 조절해 머리 뒤로 내립니다.",
+        "어깨에 자극을 유지하면서 속도를 조절해 바벨을 밀어 올립니다."
+      ]
     }
   ],
   [
     "덤벨 프론트 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-프론트-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_F_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_F_RAISE.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌리고 양손에 덤벨을 쥐고 서요.",
+        "상체의 균형을 유지하면서 한쪽 팔을 앞으로 들어 올려요.",
+        "들어올린 팔을 내리고 난 뒤 2번의 상태로 돌아옵니다.",
+        "이후 반대편 팔로 운동을 수행해요."
+      ]
     }
   ],
   [
     "덤벨 슈러그",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-슈러그/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SHRUG.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SHRUG.gif",
+      "steps": [
+        "발을 어깨 폭로 벌린 상태에서, 양손에 덤벨을 들어 허벅지 옆에 위치시킵니다.",
+        "어깨를 귀에 붙인다는 느낌으로 최대한 어깨를 끌어올립니다.",
+        "승모근에 저항감을 느끼면서 어깨를 속도를 조절해 내리고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 슈러그",
     {
       "page": "https://burnfit.io/라이브러리/바벨-슈러그/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_SHRUG.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_SHRUG.gif",
+      "steps": [
+        "발을 어깨 폭 만큼 벌린 상태에서, 바벨을 어깨 폭 정도로 잡아 허벅지 앞에 위치시킵니다.",
+        "어깨를 귀에 붙인다는 느낌으로 최대한 어깨를 끌어올립니다.",
+        "승모근에 저항감을 느끼면서 어깨를 속도를 조절해 내리고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "페이스 풀",
     {
       "page": "https://burnfit.io/라이브러리/페이스-풀/",
-      "gif": "https://burnfit.io/wp-content/uploads/FACE_PULL-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/FACE_PULL-1.gif",
+      "steps": [
+        "케이블을 머리 높이에 고정한 뒤, 케이블을 바라보고 서요.",
+        "양손으로 로프를 잡은 뒤, 가슴을 편 상태로 케이블을 얼굴 방향으로 힘껏 당깁니다.",
+        "팔을 펴면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "핸드스탠드",
     {
       "page": "https://burnfit.io/라이브러리/핸드스탠드/",
-      "gif": "https://burnfit.io/wp-content/uploads/HS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HS.gif",
+      "steps": [
+        "양 팔을 쭉펴고 물구나무를 서요.",
+        "자세를 유지하기 어렵다면, 벽이나 구조물에 몸을 기대 균형감각을 익히는데 집중해요."
+      ]
     }
   ],
   [
     "핸드스탠드 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/핸드스탠드-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/HSPU.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HSPU.gif",
+      "steps": [
+        "양팔을 쭉펴고 물구나무를 서요.",
+        "균형을 유지할 수 있는 깊이 만큼 팔꿈치를 굽혀 내려갑니다.",
+        "팔꿈치를 피고 몸을 밀어 올려서, 1번의 상태로 돌아갑니다."
+      ]
     }
   ],
   [
     "케이블 리버스 플라이",
     {
       "page": "https://burnfit.io/라이브러리/케이블-리버스-플라이/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_REV_FLY.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_REV_FLY.gif",
+      "steps": [
+        "팔을 교차하여 케이블을 잡고 머신 중앙에 자리잡아요.",
+        "팔꿈치를 살짝 굽히며 잡은 케이블을 살짝 당깁니다.",
+        "팔꿈치의 각도를 일정하게 유지하면서 케이블을 뒤로 힘차게 잡아당깁니다.",
+        "후면 삼각근의 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 업라이트 로우",
     {
       "page": "https://burnfit.io/라이브러리/바벨-업라이트-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_UPRIGHT_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_UPRIGHT_ROW.gif",
+      "steps": [
+        "바벨을 어깨 폭보다 살짝 좁게 잡고, 허벅지 위에 살짝 올려둡니다.",
+        "팔꿈치를 양옆으로 활짝 벌린다는 생각으로 바벨을 들어 올립니다.",
+        "어깨의 자극을 유지하면서 속도를 조절해 내려 1번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "덤벨 업라이트 로우",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-업라이트-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_UPRIGHT_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_UPRIGHT_ROW.gif",
+      "steps": [
+        "양손에 덤벨을 잡고 허벅지 위에 살짝 올려둡니다.",
+        "팔꿈치를 양옆으로 활짝 벌린다는 생각으로 바벨을 들어 올립니다.",
+        "어깨의 자극을 유지하면서 속도를 조절해 내려 1번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "이지바 업라이트 로우",
     {
       "page": "https://burnfit.io/라이브러리/이지바-업라이트-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/EZB_UPRIGHT_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/EZB_UPRIGHT_ROW.gif",
+      "steps": [
+        "바를 어깨 폭보다 살짝 좁게 잡고, 허벅지 위에 살짝 올려둡니다.",
+        "팔꿈치를 양옆으로 활짝 벌린다는 생각으로 바를 들어 올립니다.",
+        "어깨의 자극을 유지하면서 속도를 조절해 내려 1번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "푸시 프레스",
     {
       "page": "https://burnfit.io/라이브러리/푸시-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/PUSH_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PUSH_PRESS.gif",
+      "steps": [
+        "양발을 어깨 폭보다 약간 좁게 벌린 상태에서, 바벨을 어깨 폭 정도로 잡아 어깨에 올려둡니다.",
+        "상체는 곧게 편 상태를 유지하면서 무릎을 굽혔다가 펴는 힘으로 바벨을 머리 위로 밀어 올립니다.",
+        "바벨을 속도를 조절해 내리며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "리어 델토이드 플라이 머신",
     {
       "page": "https://burnfit.io/라이브러리/리어-델토이드-플라이-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_PEC_DECK_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_PEC_DECK_MC.gif",
+      "steps": [
+        "머신을 마주보고 앉아 가슴을 지지하는 패드에 가슴을 기대고 앉습니다.",
+        "팔꿈치를 자연스럽게 구부린 상태로 양손으로 손잡이를 잡아줘요.",
+        "후면 삼각근의 자극을 느끼며 팔꿈치를 최대한 뒤로 밀어줘요.",
+        "팔꿈치가 움직이지 않게 제한하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "레터럴 레이즈 머신",
     {
       "page": "https://burnfit.io/라이브러리/레터럴-레이즈-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/LAT_RAISE_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LAT_RAISE_MC.gif",
+      "steps": [
+        "의자에 앉아 패드에 팔꿈치를 기댄상태로 손잡이를 가볍게 잡아요.",
+        "가슴을 열고 상체를 곧게 편 상태에서 측면 삼각근의 힘으로 기구를 밀어올립니다.",
+        "",
+        "어깨 근육의 긴장감을 유지하면서 속도를 조절해 처음의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "케이블 레터럴 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/케이블-레터럴-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_LAT_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_LAT_RAISE.gif",
+      "steps": [
+        "케이블을 최하단에 고정한 상태에서, 케이블의 가운데에 서서 양쪽 케이블을 X자 형태로 잡아요.",
+        "가슴을 열고 상체를 곧게 편 상태에서, 케이블을 잡아 당겨 팔꿈치를 어깨선까지 올려요.",
+        "어깨 근육의 긴장감을 유지하면서 손을 바지 주머니 위치까지 내려요."
+      ]
     }
   ],
   [
     "케이블 프론트 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/케이블-프론트-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_FRONT_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_FRONT_RAISE.gif",
+      "steps": [
+        "케이블 머신을 등지고 다리 사이로 케이블을 빼서 몸을 곧게 펴고 서요.",
+        "상체를 앞으로 숙여준 상태로 어깨 전면부의 자극을 느끼며 양팔을 들어 올려요.",
+        "어깨 전면부의 자극을 느끼며 속도를 조절해 양팔을 내려요."
+      ]
     }
   ],
   [
     "이지바 프론트 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/이지바-프론트-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/EZB_FRONT_RAISE-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/EZB_FRONT_RAISE-1.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌리고 서서 양손으로 이지바를 잡아요.",
+        "양팔을 곧게 뻗은 상태에서 속도를 조절해 이지바를 앞으로 들어 올려요.",
+        "어깨 전면부의 자극을 느끼면서 들어올린 팔을 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "시티드 덤벨 리어 레터럴 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/시티드-덤벨-리어-레터럴-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_REAR_LAT_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_REAR_LAT_RAISE.gif",
+      "steps": [
+        "벤치에 앉아 덤벨을 양손으로 평행하게 잡고, 상체를 앞으로 숙입니다.",
+        "팔꿈치를 살짝 굽힌 상태에서, 덤벨을 든 양손을 어깨와 1자가 되게끔 들어 올려요.",
+        "삼각근과 어깨 뒤편의 자극을 느끼면서 덤벨을 속도를 조절해 내려요."
+      ]
     }
   ],
   [
     "숄더 탭",
     {
       "page": "https://burnfit.io/라이브러리/숄더-탭/",
-      "gif": "https://burnfit.io/wp-content/uploads/SHD_TAP-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SHD_TAP-1.gif",
+      "steps": [
+        "양팔을 어깨 폭만큼 벌리고 팔꿈치를 쭉펴서 바닥에 엎드립니다.",
+        "한쪽 손으로 반대쪽 어깨를 가볍게 터치해요.",
+        "터치한 손을 원위치 시킨 뒤 반대쪽 손으로 동일하게 운동을 수행해요."
+      ]
     }
   ],
   [
     "시티드 바벨 숄더 프레스",
     {
       "page": "https://burnfit.io/라이브러리/시티드-바벨-숄더-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEAT_BB_SHD_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEAT_BB_SHD_PRESS.gif",
+      "steps": [
+        "벤치에 앉은 상태에서 바벨을 어깨 폭로 잡고 쇄골 위에 올려둡니다.",
+        "등에 힘을 주고 가슴을 피면서 바벨을 머리 위로 밀어올립니다.",
+        "바벨이 올라간 동선을 따라 속도를 조절해 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "시티드 덤벨 숄더 프레스",
     {
       "page": "https://burnfit.io/라이브러리/시티드-덤벨-숄더-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEAT_DB_SHD_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEAT_DB_SHD_PRESS.gif",
+      "steps": [
+        "벤치에 앉은 상태에서 양손으로 덤벨을 잡아 머리 옆에 나란히 위치시킵니다.",
+        "어깨를 아래방향으로 지그시 누르면서 덤벨을 수직 방향으로 밀어올립니다.",
+        "어깨의 자극을 느끼면서 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "플레이트 숄더 프레스",
     {
       "page": "https://burnfit.io/라이브러리/플레이트-숄더-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/PLATE_SHD_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PLATE_SHD_PRESS.gif",
+      "steps": [
+        "플레이트를 양손으로 잡고 가슴 앞에 위치시킵니다.",
+        "어깨가 굽지 않도록 가슴을 핀 상태로 플레이트를 머리 위 수직방향으로 밀어올립니다.",
+        "플레이트가 올라간 동선을 따라 속도를 조절해 내려옵니다."
+      ]
     }
   ],
   [
     "Y 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/y-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/Y_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/Y_RAISE.gif",
+      "steps": [
+        "타겟 부위의 효과적인 자극을 위해 가슴을 지지할 수 있도록, 바닥에 엎드리거나 벤치에 가슴을 기댑니다.",
+        "양팔을 Y자 모양으로 만든 상태에서, 양팔을 최대한 위로 올립니다.",
+        "등의 긴장이 완전히 풀리기 전까지 속도를 조절해 양팔을 내려요."
+      ]
     }
   ],
   [
     "덤벨 Y 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-y-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_Y_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_Y_RAISE.gif",
+      "steps": [
+        "타겟 부위의 효과적인 자극을 위해 가슴을 지지할 수 있도록, 바닥에 엎드리거나 벤치에 가슴을 기댑니다.",
+        "양팔을 Y자 모양으로 만든 상태에서, 양손으로 덤벨을 잡고 최대한 위로 올립니다.",
+        "등의 긴장이 완전히 풀리기 전까지 속도를 조절해 양팔을 내려요."
+      ]
     }
   ],
   [
     "슈러그 머신",
     {
       "page": "https://burnfit.io/라이브러리/슈러그-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/SHRUG_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SHRUG_MC.gif",
+      "steps": [
+        "발을 어깨 폭로 벌린 상태에서, 양손으로 머신의 손잡이를 잡아요.",
+        "어깨를 귀에 붙인다는 느낌으로 최대한 어깨를 끌어올립니다.",
+        "승모근에 저항감을 느끼면서 어깨를 속도를 조절해 내리고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 슈러그",
     {
       "page": "https://burnfit.io/라이브러리/케이블-슈러그/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_SHRUG.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_SHRUG.gif",
+      "steps": [
+        "발을 어깨 폭로 벌린 상태에서, 양손으로 케이블의 손잡이를 잡아요.",
+        "어깨를 귀에 붙인다는 느낌으로 최대한 어깨를 끌어올립니다.",
+        "승모근에 저항감을 느끼면서 어깨를 속도를 조절해 내리고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 인터널 로테이션",
     {
       "page": "https://burnfit.io/라이브러리/케이블-인터널-로테이션/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_INT_ROT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_INT_ROT.gif",
+      "steps": [
+        "케이블 머신의 높이를 허리에 맞추고 한손으로 케이블을 잡은 상태에서 머신 옆에 나란히 서요.",
+        "팔꿈치를 허리에 단단히 고정시킨 상태에서 케이블을 배꼽방향으로 반원을 그리며 당겨줘요.",
+        "어깨의 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 익스터널 로테이션",
     {
       "page": "https://burnfit.io/라이브러리/케이블-익스터널-로테이션/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_EXT_ROT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_EXT_ROT.gif",
+      "steps": [
+        "케이블 머신의 높이를 허리에 맞추고 한손으로 케이블을 잡은 상태에서 머신 옆에 나란히 서요.",
+        "팔꿈치를 허리에 단단히 고정시킨 상태에서 케이블을 몸의 바깥방향으로 반원을 그리며 당겨줘요.",
+        "어깨의 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "원암 케이블 레터럴 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/원암-케이블-레터럴-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/OA_CABLE_LAT_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/OA_CABLE_LAT_RAISE.gif",
+      "steps": [
+        "케이블 머신의 높이를 가장 낮게 맞추고 한손으로 케이블을 잡은 상태에서 머신 옆에 나란히 서요.",
+        "측면 어깨에 자극을 느끼면서 팔꿈치를 올린다는 생각으로 케이블을 들어 올립니다.",
+        "측면 삼각근의 자극을 느끼면서 속도를 조절해 팔을 내립니다."
+      ]
     }
   ],
   [
     "랜드마인 프레스",
     {
       "page": "https://burnfit.io/라이브러리/랜드마인-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/LAND_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LAND_PRESS.gif",
+      "steps": [
+        "바벨의 한쪽 끝을 고정시킵니다.",
+        "다리를 어깨 폭만큼 벌린 상태로 바벨의 끝부분을 양손으로 잡아요.",
+        "손목이 꺾이지 않도록 유의하면서 바벨을 밀어올립니다.",
+        "속도를 조절해 바벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "원암 랜드마인 프레스",
     {
       "page": "https://burnfit.io/라이브러리/원암-랜드마인-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/OA_LAND_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/OA_LAND_PRESS.gif",
+      "steps": [
+        "바벨의 한쪽 끝을 고정시킵니다.",
+        "다리를 어깨 폭만큼 벌린 상태로 바벨의 끝부분을 한손으로 잡아요.",
+        "손목이 꺾이지 않도록 유의하면서 바벨을 밀어올립니다.",
+        "속도를 조절해 바벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "벤치 프레스",
+    "벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_BP-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_BP-1.gif",
+      "steps": [
+        "등과 발을 안정적으로 지지하고, 벤치에 누워 바를 잡아요.",
+        "팔꿈치를 굽혀 바를 가슴 쪽으로 내리세요.",
+        "가슴 위에서 바를 들어 시작 높이로 되돌려요."
+      ]
     }
   ],
   [
-    "스미스 머신 벤치 프레스",
+    "스미스머신 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_BP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_BP.gif",
+      "steps": [
+        "벤치에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 조금 넓게 잡고 위로 들어 올려요.",
+        "가슴 근육의 이완을 느끼며 팔을 굽혀 바벨을 가슴 방향으로 내립니다.",
+        "가슴 근육의 수축을 느끼며 몸의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "스미스머신 인클라인 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-인클라인-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/SM_INC_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SM_INC_PRESS.gif",
+      "steps": [
+        "기울어진 벤치에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 조금 넓게 잡고 위로 들어 올려요.",
+        "가슴 근육의 이완을 느끼며 팔을 굽혀 바벨을 가슴 방향으로 내립니다.",
+        "가슴 근육의 수축을 느끼며 바닥의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
-    "덤벨 프레스",
+    "덤벨 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_BP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_BP.gif",
+      "steps": [
+        "덤벨을 양손에 들고 벤치에 가슴을 펴고 누운 상태에서, 덤벨을 수직으로 들어 올려요.",
+        "덤벨이 가로로 놓이게 잡아주고, 가슴 근육의 이완을 느끼며 팔을 굽히며 덤벨을 아래로 내립니다.",
+        "가슴 근육의 수축을 느끼며 몸의 수직방향으로 덤벨을 밀어올립니다."
+      ]
     }
   ],
   [
-    "인클라인 덤벨 프레스",
+    "인클라인 덤벨 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-덤벨-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_INC_BP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_INC_BP.gif",
+      "steps": [
+        "덤벨을 양손에 들고 기울어진 벤치에 가슴을 펴고 누운 상태에서, 덤벨을 바닥에 수직하게 들어 올려요.",
+        "덤벨이 가로로 놓이게 잡아주고, 가슴 근육의 이완을 느끼며 팔을 굽혀 덤벨을 아래로 내립니다.",
+        "가슴 근육의 수축을 느끼며 수직방향으로 덤벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "덤벨 플라이",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-플라이/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_FLY.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_FLY.gif",
+      "steps": [
+        "벤치에 등을 대고 누운 뒤 손바닥을 서로 마주보게 덤벨을 잡아, 가슴 위로 양팔을 쭉 밀어올립니다.",
+        "팔꿈치는 자연스럽게 살짝 구부리면서 가슴 옆방향으로 팔을 속도를 조절해 펼쳐줘요.",
+        "팔로 반원을 그리며 덤벨을 모아 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스탠딩 케이블 플라이",
     {
       "page": "https://burnfit.io/라이브러리/스탠딩-케이블-플라이/",
-      "gif": "https://burnfit.io/wp-content/uploads/STD_CABLE_FLY.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/STD_CABLE_FLY.gif",
+      "steps": [
+        "케이블 머신의 가운데에서 한 걸음 정도 앞으로 나온 상태에서, 가슴을 활짝펴고 곧게 서요.",
+        "팔꿈치를 살짝 구부려 팔의 개입을 최소화한 상태에서 케이블을 양손으로 잡아요.",
+        "원을 그리듯 속도를 조절해 양팔을 모아주며 가슴 근육을 수축시킵니다.",
+        "가슴 근육의 이완을 느끼면서 속도를 조절해 팔을 내려요."
+      ]
     }
   ],
   [
-    "인클라인 벤치 프레스",
+    "인클라인 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_INC_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_INC_PRESS.gif",
+      "steps": [
+        "기울어진 벤치에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 조금 넓게 잡고 위로 들어 올려요.",
+        "가슴 근육의 이완을 느끼며 팔을 굽혀 바벨을 가슴 방향으로 내립니다.",
+        "가슴 근육의 수축을 느끼며 바닥의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "딥스",
     {
       "page": "https://burnfit.io/라이브러리/딥스/",
-      "gif": "https://burnfit.io/wp-content/uploads/DIPS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DIPS.gif",
+      "steps": [
+        "딥스바의 폭을 어깨보다 살짝 넓게 셋팅한 상태에서, 손목이 꺾이지 않게 딥스바에 올라갑니다.",
+        "상체는 살짝 앞으로 기울인상태로 팔꿈치가 90도가 될때까지 팔을 굽혀 몸을 내립니다.",
+        "상체의 균형을 유지한채로 팔을 피면서 올라옵니다."
+      ]
     }
   ],
   [
     "중량 딥스",
     {
       "page": "https://burnfit.io/라이브러리/중량-딥스/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_DIPS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_DIPS.gif",
+      "steps": [
+        "중량 도구를 몸에 장착하고, 손목이 꺾이지 않게 딥스바에 올라갑니다.",
+        "상체는 살짝 앞으로 기울인상태로 팔꿈치가 90도가 될때까지 팔을 굽혀 몸을 내려요.",
+        "상체의 균형을 유지한채로 팔을 피면서 올라옵니다."
+      ]
     }
   ],
   [
     "인클라인 덤벨 플라이",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-덤벨-플라이/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_INC_FLY.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_INC_FLY.gif",
+      "steps": [
+        "벤치에 등을 기대고 누운 뒤 손바닥을 서로 마주보게 덤벨을 잡아, 바닥의 수직 방향으로 양팔을 밀어올립니다.",
+        "팔꿈치는 자연스럽게 살짝 구부리면서 가슴 옆방향으로 팔을 속도를 조절해 펼쳐줘요.",
+        "팔로 반원을 그리며 덤벨을 모아 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "푸시업",
     {
       "page": "https://burnfit.io/라이브러리/푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PUSH_UP.gif",
+      "steps": [
+        "양팔을 가슴 옆에 두고 바닥에 엎드립니다.",
+        "복근과 둔근에 힘을 준 상태로 팔꿈치를 피며 올라옵니다.",
+        "속도를 조절해 팔꿈치를 굽히며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "중량 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/중량-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_PUSH_UP.gif",
+      "steps": [
+        "양팔을 가슴 옆에 두고 바닥에 엎드립니다.",
+        "중량판이 떨어지지 않도록 등 위에 올려둡니다.",
+        "복근과 둔근에 힘을 준 상태로 팔꿈치를 피며 올라옵니다.",
+        "속도를 조절해 팔꿈치를 굽히며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "힌두 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/힌두-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/HINDU_PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HINDU_PUSH_UP.gif",
+      "steps": [
+        "일반적인 푸시업 자세에서, 양발은 살짝 넓게 벌리고 엉덩이를 위로 올려요.",
+        "팔을 굽히면서 상체를 앞방향으로 밀어줘요.",
+        "복근과 둔근의 긴장상태를 유지하며 상체를 일으켜 세웁니다.",
+        "팔을 뒤로 밀며 1번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "아처 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/아처-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/ARCHER_PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ARCHER_PUSH_UP.gif",
+      "steps": [
+        "기본 푸시업 자세보다 팔의 너비를 넓게 벌립니다.",
+        "양손 끝을 바깥으로 벌린 상태로, 몸의 체중을 한쪽 팔에 실으면서 아래로 내려갑니다.",
+        "가슴에 긴장감을 유지하면서 1번의 자세로 돌아옵니다.",
+        "반대편 팔에 체중을 실으면서 아래로 내려갔다 올라옵니다."
+      ]
     }
   ],
   [
     "클로즈그립 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/클로즈그립-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/CG_PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CG_PUSH_UP.gif",
+      "steps": [
+        "가슴 아래에 양손을 모아 검지와 엄지 손가락이 ‘다이아몬드’ 형태가 되도록 놓고 푸시업 자세를 취해요.",
+        "코어에 힘을 주며 바닥으로 속도를 조절해 내려갑니다.",
+        "손바닥으로 바닥을 밀면서 몸을 들어올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "체스트 프레스 머신",
     {
       "page": "https://burnfit.io/라이브러리/체스트-프레스-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/CHEST_PRESS_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CHEST_PRESS_MC.gif",
+      "steps": [
+        "가슴을 활짝 편 상태로, 의자에 윗 등을 붙이고 앉습니다.",
+        "양손으로 손잡이를 잡고, 가슴에 힘을 주면서 앞으로 밀어줘요.",
+        "가슴 근육의 이완을 느끼면서 팔꿈치를 뒤로 속도를 조절해 이동해요."
+      ]
     }
   ],
   [
     "펙덱 플라이 머신",
     {
       "page": "https://burnfit.io/라이브러리/펙덱-플라이-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/PEC_DECK_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PEC_DECK_MC.gif",
+      "steps": [
+        "팔과 팔꿈치가 가슴 중앙에 위치할 수 있도록 머신을 조절한 후, 가슴을 펴고 의자에 앉습니다.",
+        "팔꿈치는 직각을 만들어 패드에 붙이고, 팔을 가슴 안쪽으로 모아줘요.",
+        "가슴의 이완에 집중하면서 팔을 벌립니다."
+      ]
     }
   ],
   [
     "인클라인 벤치프레스 머신",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-벤치프레스-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/INC_BP_MAC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INC_BP_MAC.gif",
+      "steps": [
+        "기울어진 벤치에 가슴을 활짝펴고 기대어 손잡이를 잡아요.",
+        "가슴 근육의 수축을 느끼며 팔꿈치를 수직 방향으로 밀어올립니다.",
+        "중량을 가슴 근육으로 받는다는 생각으로 팔꿈치를 굽힙니다."
+      ]
     }
   ],
   [
     "덤벨 풀오버",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-풀오버/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_PULLOVER.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_PULLOVER.gif",
+      "steps": [
+        "벤치에 등 상부를 대고 가슴을 펴고 누워요.",
+        "덤벨을 세로로 잡고 몸의 수직방향으로 들어 올려요.",
+        "덤벨을 머리 위쪽으로 멀리 보낸다고 생각하면서 속도를 조절해 내려요.",
+        "가슴과 등의 자극을 느끼면서 속도를 조절해 2번의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "시티드 딥스 머신",
     {
       "page": "https://burnfit.io/라이브러리/시티드-딥스-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEAT_DIPS_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEAT_DIPS_MC.gif",
+      "steps": [
+        "운동 중간에 몸이 뜨지 않도록 엉덩이를 의자 안쪽에 깊숙히 넣어 앉습니다.",
+        "아랫 가슴에 힘을 준상태로 손을 수직 아래 방향으로 밀어줘요.",
+        "속도를 조절해 가슴과 삼두에 자극을 느끼며 처음의 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "로우 풀리 케이블 플라이",
     {
       "page": "https://burnfit.io/라이브러리/로우-풀리-케이블-플라이/",
-      "gif": "https://burnfit.io/wp-content/uploads/LP_CABLE_FLY.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LP_CABLE_FLY.gif",
+      "steps": [
+        "케이블을 최하단에 고정하고 손바닥을 앞쪽으로 향하도록 잡아요.",
+        "케이블 가운데서 한 걸음 정도 앞으로 나온 상태에서, 가슴을 활짝펴고 곧게 서요.",
+        "케이블의 경로를 거꾸로된 V 모양을 그리면서 손을 턱 앞까지 모아줘요.",
+        "윗 가슴의 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "해머 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/해머-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/HAMMER_BP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HAMMER_BP.gif",
+      "steps": [
+        "벤치에 누워 양손으로 그립을 잡아줘요.",
+        "허리를 벤치에 붙이기보다 아치형을 만든 상태에서 기구를 위로 들어 올려요.",
+        "가슴 근육의 이완을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스포토 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/스포토-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/SPOTO_BP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SPOTO_BP.gif",
+      "steps": [
+        "벤치에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 조금 넓게 잡고 위로 들어 올려요.",
+        "가슴 근육의 이완을 느끼며 팔을 굽혀 바벨을 가슴 방향으로 내립니다.",
+        "온몸의 강한 텐션을 유지한채로, 가슴 근육의 수축을 느끼며 몸의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "어시스트 딥스 머신",
     {
       "page": "https://burnfit.io/라이브러리/어시스트-딥스-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/ASS_DIP_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ASS_DIP_MC.gif",
+      "steps": [
+        "보조 받고 싶은 중량을 설정해요.",
+        "손목이 꺾이지 않게 딥스 바에 올라가면서, 받침대에 양무릎을 올려 체중을 실어줘요.",
+        "상체는 살짝 앞으로 기울신 상태로 팔꿈치가 90도가 될때까지 팔을 굽혀 몸을 내립니다.",
+        "상체의 균형을 유지한채로 팔을 피면서 올라옵니다."
+      ]
     }
   ],
   [
-    "디클라인 벤치 프레스",
+    "디클라인 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/디클라인-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_DEC_BP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_DEC_BP.gif",
+      "steps": [
+        "기울어진 벤치에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 조금 넓게 잡아 바닥의 수직방향으로 들어 올려요.",
+        "가슴 근육의 이완을 느끼며 팔을 굽혀 바벨을 아랫 가슴 방향으로 내립니다.",
+        "가슴 근육의 수축을 느끼며 바닥의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
-    "플로어 프레스",
+    "바벨 플로어 프레스",
     {
       "page": "https://burnfit.io/라이브러리/바벨-플로어-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_FLOOR_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_FLOOR_PRESS.gif",
+      "steps": [
+        "바닥에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 조금 넓게 잡고 위로 들어 올려요.",
+        "가슴 근육의 이완을 느끼며 팔을 굽혀 바벨을 가슴 방향으로 내립니다.",
+        "가슴 근육의 수축을 느끼며 몸의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "클랩 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/클랩-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/CLAP_PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CLAP_PUSH_UP.gif",
+      "steps": [
+        "양팔을 가슴 옆에 두고 바닥에 엎드립니다.",
+        "복근과 둔근에 힘을 준 상태로 팔꿈치를 힘차게 피며 올라옵니다.",
+        "양손이 바닥에서 떨어질만큼 상체를 밀어올린 상태에서 박수를 칩니다.",
+        "양팔로 중량을 유지하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "디클라인 덤벨 플라이",
     {
       "page": "https://burnfit.io/라이브러리/디클라인-덤벨-플라이/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_DEC_FLY.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_DEC_FLY.gif",
+      "steps": [
+        "벤치에 등을 기대고 누운 뒤 손바닥을 서로 마주보게 덤벨을 잡아, 바닥의 수직 방향으로 양팔을 밀어올립니다.",
+        "팔꿈치는 자연스럽게 살짝 구부리면서 가슴 옆방향으로 팔을 속도를 조절해 펼쳐줘요.",
+        "팔로 반원을 그리며 덤벨을 모아 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "디클라인 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/디클라인-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/디클라인-푸시업-7.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/디클라인-푸시업-7.gif",
+      "steps": [
+        "양팔을 단차가 있는 구조물 위에 올려둔 상태에서, 손은 어깨 폭보다 약간 넓게 바닥에 놓습니다.",
+        "팔꿈치를 굽히면서 가슴을 바닥 방향으로 내립니다.",
+        "가슴과 팔의 힘을 사용해 몸을 밀어 올립니다."
+      ]
     }
   ],
   [
     "인클라인 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/INC_PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INC_PUSH_UP.gif",
+      "steps": [
+        "양팔을 단차가 있는 구조물 위에, 가슴 너비보다 조금 넓게 위치시킵니다.",
+        "속도를 조절해 팔꿈치를 굽히면서 가슴에 구조물이 닿을때까지 내려갑니다.",
+        "복근과 둔근에 힘을 준 상태로 팔꿈치를 피며 올라옵니다."
+      ]
     }
   ],
   [
     "무릎 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/무릎-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/무릎-푸시업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/무릎-푸시업.gif",
+      "steps": [
+        "양팔을 가슴 옆에 두고, 무릎을 바닥에 댄 상태로 바닥에 엎드립니다.",
+        "복근과 둔근에 힘을 준 상태를 유지하며, 팔꿈치를 펴 상체를 밀어 올립니다.",
+        "속도를 조절해 팔꿈치를 굽혀 가슴이 바닥 가까이 오도록 하며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "파이크 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/파이크-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/PIKE_PUSH_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PIKE_PUSH_UP.gif",
+      "steps": [
+        "엉덩이를 최대한 높이 들어올린 상태로 양손과 양발을 바닥에 고정해요.",
+        "이마가 바닥에 닿는다는 느낌으로 속도를 조절해 팔꿈치를 굽혀 내려갑니다.",
+        "전면 삼각근과 삼두의 힘을 이용하여 다시 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "디클라인 체스트 프레스 머신",
     {
       "page": "https://burnfit.io/라이브러리/디클라인-체스트-프레스-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/DEC_CHEST_MAC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DEC_CHEST_MAC.gif",
+      "steps": [
+        "가슴을 활짝 편 상태로, 기울어진 벤치에 등을 붙이고 앉습니다.",
+        "양손으로 손잡이를 잡고, 가슴에 힘을 주면서 앞으로 밀어줘요.",
+        "가슴 근육의 이완을 느끼면서 팔꿈치를 뒤로 속도를 조절해 이동해요."
+      ]
     }
   ],
   [
     "인클라인 덤벨 트위스트 프레스",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-덤벨-트위스트-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/INC_DB_TWIST_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INC_DB_TWIST_PRESS.gif",
+      "steps": [
+        "덤벨을 양손에 들고 기울어진 벤치에 가슴을 펴고 누운 상태에서, 덤벨을 바닥에 수직하게 들어 올려요.",
+        "덤벨이 가로로 놓이게 잡아주고, 가슴 근육의 이완을 느끼며 팔을 굽혀 덤벨을 아래로 내립니다.",
+        "가슴 근육의 수축을 느끼며 덤벨을 90도 회전시키면서 덤벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "인클라인 케이블 플라이",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-케이블-플라이/",
-      "gif": "https://burnfit.io/wp-content/uploads/INC_CABLE_FLY.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INC_CABLE_FLY.gif",
+      "steps": [
+        "벤치에 가슴을 펴고 누운 상태에서 양손으로 케이블을 잡아요.",
+        "팔꿈치를 살짝 구부려 팔의 개입이 최소화할 수 있도록 자세를 잡아요.",
+        "원을 그리듯 속도를 조절해 양팔을 모아주며 가슴 근육을 수축시킵니다.",
+        "가슴 근육의 이완을 느끼면서 속도를 조절해 팔을 내려요."
+      ]
     }
   ],
   [
     "덤벨 스퀴즈 프레스",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스퀴즈-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SQUEEZE_PRESS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SQUEEZE_PRESS.gif",
+      "steps": [
+        "벤치에 누운 상태에서 양손등이 바깥쪽을 향하도록 덤벨을 세로로 잡아요.",
+        "가슴의 자극을 느끼면서 수직방향으로 덤벨을 밀어올립니다.",
+        "코로 호흡하면서 덤벨을 속도를 조절해내려 시작자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "바벨 컬",
     {
       "page": "https://burnfit.io/라이브러리/바벨-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_BC_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_BC_CURL.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌려 서고, 바벨을 어깨보다 살짝 넓게 잡고 서요.",
+        "팔꿈치를 고정한 상태에서, 이두의 힘으로 바벨을 들어 올려요.",
+        "이두의 긴장감을 유지하면서 바벨을 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "이지바 컬",
     {
       "page": "https://burnfit.io/라이브러리/이지바-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/EZB_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/EZB_CURL.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌려 서고, 이지바를 어깨 폭만큼 잡고 서요.",
+        "팔꿈치를 고정한 상태에서, 이두의 힘으로 바를 들어 올려요.",
+        "이두의 긴장감을 유지하면서 바를 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "덤벨 컬",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-컬.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌리고 양손에 덤벨을 잡아요.",
+        "이두근으로만 덤벨을 들어올린다는 생각으로 팔을 구부립니다.",
+        "구부린 팔을 펴면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 해머 컬",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-해머-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_HAM_CURL-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_HAM_CURL-1.gif",
+      "steps": [
+        "양 손바닥이 마주보게 덤벨을 잡고, 몸을 곧게 펴고 서요.",
+        "팔꿈치를 고정한 상태로, 덤벨을 최대한 들어 올립니다.",
+        "속도를 조절해 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "클로즈 그립 벤치 프레스",
+    "클로즈 그립 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/클로즈-그립-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/CG_BB_BP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CG_BB_BP.gif",
+      "steps": [
+        "벤치에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 조금 좁게 잡고 위로 들어 올려요.",
+        "삼두근의 이완을 느끼면서 바벨을 가슴 하부 방향으로 속도를 조절해 내립니다.",
+        "삼두근의 수축을 느끼며 몸의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "덤벨 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_TRI_EXT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_TRI_EXT.gif",
+      "steps": [
+        "양발을 골반너비로 적당히 벌리고, 덤벨을 양손으로 잡고 서요.",
+        "덤벨을 잡은 양팔의 팔꿈치를 직각으로 만들면서 머리 뒤로 넘깁니다.",
+        "팔꿈치를 고정한 상태로 덤벨을 위로 들어 올려요."
+      ]
     }
   ],
   [
     "시티드 덤벨 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/시티드-덤벨-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEAT_DB_TRI_EXT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEAT_DB_TRI_EXT.gif",
+      "steps": [
+        "덤벨을 양손으로 잡고 의자에 허리를 곧게 세우고 앉습니다.",
+        "덤벨을 잡은 양팔의 팔꿈치를 직각으로 만들면서 머리뒤로 넘깁니다.",
+        "팔꿈치를 고정한 상태로 덤벨을 위로 들어 올려요."
+      ]
     }
   ],
   [
     "케이블 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/케이블-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_TRI_EXT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_TRI_EXT.gif",
+      "steps": [
+        "케이블 머신에 로프를 연결하고, 로프를 앞으로 당기면서 상체를 숙여줘요.",
+        "팔꿈치를 고정한 상태에서, 속도를 조절해 로프를 앞으로 밀면서 팔을 펴요.",
+        "삼두에 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 킥백",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-킥백/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_KICKBACK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_KICKBACK.gif",
+      "steps": [
+        "덤벨을 쥔 팔의 상완근 부위가 바닥과 평행하도록 자세를 잡아요.",
+        "팔꿈치를 고정한 상태로 덤벨을 다리쪽으로 멀리 보낸다는 생각으로 들어 올려요.",
+        "삼두근을 일정기간 수축한뒤, 덤벨을 내리며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/바벨-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_WRIST_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_WRIST_CURL.gif",
+      "steps": [
+        "벤치에 양손을 올린 뒤, 바벨을 언더 그립으로 잡아요.",
+        "손목을 아래쪽으로 젖혀주면서 손가락을 살짝 풀어줘요.",
+        "손가락과 손목을 최대한 높이 말아올리면서 전완근을 수축시켜줘요."
+      ]
     }
   ],
   [
     "이지바 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/이지바-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/EZB_WRIST_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/EZB_WRIST_CURL.gif",
+      "steps": [
+        "벤치에 양손을 올린 뒤, 이지바를 언더 그립으로 잡아요.",
+        "손목을 아래쪽으로 젖혀주면서 손가락을 살짝 풀어줘요.",
+        "손가락과 손목을 최대한 높이 말아올리면서 전완근을 수축시켜줘요."
+      ]
     }
   ],
   [
     "덤벨 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_WRIST_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_WRIST_CURL.gif",
+      "steps": [
+        "벤치에 팔을 댄 상태로, 덤벨을 언더 그립으로 잡아요.",
+        "손목을 아래쪽으로 젖혀주면서 손가락을 살짝 풀어줘요.",
+        "손가락과 손목을 최대한 높이 말아올리면서 전완근을 수축시켜줘요."
+      ]
     }
   ],
   [
     "스컬 크러셔",
     {
       "page": "https://burnfit.io/라이브러리/스컬-크러셔/",
-      "gif": "https://burnfit.io/wp-content/uploads/SKULL_CRUSH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SKULL_CRUSH.gif",
+      "steps": [
+        "벤치에 누워 양손으로 바를 잡아 수직으로 들어 올려요.",
+        "팔꿈치를 고정한 상태에서, 이마에 닿을 높이까지 바를 내려요.",
+        "내려온 동선을따라 바를 들어올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 라잉 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/바벨-라잉-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/LYING_TRI_EXT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LYING_TRI_EXT.gif",
+      "steps": [
+        "벤치에 누워 양손으로 바를 잡아 수직으로 들어 올려요.",
+        "팔꿈치를 고정한 상태에서, 이마를 넘겨 정수리 위까지 바를 내려요.",
+        "내려온 동선을따라 바를 들어올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "케이블 푸시다운",
+    "케이블 푸시 다운",
     {
       "page": "https://burnfit.io/라이브러리/케이블-푸시-다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_PUSH_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_PUSH_DOWN.gif",
+      "steps": [
+        "케이블을 바라본 상태에서, 허리를 살짝 숙이고 엉덩이는 뒤로 빼줘요.",
+        "어깨와 팔꿈치가 일직선상에 있도록 고정한 상태로, 케이블을 몸쪽으로 당겨줘요.",
+        "삼두에 자극을 느끼면서 팔꿈치를 속도를 조절해 굽혀, 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 프리쳐 컬",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-프리쳐-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_PREA_CURL-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_PREA_CURL-1.gif",
+      "steps": [
+        "양손에 덤벨을 든 상태로, 가슴을 경사면에 기대고 양팔은 경사면 위에 올려요.",
+        "상체와 팔꿈치를 고정한 상태를 유지하며, 이두근의 수축을 느끼며 덤벨을 당겨 올립니다.",
+        "",
+        "속도를 조절해 덤벨을 내리다가 팔이 완전히 펴지기 직전에 멈춥니다."
+      ]
     }
   ],
   [
     "바벨 프리쳐 컬",
     {
       "page": "https://burnfit.io/라이브러리/바벨-프리쳐-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_PREA_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_PREA_CURL.gif",
+      "steps": [
+        "양손에 바벨을 든 상태로, 가슴을 경사면에 기대고 양팔은 경사면 위에 올려요.",
+        "상체와 팔꿈치를 고정한 상태를 유지하며, 이두근의 수축을 느끼며 바벨을 당겨 올립니다.",
+        "",
+        "속도를 조절해 바벨을 내리다가 팔이 완전히 펴지기 직전에 멈춥니다."
+      ]
     }
   ],
   [
     "이지바 프리쳐 컬",
     {
       "page": "https://burnfit.io/라이브러리/이지바-프리쳐-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/EZ_PREA_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/EZ_PREA_CURL.gif",
+      "steps": [
+        "양손에 이지바를 든 상태로, 가슴을 경사면에 기대고 양팔은 경사면 위에 올려요.",
+        "상체와 팔꿈치를 고정한 상태를 유지하며, 이두근의 수축을 느끼며 이지바를 당겨 올립니다.",
+        "",
+        "속도를 조절해 이지바를 내리다가 팔이 완전히 펴지기 직전에 멈춥니다."
+      ]
     }
   ],
   [
     "프리쳐 컬 머신",
     {
       "page": "https://burnfit.io/라이브러리/프리쳐-컬-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/PREA_CURL_MAC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PREA_CURL_MAC.gif",
+      "steps": [
+        "가슴은 경사면에 기댄 상태에서 양손으로 손잡이를 잡아 경사면 위에 올려요.",
+        "상체와 팔꿈치를 고정한 상태를 유지하며, 이두근의 수축을 느끼며 손잡이를 당겨 올립니다.",
+        "",
+        "속도를 조절해 손잡이를 내리다가 팔이 완전히 펴지기 직전에 멈춥니다."
+      ]
     }
   ],
   [
     "암 컬 머신",
     {
       "page": "https://burnfit.io/라이브러리/암-컬-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/ARM_CURL_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ARM_CURL_MC.gif",
+      "steps": [
+        "겨드랑이를 패드에 밀착시킨 상태로 기구에 앉습니다.",
+        "팔꿈치를 고정한 상태로 이두에 힘을주어 팔을 당겨 올립니다.",
+        "이두에 자극을 느끼며 속도를 조절해 팔을 내려 처음의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
-    "케이블 해머 컬",
+    "케이블 해머컬",
     {
       "page": "https://burnfit.io/라이브러리/케이블-해머컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_HAM_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_HAM_CURL.gif",
+      "steps": [
+        "케이블을 최하단에 고정한 상태에서, 상체를 곧게 펴고 양손으로 그립을 잡아요.",
+        "팔꿈치를 고정한 상태에서 이두의 힘으로 팔을 당겨 올립니다.",
+        "이두근의 자극을 느끼며 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 오버헤드 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/케이블-오버헤드-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_OHT_EXT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_OHT_EXT.gif",
+      "steps": [
+        "로프를 케이블 상단에 걸고 양손으로 로프를 잡아요.",
+        "케이블을 등지고 선 상태에서 한발을 앞으로 내밀고 상체를 앞으로 기울이고 무릎을 살짝 구부린 상태를 유지해요.",
+        "팔꿈치를 머리 옆에 고정한 상태를 유지하면서 팔을 힘차게 앞으로 뻗습니다.",
+        "삼두의 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 라잉 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/케이블-라잉-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_LYING_TRI_EXT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_LYING_TRI_EXT.gif",
+      "steps": [
+        "벤치에 누워 양손으로 바를 잡아 수직으로 들어 올려요.",
+        "팔꿈치를 고정한 상태에서, 이마를 넘겨 정수리 위까지 바를 내려요.",
+        "내려온 동선을따라 바를 들어올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "리버스 바벨 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/리버스-바벨-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_BB_WRIST_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_BB_WRIST_CURL.gif",
+      "steps": [
+        "바벨을 손등이 하늘을 향한 상태에서 어깨 폭보다 약간 좁게 잡고, 벤치 위에 전완부를 올려놓습니다.",
+        "손목을 바닥 방향으로 구부리면서 바벨을 내립니다.",
+        "손목을 위로 최대한 끌어올린다는 생각으로 바벨을 들어 올려요."
+      ]
     }
   ],
   [
     "리버스 덤벨 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/리버스-덤벨-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_DB_WRIST_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_DB_WRIST_CURL.gif",
+      "steps": [
+        "벤치에 앉아 손등이 하늘을 향하도록 덤벨을 잡고, 허벅지 위에 전완부를 올려놓습니다.",
+        "손바닥을 바닥 방향으로 구부리면서 덤벨을 내립니다.",
+        "손바닥을 위로 최대한 끌어올린다는 생각으로 덤벨을 들어 올려요."
+      ]
     }
   ],
   [
     "인클라인 덤벨 컬",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-덤벨-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/INC_DB_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INC_DB_CURL.gif",
+      "steps": [
+        "양손으로 덤벨을 들고 인클라인 벤치에 앉습니다.",
+        "운동중 상체가 움직이지 견갑을 고정한 상태로 팔과 덤벨이 바닥과 수직이 되도록 자세를 잡아요.",
+        "이두근으로만 덤벨을 들어올린다는 생각으로 팔을 구부립니다.",
+        "구부린 팔을 펴면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "벤치 딥스",
     {
       "page": "https://burnfit.io/라이브러리/벤치-딥스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BENCH_DIPS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BENCH_DIPS.gif",
+      "steps": [
+        "양손을 어깨 폭만큼 벌려 벤치 모서리를 잡아줘요.",
+        "발의 위치에 따라 강도가 조절되므로 적당한 위치를 설정해요.",
+        "팔을 굽혀서 몸을 수직방향으로 내립니다.",
+        "삼두근의 자극을 느끼며 몸을 밀어올려 시작자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "리스트 롤러",
     {
       "page": "https://burnfit.io/라이브러리/리스트-롤러/",
-      "gif": "https://burnfit.io/wp-content/uploads/WRIST_ROLLER.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WRIST_ROLLER.gif",
+      "steps": [
+        "롤러의 손잡이를 손등이 하늘을 향하도록 잡은 상태에서, 양팔을 앞으로 쭉 펴요.",
+        "양팔이 펴진 상태를 유지하면서 한손으로 최대한 감을수 있을만큼 크게 손잡이를 돌려줘요.",
+        "양손을 번갈아 한번씩 감아줘요.",
+        "롤러를 다 감았으면 반대 방향으로 손잡이를 감으며 롤러를 풀어줘요."
+      ]
     }
   ],
   [
     "리버스 바벨 컬",
     {
       "page": "https://burnfit.io/라이브러리/리버스-바벨-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_BB_CURL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_BB_CURL.gif",
+      "steps": [
+        "양발을 어깨 폭로 적당히 벌려선 상태에서, 손등이 앞을 바라보도록 바벨을 잡아요.",
+        "팔꿈치를 고정한 상태에서 이두의 힘으로 바벨을 들어 올려요.",
+        "이두의 긴장감을 유지하면서 바벨을 속도를 조절해 내립니다."
+      ]
     }
   ],
   [
     "트라이셉 익스텐션 머신",
     {
       "page": "https://burnfit.io/라이브러리/트라이셉-익스텐션-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/TRI_EXT_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/TRI_EXT_MC.gif",
+      "steps": [
+        "머신에 앉은 상태에서 패드에 팔꿈치를 대고 양손으로 손잡이를 잡아요.",
+        "팔꿈치를 고정한 상태에서 속도를 조절해 팔을 펴요.",
+        "삼두에 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "악력기",
     {
       "page": "https://burnfit.io/라이브러리/악력기/",
-      "gif": "https://burnfit.io/wp-content/uploads/악력기.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/악력기.gif",
+      "steps": [
+        "손가락과 손바닥의 힘을 사용해 악력기를 완전히 닫습니다.",
+        "악력기를 닫은 상태를 1~2초 동안 유지하며 근육을 수축시킵니다.",
+        "전완근의 긴장을 유지하면서 악력기를 서서히 풀어줘요."
+      ]
     }
   ],
   [
     "케이블 로프 푸시 다운",
     {
       "page": "https://burnfit.io/라이브러리/케이블-로프-푸시-다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/케이블-로프-푸시-다운.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케이블-로프-푸시-다운.gif",
+      "steps": [
+        "케이블을 바라본 상태에서, 허리를 살짝 숙이고 엉덩이는 뒤로 빼줘요.",
+        "어깨와 팔꿈치가 일직선상에 있도록 고정한 상태로, 로프를 몸쪽으로 당겨줘요.",
+        "삼두에 자극을 느끼면서 팔꿈치를 속도를 조절해 굽혀, 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "컨센트레이션 컬",
     {
       "page": "https://burnfit.io/라이브러리/컨센트레이션-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/컨센트레이션-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/컨센트레이션-컬.gif",
+      "steps": [
+        "벤치에 앉아 한쪽 팔을 같은 쪽 허벅지 안쪽에 기대어 고정해요.",
+        "덤벨을 잡은 이두근의 힘으로 덤벨을 속도를 조절해 들어 올립니다.",
+        "이두근의 긴장을 느끼며 덤벨을 속도를 조절해 시작 자세로 내립니다."
+      ]
     }
   ],
   [
     "바벨 JM 프레스",
     {
       "page": "https://burnfit.io/라이브러리/바벨-jm-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/바벨-JM-프레스.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/바벨-JM-프레스.gif",
+      "steps": [
+        "벤치에 가슴을 펴고 누운 상태에서, 바벨을 어깨 폭보다 좁게 잡아요.",
+        "바벨을 속도를 조절해 내리면서 팔꿈치를 가슴쪽으로 구부립니다.",
+        "삼두근의 힘으로 바벨을 속도를 조절해 밀어 올립니다."
+      ]
     }
   ],
   [
     "스미스머신 JM 프레스",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-jm-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-JM-프레스.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-JM-프레스.gif",
+      "steps": [
+        "벤치에 가슴을 펴고 누운 상태에서, 스미스머신의 바벨을 어깨 폭보다 좁게 잡아요.",
+        "바벨을 속도를 조절해 내리면서 팔꿈치를 가슴쪽으로 구부립니다.",
+        "삼두근의 힘으로 바벨을 속도를 조절해 밀어 올립니다."
+      ]
     }
   ],
   [
     "리버스 이지바 컬",
     {
       "page": "https://burnfit.io/라이브러리/리버스-이지바-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/리버스-이지바-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/리버스-이지바-컬.gif",
+      "steps": [
+        "다리를 어깨 폭만큼 벌린 상태에서 양손으로 이지바를 오버핸드 그립으로 잡아요.",
+        "팔꿈치를 몸 옆에 고정한 상태로 이지바를 들어 올립니다.",
+        "팔 근육의 긴장을 유지하면서 속도를 조절해 이지바를 내립니다."
+      ]
     }
   ],
   [
     "리버스그립 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/리버스그립-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/리버스그립-푸시업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/리버스그립-푸시업.gif",
+      "steps": [
+        "손바닥을 발방향으로 향하게 손목을 반대로 돌린 상태에서, 양손은 어깨 폭보다 약간 넓게 배치해요.",
+        "발은 어깨 폭로 벌리고 몸을 일직선으로 유지해요.",
+        "팔꿈치를 구부리며 가슴을 바닥 쪽으로 내립니다.",
+        "가슴과 삼두근의 힘을 사용해 몸을 밀어 올립니다."
+      ]
     }
   ],
   [
     "이지바 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/이지바-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/악력기.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/악력기.gif",
+      "steps": [
+        "양발을 골반너비로 적당히 벌리고, 이지바를 양손으로 잡고 서요.",
+        "이지바를 잡은 양팔의 팔꿈치를 직각으로 만들면서 머리 뒤로 넘깁니다.",
+        "팔꿈치를 고정한 상태로 이지바를 위로 들어 올려요.",
+        "삼두근의 긴장을 느끼며 이지바를 내리며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "클로즈그립 스미스머신 벤치프레스",
     {
       "page": "https://burnfit.io/라이브러리/클로즈그립-스미스머신-벤치프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/클로즈그립-스미스머신-벤치프레스.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/클로즈그립-스미스머신-벤치프레스.gif",
+      "steps": [
+        "벤치에 가슴을 펴고 누운 상태에서, 스미스머신의 바벨을 어깨 폭보다 좁게 잡고 위로 들어 올려요.",
+        "삼두근의 이완을 느끼면서 바벨을 가슴 하부 방향으로 속도를 조절해 내립니다.",
+        "삼두근의 수축을 느끼며 몸의 수직방향으로 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "이지바 비하인드 백 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/이지바-비하인드-백-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/이지바-비하인드-백-리스트-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/이지바-비하인드-백-리스트-컬.gif",
+      "steps": [
+        "발은 어깨 폭로 벌리고 이지바를 몸 뒤쪽에서 허리 높이로 잡아요.",
+        "손목의 힘을 사용해 이지바를 위쪽으로 들어 올립니다.",
+        "최대한 들어 올린 상태에서 손목을 완전히 수축시키며 1~2초간 유지해요.",
+        "속도를 조절해 손목을 펴면서 이지바를 시작 위치로 되돌려요."
+      ]
     }
   ],
   [
     "원암 덤벨 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/원암-덤벨-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/원암-덤벨-리스트-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/원암-덤벨-리스트-컬.gif",
+      "steps": [
+        "벤치에 앉아 손바닥이 위를 향하도록 덤벨을 잡아요.",
+        "팔뚝을 허벅지 위에 고정하여 안정적인 자세를 유지해요.",
+        "손목의 힘을 사용해 덤벨을 위로 들어 올립니다.",
+        "속도를 조절해 손목을 펴면서 덤벨을 시작 위치로 되돌려요."
+      ]
     }
   ],
   [
     "덤벨 라잉 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-라잉-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-라잉-트라이셉-익스텐션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-라잉-트라이셉-익스텐션.gif",
+      "steps": [
+        "벤치에 누워 양손으로 덤벨을 하나씩 잡고, 손바닥이 서로 마주 보도록 해요.",
+        "팔꿈치를 고정한 상태에서, 덤벨을 속도를 조절해 머리 뒤쪽 방향으로 내립니다.",
+        "삼두근의 힘을 사용해 덤벨을 다시 시작 위치로 들어 올려요."
+      ]
     }
   ],
   [
     "이지바 라잉 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/이지바-라잉-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/이지바-라잉-트라이셉-익스텐션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/이지바-라잉-트라이셉-익스텐션.gif",
+      "steps": [
+        "벤치에 누워 양손으로 이지바를 잡아 수직으로 들어 올려요.",
+        "팔꿈치를 고정한 상태에서, 이마를 넘겨 정수리 위까지 이지바를 내려요.",
+        "내려온 동선을 따라 이지바를 들어올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "인클라인 덤벨 해머 컬",
     {
       "page": "https://burnfit.io/라이브러리/인클라인-덤벨-해머-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-스컬-크러셔.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-스컬-크러셔.gif",
+      "steps": [
+        "벤치에 누워 양손으로 각각 덤벨을 잡아 수직으로 들어 올려요.",
+        "팔꿈치를 고정한 상태에서, 이마에 닿을 높이까지 덤벨을 내려요.",
+        "내려온 동선을 따라 덤벨을 들어올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
@@ -1675,1182 +2952,2113 @@ export const burnFitGuides = new Map([
     "시티드 바벨 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/시티드-바벨-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/시티드-바벨-트라이셉-익스텐션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/시티드-바벨-트라이셉-익스텐션.gif",
+      "steps": [
+        "바벨을 양손으로 어깨 폭 정도로 잡은 상태에서, 벤치에 등을 곧게 펴고 앉습니다.",
+        "바벨을 머리 위로 들어올려 팔꿈치를 귀 옆에 가깝게 위치시킵니다.",
+        "팔꿈치를 고정한 상태로 바벨을 속도를 조절해 머리 뒤쪽으로 내립니다.",
+        "삼두근의 힘을 사용해 바벨을 원래 위치로 속도를 조절해 들어 올립니다."
+      ]
     }
   ],
   [
     "바이셉 컬 머신",
     {
       "page": "https://burnfit.io/라이브러리/바이셉-컬-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/바이셉-컬-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/바이셉-컬-머신.gif",
+      "steps": [
+        "손바닥이 위를 향하도록 양손으로 손잡이를 잡아요.",
+        "팔꿈치를 패드 위에 고정한 상태에서, 손잡이를 속도를 조절해 위로 들어 올립니다.",
+        "이두근의 이완을 느끼며 손잡이를 속도를 조절해 시작 위치로 되돌려요."
+      ]
     }
   ],
   [
     "비하인드 백 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/비하인드-백-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/비하인드-백-리스트-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/비하인드-백-리스트-컬.gif",
+      "steps": [
+        "발을 어깨 폭로 벌리고 바벨을 몸 뒤쪽에서 허리 높이로 잡아요.",
+        "손목의 힘을 사용해 바벨을 위쪽으로 들어 올립니다.",
+        "최대한 들어 올린 상태에서 손목을 완전히 수축시키며 1~2초간 유지해요.",
+        "속도를 조절해 손목을 펴면서 바벨을 시작 위치로 되돌려요."
+      ]
     }
   ],
   [
-    "트라이셉스 프레스 머신",
+    "트라이셉 프레스 머신",
     {
       "page": "https://burnfit.io/라이브러리/트라이셉-프레스-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/트라이셉-프레스-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/트라이셉-프레스-머신.gif",
+      "steps": [
+        "시트에 앉아 발을 바닥에 단단히 고정해요.",
+        "양손으로 손잡이를 잡고 팔꿈치를 몸 옆에 고정해요.",
+        "가슴을 편 상태에서 삼두근에 집중하며 팔을 완전히 펴요.",
+        "속도를 조절해 팔꿈치를 구부리며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "원암 덤벨 컬",
     {
       "page": "https://burnfit.io/라이브러리/원암-덤벨-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/원암-덤벨-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/원암-덤벨-컬.gif",
+      "steps": [
+        "양발을 어깨 폭로 벌리고 한 손에 덤벨을 들고 곧게 서요.",
+        "이두근의 수축을 느끼며, 덤벨을 들어올리듯 팔을 구부립니다.",
+        "이두근의 긴장을 유지한 채, 팔을 속도를 조절해 펴면서 처음 위치로 복귀해요.",
+        "정해진 횟수만큼 수행한 후, 반대팔도 같은 방식으로 반복해요."
+      ]
     }
   ],
   [
     "원암 덤벨 해머 컬",
     {
       "page": "https://burnfit.io/라이브러리/원암-덤벨-해머-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/원암-덤벨-해머-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/원암-덤벨-해머-컬.gif",
+      "steps": [
+        "한 손에 덤벨을 들고, 손바닥이 몸을 향하도록 한 상태에서 곧게 서줘요.",
+        "팔꿈치를 옆구리에 고정한 상태로, 전완근과 이두근의 힘으로 덤벨을 들어 올립니다.",
+        "최대 수축 지점까지 들어올린 후, 속도를 조절해 덤벨을 내리며 처음 위치로 복귀해요.",
+        "정해진 횟수만큼 수행한 뒤, 반대쪽 팔도 같은 방식으로 반복해요."
+      ]
     }
   ],
   [
     "리버스 이지바 리스트 컬",
     {
       "page": "https://burnfit.io/라이브러리/리버스-이지바-리스트-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/리버스-이지바-리스트-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/리버스-이지바-리스트-컬.gif",
+      "steps": [
+        "이지바를 손등이 하늘을 향한 상태에서 어깨 폭보다 약간 좁게 잡고, 벤치 위에 전완부를 올려놓습니다.",
+        "손목을 바닥 방향으로 구부리면서 이지바를 내립니다.",
+        "손목을 위로 최대한 끌어올린다는 생각으로 이지바를 들어 올려요."
+      ]
     }
   ],
   [
     "덤벨 리스트 수피네이션",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-리스트-수피네이션/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-리스트-수피네이션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-리스트-수피네이션.gif",
+      "steps": [
+        "팔꿈치를 90도로 굽힌 상태로 앉은 상태에서, 한 손에 덤벨을 잡아요.",
+        "팔꿈치를 움직이지 않게 고정한 채, 손바닥이 아래를 향한 상태에서 시작해요.",
+        "전완근의 힘을 이용해 손목을 회전시켜, 손바닥이 위로 향하는 상태까지 속도를 조절해 돌립니다.",
+        "속도를 조절해 다시 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 리스트 라디얼 플렉션",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-리스트-라디얼-플렉션/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-리스트-라디얼-플렉션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-리스트-라디얼-플렉션.gif",
+      "steps": [
+        "곧게 선 상태에서 한 손에 덤벨을 들고, 손바닥이 몸을 향하도록 하여 팔을 몸 옆으로 곧게 내려뜨립니다.",
+        "팔꿈치를 편 상태를 유지한 채, 손목을 속도를 조절해 엄지 방향으로 들어 올립니다.",
+        "손목이 더 이상 올라가지 않을 때까지 들어 올린 뒤, 속도를 조절해 처음 위치로 복귀해요.",
+        "반동 없이 전완근의 수축을 느끼며 정해진 횟수만큼 반복한 후, 반대 손도 같은 방식으로 진행해요."
+      ]
     }
   ],
   [
     "케이블 스트레치 컬",
     {
       "page": "https://burnfit.io/라이브러리/케이블-스트레치-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/케이블-스트레치-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케이블-스트레치-컬.gif",
+      "steps": [
+        "케이블 머신의 손잡이를 가장 아래 위치에 설정하고, 손잡이를 잡은 뒤 머신을 등지고 한 발 앞으로 나와 준비 자세를 취해요.",
+        "팔은 몸 뒤쪽에 위치하도록 하여 이두근이 스트레치 된 상태를 만듭니다.",
+        "팔꿈치를 고정한 채, 이두근의 힘으로 손잡이를 위로 들어 올립니다.",
+        "팔꿈치를 축으로 전완만 움직이는 느낌으로 수행해요.",
+        "이두근이 최대한 수축된 지점에서 잠시 멈췄다가, 이두근이 늘어나는 것을 느끼며 속도를 조절해 팔을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 크로스 트라이셉 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/케이블-크로스-트라이셉-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/케이블-크로스-트라이셉-익스텐션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케이블-크로스-트라이셉-익스텐션.gif",
+      "steps": [
+        "케이블 머신의 손잡이를 가장 아래 위치에 설정한 뒤, 손잡이를 잡고 머신의 옆이나 앞에 서서 준비해요.",
+        "운동하는 팔은 몸의 반대편에서 시작하도록 위치시켜, 케이블이 몸 앞을 가로질러 지나가게 해요.",
+        "상완을 몸통 옆에 고정한 상태에서, 숨을 내쉬며 팔꿈치를 펴는 힘으로 손잡이를 바깥쪽 또는 아래쪽으로 밀어냅니다.",
+        "팔이 거의 완전히 펴진 지점에서 삼두근의 수축을 느끼며 잠시 멈췄다가, 숨을 들이마시며 삼두근이 늘어나는 것을 느끼면서 속도를 조절해 팔꿈치를 굽혀 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 스파이더 컬",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스파이더-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-스파이더-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-스파이더-컬.gif",
+      "steps": [
+        "인클라인 벤치를 45~60도로 세팅한 뒤, 벤치에 가슴을 대고 엎드린 상태로 덤벨을 잡아 준비해요.",
+        "팔은 바닥을 향해 자연스럽게 늘어뜨리고, 발은 바닥에 단단히 고정해 자세를 안정시킵니다.",
+        "숨을 내쉬며 이두근의 힘으로 덤벨을 위로 들어 올립니다.",
+        "덤벨이 어깨 쪽으로 가까워지며 이두근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 이두근이 늘어나는 것을 느끼면서 속도를 조절해 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "이지바 스파이더 컬",
     {
       "page": "https://burnfit.io/라이브러리/이지바-스파이더-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/이지바-스파이더-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/이지바-스파이더-컬.gif",
+      "steps": [
+        "인클라인 벤치를 45~60도로 세팅한 뒤, 벤치에 가슴을 대고 엎드린 상태로 이지바를 잡아 준비해요.",
+        "손목이 편안한 각도로 이지바를 잡고, 팔은 바닥을 향해 자연스럽게 늘어뜨립니다.",
+        "숨을 내쉬며 이두근의 힘으로 이지바를 위로 들어 올립니다.",
+        "이지바가 어깨 쪽으로 가까워지며 이두근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 이두근이 늘어나는 것을 느끼면서 속도를 조절해 이지바를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 이지바 푸시 다운",
     {
       "page": "https://burnfit.io/라이브러리/케이블-이지바-푸시-다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/케이블-이지바-푸시-다운.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케이블-이지바-푸시-다운.gif",
+      "steps": [
+        "케이블 머신의 손잡이를 가장 높은 곳에 설정한 뒤, 이지바를 연결해 잡고 머신 앞에 서서 준비해요.",
+        "발은 어깨 폭로 벌리고, 상체를 약간만 세운 상태에서 코어에 힘을 주어 자세를 고정해요.",
+        "팔꿈치를 몸통 옆에 붙여 고정한 상태에서, 숨을 내쉬며 상완삼두근의 힘으로 이지바를 아래쪽으로 눌러 내립니다.",
+        "팔이 거의 완전히 펴서 삼두근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 삼두근이 늘어나는 것을 느끼면서 속도를 조절해 이지바를 올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "리버스 덤벨 컬",
     {
       "page": "https://burnfit.io/라이브러리/리버스-덤벨-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/리버스-덤벨-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/리버스-덤벨-컬.gif",
+      "steps": [
+        "양손에 덤벨을 잡고 손바닥이 몸 쪽을 향하도록 선 상태로 준비해요.",
+        "팔꿈치를 몸통 옆에 고정한 상태에서, 숨을 내쉬며 전완과 상완근의 힘으로 덤벨을 위로 들어 올립니다.",
+        "덤벨이 가슴 아래까지 올라와 근육이 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 전완이 늘어나는 것을 느끼면서 속도를 조절해 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "시티드 덤벨 해머 컬",
     {
       "page": "https://burnfit.io/라이브러리/시티드-덤벨-해머-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/시티드-덤벨-해머-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/시티드-덤벨-해머-컬.gif",
+      "steps": [
+        "벤치에 앉아 등을 곧게 세운 상태로 양손에 덤벨을 잡고 준비해요.",
+        "팔꿈치를 몸통 옆에 고정한 상태에서, 숨을 내쉬며 전완과 상완근의 힘으로 덤벨을 위로 들어 올립니다.",
+        "덤벨이 어깨 높이 근처까지 올라와 근육이 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 근육이 늘어나는 것을 느끼면서 속도를 조절해 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "시티드 덤벨 컬",
     {
       "page": "https://burnfit.io/라이브러리/시티드-덤벨-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/시티드-덤벨-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/시티드-덤벨-컬.gif",
+      "steps": [
+        "벤치에 앉아 등을 곧게 세운 상태로 양손에 덤벨을 잡고 준비해요.",
+        "팔꿈치를 몸통 옆에 고정한 상태에서, 숨을 내쉬며 이두근의 힘으로 덤벨을 위로 들어 올립니다.",
+        "덤벨이 어깨 높이 근처까지 올라와 이두근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 이두근이 늘어나는 것을 느끼면서 속도를 조절해 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 프리처 해머 컬",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-프리처-해머-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-프리처-해머-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-프리처-해머-컬.gif",
+      "steps": [
+        "프리처 벤치에 앉아 상완을 패드 위에 밀착시키고, 한 손 또는 양손에 덤벨을 잡아 준비해요.",
+        "손바닥이 서로 마주보는 뉴트럴 그립을 유지하고, 가슴과 겨드랑이를 패드에 안정적으로 붙입니다.",
+        "팔꿈치를 패드에 고정한 상태에서, 숨을 내쉬며 상완근과 전완의 힘으로 덤벨을 위로 들어 올립니다.",
+        "덤벨이 어깨 방향으로 올라와 근육이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 상완근과 전완이 늘어나는 것을 느끼면서 속도를 조절해 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 인클라인 킥백",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-인클라인-킥백/",
-      "gif": "https://burnfit.io/wp-content/uploads/덤벨-인클라인-킥백.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/덤벨-인클라인-킥백.gif",
+      "steps": [
+        "인클라인 벤치를 30~45도로 세팅한 뒤, 벤치에 가슴을 대고 엎드린 상태로 양손에 덤벨을 잡고 준비해요.",
+        "상체와 복부를 벤치에 밀착시키고, 코어에 힘을 주어 몸통이 흔들리지 않도록 해요.",
+        "운동하는 팔의 상완을 몸통 옆에 고정한 상태에서, 숨을 내쉬며 상완삼두근의 힘으로 팔꿈치를 펴 덤벨을 뒤쪽으로 밀어냅니다.",
+        "팔이 거의 완전히 펴져 삼두근이 최대한 수축된 지점에서 잠시 멈췄다가,",
+        "숨을 들이마시며 삼두근이 늘어나는 것을 느끼면서 속도를 조절해 덤벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "바벨 스파이더 컬",
     {
       "page": "https://burnfit.io/라이브러리/바벨-스파이더-컬/",
-      "gif": "https://burnfit.io/wp-content/uploads/바벨-스파이더-컬.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/바벨-스파이더-컬.gif",
+      "steps": [
+        "인클라인 벤치를 45~60도로 세팅한 뒤, 벤치에 가슴을 대고 엎드린 상태로 바벨을 잡아 준비해요.",
+        "팔은 바닥을 향해 자연스럽게 늘어뜨리고, 발은 바닥에 단단히 고정해 자세를 안정시킵니다.",
+        "숨을 내쉬며 이두근의 힘으로 바벨을 위로 들어 올립니다.",
+        "바벨이 어깨 쪽으로 가까워지며 이두근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 이두근이 늘어나는 것을 느끼면서 속도를 조절해 바벨을 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "싯업",
     {
       "page": "https://burnfit.io/라이브러리/싯업/",
-      "gif": "https://burnfit.io/wp-content/uploads/SIT_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SIT_UP.gif",
+      "steps": [
+        "무릎을 구부리고 바닥에 누워서, 발이 바닥과 떨어지지 않게 해요.",
+        "배의 근육을 이용해 상체를 들어 올려요.",
+        "복근에 힘을 유지하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "브이 업",
     {
       "page": "https://burnfit.io/라이브러리/브이-업/",
-      "gif": "https://burnfit.io/wp-content/uploads/브이-업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/브이-업.gif",
+      "steps": [
+        "바닥에 누워서 팔과 다리를 일자로 쭉 펴요.",
+        "상체와 하체가 V 모양이 되도록 상, 하체를 동시에 들어 올려요.",
+        "복근의 자극을 느끼며 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "크런치",
     {
       "page": "https://burnfit.io/라이브러리/크런치/",
-      "gif": "https://burnfit.io/wp-content/uploads/CRUNCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CRUNCH.gif",
+      "steps": [
+        "무릎을 굽히고 바닥에 누워, 양손은 가슴 앞이나 머리 뒤로 올려 고정해요.",
+        "등 전체가 아닌 상체 윗부분만 서서히 들어올려, 복근의 윗 부분의 수축감을 느낀다.",
+        "윗 복근의 긴장감을 느끼면서 속도를 조절해 내려옵니다."
+      ]
     }
   ],
   [
     "힐 터치",
     {
       "page": "https://burnfit.io/라이브러리/힐-터치/",
-      "gif": "https://burnfit.io/wp-content/uploads/HEEL_TOUCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HEEL_TOUCH.gif",
+      "steps": [
+        "무릎을 굽히고 양손은 엉덩이 옆에 둔채로 바닥에 누워요.",
+        "복부의 힘으로 상체를 들어올려 복근에 긴장감을 유지한 상태에서, 한쪽 손으로 같은쪽 복숭아뼈를 터치해요.",
+        "반대쪽 손도 마찬가지로 복숭아뼈를 터치하고 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "레그 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/레그-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/LEG_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LEG_RAISE.gif",
+      "steps": [
+        "바닥에 똑바로 누운 상태에서, 팔을 골반옆에 위치시켜 바닥을 지지할 수 있도록 해요.",
+        "등을 바닥에 밀착시킨 상태로, 무릎을 최대한 피면서 다리를 들어 올려요.",
+        "허리가 뜨지 않도록 복근에 힘을 주면서 속도를 조절해 다리를 내려요."
+      ]
     }
   ],
   [
     "행잉 레그 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/행잉-레그-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/HANG_LEG_RAIGE-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HANG_LEG_RAIGE-1.gif",
+      "steps": [
+        "철봉에 매달린 상태에서 상,하체를 곧게 폅니다.",
+        "복부와 등에 힘을 주어 자세를 유지하면서, 무릎을 골반 높이까지 끌어 올립니다.",
+        "복근의 긴장감을 유지하면서, 다리를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "러시안 트위스트",
     {
       "page": "https://burnfit.io/라이브러리/러시안-트위스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/러시안-트위스트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/러시안-트위스트.gif",
+      "steps": [
+        "바닥에 엉덩이를 붙이고 앉아 케틀벨을 양손으로 움켜 잡아요.",
+        "복근에 힘을 준 상태로, 몸통과 허벅지가 V자 형태가 되도록 등을 뒤로 기울입니다.",
+        "자세를 유지하면서 케틀벨을 좌우로 번갈아 이동해요."
+      ]
     }
   ],
   [
     "할로우 락",
     {
       "page": "https://burnfit.io/라이브러리/할로우-락/",
-      "gif": "https://burnfit.io/wp-content/uploads/HOLLOW_ROCK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HOLLOW_ROCK.gif",
+      "steps": [
+        "등과 허리를 바닥에 붙인 상태로 하늘을 보고 누워요.",
+        "허리가 바닥에 떨어지지 않게 유의하면서, 양손은 머리 위로 올리고 다리는 살짝 들어줘요.",
+        "복근의 긴장을 유지하면서 앞뒤로 오뚝이처럼 움직입니다."
+      ]
     }
   ],
   [
     "할로우 포지션",
     {
       "page": "https://burnfit.io/라이브러리/할로우-포지션/",
-      "gif": "https://burnfit.io/wp-content/uploads/HOLLOW_POS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HOLLOW_POS.gif",
+      "steps": [
+        "등과 허리를 바닥에 붙인 상태로 하늘을 보고 누워요.",
+        "허리가 바닥에 떨어지지 않게 유의하면서, 양손은 머리 위로 올리고 다리는 살짝 들어줘요.",
+        "복근에 긴장감을 느끼며 자세를 유지해요."
+      ]
     }
   ],
   [
     "플랭크",
     {
       "page": "https://burnfit.io/라이브러리/플랭크/",
-      "gif": "https://burnfit.io/wp-content/uploads/PLANK-2.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PLANK-2.gif",
+      "steps": [
+        "손목과 팔꿈치를 바닥에 댄 상태로 바닥에 엎드립니다.",
+        "팔꿈치와 어깨를 동일선상에 놓은 상태에서, 복부와 엉덩이에 힘을 주며 몸을 밀어 올립니다.",
+        "등을 평평하게 만든다는 생각으로 팔꿈치로 바닥을 밀며 자세를 유지해요."
+      ]
     }
   ],
   [
     "덤벨 사이드 벤드",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-사이드-벤드/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SIDE_BEND-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SIDE_BEND-1.gif",
+      "steps": [
+        "양발을 어깨 폭만큼 벌린 상태에서, 한쪽 손에 덤벨을 들고 덤벨을 몸과 일직선이 되도록 곧게 서요.",
+        "숨을 들이마시면서, 덤벨을 들고있는 손 방향으로 허리를 속도를 조절해 구부려 줘요.",
+        "복근의 긴장감을 유지하면서 허리를 펴요."
+      ]
     }
   ],
   [
     "복근 롤아웃",
     {
       "page": "https://burnfit.io/라이브러리/복근-롤아웃/",
-      "gif": "https://burnfit.io/wp-content/uploads/ABS_ROLL_OUT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ABS_ROLL_OUT.gif",
+      "steps": [
+        "바닥에 무릎을 대고, 바벨을 어깨 폭로 잡아 어깨 아래에 위치시킵니다.",
+        "속도를 조절해 바벨을 밀어 내려갈 수 있는 만큼 몸을 낮춥니다.",
+        "복부에 긴장감을 유지한채로 시작 자세로 되돌아옵니다."
+      ]
     }
   ],
   [
     "복근 에어 바이크",
     {
       "page": "https://burnfit.io/라이브러리/복근-에어-바이크/",
-      "gif": "https://burnfit.io/wp-content/uploads/ABS_AIR_BIKE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ABS_AIR_BIKE.gif",
+      "steps": [
+        "바닥에 등을 대고 누워 양손으로 가볍게 머리를 감싸줘요.",
+        "오른쪽 상체를 비틀어 들어올림과 동시에 왼쪽 무릎을 당겨 올려요.",
+        "들어올린 오른쪽 상체와 왼쪽 무릎을 내리고, 왼쪽 상체를 비틀어 올리면서 오른쪽 무릎을 당겨 올립니다."
+      ]
     }
   ],
   [
     "토즈투 바",
     {
       "page": "https://burnfit.io/라이브러리/토즈투-바/",
-      "gif": "https://burnfit.io/wp-content/uploads/토즈투-바.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/토즈투-바.gif",
+      "steps": [
+        "팔을 어깨 폭보다 살짝 넓게 벌린 상태로 바에 매달립니다.",
+        "복근에 힘을 유지한채로 발끝을 힘차게 들어 올려요.",
+        "발끝이 바에 닿을때까지, 상체는 발의 방향으로 몸을 기울인다는 느낌으로 등에 힘을 줘요.",
+        "복근의 긴장감을 유지하면서 발을 내리며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "행잉 니 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/행잉-니-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/HANG_KNEE_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HANG_KNEE_RAISE.gif",
+      "steps": [
+        "팔을 어깨 폭만큼 벌리고, 손바닥이 앞을 바라본 상태로 바를 잡고 매달립니다.",
+        "아랫 배에 힘을 주어 양다리를 위로 말아 올려요.",
+        "복근에 자극을 느끼며 속도를 조절해 양다리를 내려요."
+      ]
     }
   ],
   [
     "복근 크런치 머신",
     {
       "page": "https://burnfit.io/라이브러리/복근-크런치-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/ABS_CRUNCH_MC-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ABS_CRUNCH_MC-1.gif",
+      "steps": [
+        "운동중 하체가 움직이지 않도록 발판에 양발을 올리고 기구에 앉습니다.",
+        "손잡이를 양손으로 잡은 상태에서 복근에 자극을 느끼며 상체를 앞으로 숙여줘요.",
+        "굽었던 상체를 속도를 조절해 피면서 처음의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "케이블 크런치",
     {
       "page": "https://burnfit.io/라이브러리/케이블-크런치/",
-      "gif": "https://burnfit.io/wp-content/uploads/케이블-크런치.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케이블-크런치.gif",
+      "steps": [
+        "무릎을 꿇었을때 로프가 머리 높이보다 위에 올 수 있게 높이를 조절해요.",
+        "바닥에 무릎을 꿇고 허벅지가 바닥과 수직이 되게 몸을 세웁니다.",
+        "양손으로 로프를 잡고 복근에 힘을 주어 등을 둥글게 말아 숙인 뒤, 로프를 잡은 손을 머리 양옆에 붙입니다.",
+        "등을 최대한 말아서 배꼽을 보겠다는 느낌으로 복근을 수축시키며 로프를 당깁니다.",
+        "복근의 자극을 느끼면서 속도를 조절해 등을 피며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "필라테스 잭나이프",
     {
       "page": "https://burnfit.io/라이브러리/필라테스-잭나이프/",
-      "gif": "https://burnfit.io/wp-content/uploads/PIL_JACKKNIFE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PIL_JACKKNIFE.gif",
+      "steps": [
+        "척추 전체가 바닥에 닿도록 매트에 누워요.",
+        "양팔로 바닥을 지그시 누르면서 두 다리를 모아서 수직으로 들어 올립니다.",
+        "척추를 바닥에서부터 떼어주면서 두 다리를 모아 바닥에서 수직방향으로 곧게 밀어올립니다.",
+        "올라왔던 역순서대로 몸을 내리면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "리버스 크런치",
     {
       "page": "https://burnfit.io/라이브러리/리버스-크런치/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_CRUNCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_CRUNCH.gif",
+      "steps": [
+        "양손으로 바닥을 눌러 균형을 잡은 상태에서 허벅지가 바닥과 수직이 되도록 무릎을 90도로 구부려 들어 올립니다.",
+        "손바닥으로 바닥을 지그시 누르면서, 복부의 힘으로 무릎이 가슴쪽으로 가도록 엉덩이를 밀어 올립니다.",
+        "최고점에서 하복부의 자극을 느끼며 속도를 조절해 시작자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "사이드 플랭크",
     {
       "page": "https://burnfit.io/라이브러리/사이드-플랭크/",
-      "gif": "https://burnfit.io/wp-content/uploads/SIDE_PLANK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SIDE_PLANK.gif",
+      "steps": [
+        "팔꿈치를 바닥에 대고 몸을 곧게 편상태로 옆으로 누워요.",
+        "바닥에 대고 있는 팔로 바닥을 지그시 밀면서 엉덩이를 들어올려 몸통 전체를 일직선으로 만듭니다.",
+        "정해진 시간만큼 버티고 엉덩이를 속도를 조절해내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "45도 사이드 벤드",
     {
       "page": "https://burnfit.io/라이브러리/45도-사이드-벤드/",
-      "gif": "https://burnfit.io/wp-content/uploads/45_SIDE_BEND.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/45_SIDE_BEND.gif",
+      "steps": [
+        "하이퍼익스텐션 머신과 같이 기울어진 구조물에 기대 하체를 고정시킵니다.",
+        "기댄 방향으로 속도를 조절해 상체를 숙여 복근의 이완을 느낍니다.",
+        "복부에 힘을 유지한 상태로 몸을 속도를 조절해 당겨 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "RKC 플랭크",
     {
       "page": "https://burnfit.io/라이브러리/rkc-플랭크/",
-      "gif": "https://burnfit.io/wp-content/uploads/RKC_PLANK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/RKC_PLANK.gif",
+      "steps": [
+        "손목과 팔꿈치를 바닥에 댄 상태로 바닥에 엎드립니다.",
+        "팔꿈치와 어깨를 동일선상에 놓은 상태에서, 복부와 엉덩이에 힘을 주며 몸을 밀어 올립니다.",
+        "등을 평평하게 만든 상태에서 팔꿈치를 발방향으로 밀어준다는 느낌으로 복근에 더 큰 자극을 부과해요."
+      ]
     }
   ],
   [
     "케이블 사이드 벤드",
     {
       "page": "https://burnfit.io/라이브러리/케이블-사이드-벤드/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_SIDE_BEND.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_SIDE_BEND.gif",
+      "steps": [
+        "양발을 어깨 폭만큼 벌린 상태에서, 한쪽 손으로 케이블을 잡아요.",
+        "숨을 들이마시면서, 케이블을 잡고있는 손의 방향으로 허리를 속도를 조절해 구부려 줘요.",
+        "복근의 긴장감을 유지하면서 허리를 펴요."
+      ]
     }
   ],
   [
     "디클라인 크런치",
     {
       "page": "https://burnfit.io/라이브러리/디클라인-크런치/",
-      "gif": "https://burnfit.io/wp-content/uploads/디클라인-크런치.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/디클라인-크런치.gif",
+      "steps": [
+        "기울어진 벤치에 누워 발목을 고정한 상태에서, 양손은 가슴 앞이나 머리 뒤로 올려 고정해요.",
+        "등 전체가 아닌 상체 윗부분만 서서히 들어올려, 복근의 윗 부분의 수축감을 느낍니다.",
+        "윗 복근의 긴장감을 느끼면서 속도를 조절해 내려옵니다."
+      ]
     }
   ],
   [
     "중량 디클라인 크런치",
     {
       "page": "https://burnfit.io/라이브러리/중량-디클라인-크런치/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_DEC_CRUNCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_DEC_CRUNCH.gif",
+      "steps": [
+        "기울어진 벤치에 누워 발목을 고정한 상태에서, 양손으로 중량을 고정해요.",
+        "등 전체가 아닌 상체 윗부분만 서서히 들어올려, 복근의 윗 부분의 수축감을 느낍니다.",
+        "윗 복근의 긴장감을 느끼면서 속도를 조절해 내려옵니다."
+      ]
     }
   ],
   [
     "디클라인 리버스 크런치",
     {
       "page": "https://burnfit.io/라이브러리/디클라인-리버스-크런치/",
-      "gif": "https://burnfit.io/wp-content/uploads/DEC_REV_CRUNCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DEC_REV_CRUNCH.gif",
+      "steps": [
+        "기울어진 벤치에 누운 상태에서, 신체가 움직이지 않도록 양손으로 벤치를 잡아요.",
+        "복부의 힘으로 무릎이 가슴쪽으로 올라가도록 엉덩이를 밀어 올립니다.",
+        "최고점에서 하복부의 자극을 느끼며 속도를 조절해 시작자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "디클라인 싯업",
     {
       "page": "https://burnfit.io/라이브러리/디클라인-싯업/",
-      "gif": "https://burnfit.io/wp-content/uploads/DEC_SIT_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DEC_SIT_UP.gif",
+      "steps": [
+        "기울어진 벤치에 누워 발목을 고정한 상태에서, 양손은 가슴 앞이나 머리 뒤로 올려 고정해요.",
+        "복부의 근육을 이용하여 상체를 들어 올려요.",
+        "복근에 힘을 유지하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "중량 디클라인 싯업",
     {
       "page": "https://burnfit.io/라이브러리/중량-디클라인-싯업/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_DEC_SIT_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_DEC_SIT_UP.gif",
+      "steps": [
+        "기울어진 벤치에 누워 발목을 고정한 상태에서, 양손으로 중량을 고정해요.",
+        "복부의 근육을 이용하여 상체를 들어 올려요.",
+        "복근에 힘을 유지하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "사이드 크런치",
     {
       "page": "https://burnfit.io/라이브러리/사이드-크런치/",
-      "gif": "https://burnfit.io/wp-content/uploads/SIDE_CRUNCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SIDE_CRUNCH.gif",
+      "steps": [
+        "무릎을 굽힌 상태에서 바닥에 옆으로 누워, 양손을 머리에 자연스럽게 올려둡니다.",
+        "복부의 근육을 이용하여 상체를 바닥과 수직 방향으로 들어 올려요.",
+        "복근에 힘을 유지하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케이블 트위스트",
     {
       "page": "https://burnfit.io/라이브러리/케이블-트위스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_TWIST.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_TWIST.gif",
+      "steps": [
+        "케이블 머신의 높이를 어깨 높이로 맞춘 상태로 케이블 옆에 나란히 서요.",
+        "팔꿈치를 곧게 편 상태로 케이블 손잡이를 양손으로 잡고, 복근의 힘을 이용하여 상반신을 트위스트해요.",
+        "복근의 자극을 느끼면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "업도미널 힙 쓰러스트",
     {
       "page": "https://burnfit.io/라이브러리/업도미널-힙-쓰러스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/업도미널-힙-쓰러스트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/업도미널-힙-쓰러스트.gif",
+      "steps": [
+        "벤치나 바닥에 등을 대고 누워요.",
+        "상체가 움직이지 않도록 양팔로 고정한 상태에서 허리가 뜨지 않게 복압으로 눌러줘요.",
+        "양다리를 들어 바닥과 수직이 되도록 들어 올려요.",
+        "아랫배에 자극을 느끼면서 골반을 위쪽으로 들어 올려요.",
+        "1~2초간 자세를 유지한 후 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "중량 업도미널 힙 쓰러스트",
     {
       "page": "https://burnfit.io/라이브러리/중량-업도미널-힙-쓰러스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/중량-업도미널-힙-쓰러스트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/중량-업도미널-힙-쓰러스트.gif",
+      "steps": [
+        "벤치나 바닥에 등을 대고 누워요.",
+        "상체가 움직이지 않도록 양팔로 고정한 상태에서 허리가 뜨지 않게 복압으로 눌러줘요.",
+        "양다리로 덤벨을 고정한 상태에서, 바닥과 수직이 되도록 양다리를 들어 올려요.",
+        "아랫배에 자극을 느끼면서 골반을 위쪽으로 들어 올려요.",
+        "1~2초간 자세를 유지한 후 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "토르소 로테이션 머신",
     {
       "page": "https://burnfit.io/라이브러리/토르소-로테이션-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/토르소-로테이션-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/토르소-로테이션-머신.gif",
+      "steps": [
+        "의자에 앉아 허리를 곧게 세우고 복부에 힘을 줘요.",
+        "양손으로 손잡이를 잡은 상태에서 복부와 옆구리 근육을 사용해 상체를 속도를 조절해 한쪽 방향으로 회전시킵니다.",
+        "복부의 힘을 사용해 속도를 조절해 상체를 원래 위치로 회전해요."
+      ]
     }
   ],
   [
     "시티드 니업",
     {
       "page": "https://burnfit.io/라이브러리/시티드-니업/",
-      "gif": "https://burnfit.io/wp-content/uploads/시티드-니업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/시티드-니업.gif",
+      "steps": [
+        "벤치에 앉은 상태에서 양손을 엉덩이 옆에 놓고 균형을 잡아요.",
+        "무릎을 약간 구부린 상태에서, 복부의 힘을 사용해 양 무릎을 가슴 쪽으로 끌어올립니다.",
+        "속도를 조절해 다리를 시작 위치로 내리며 복부의 긴장을 유지해요."
+      ]
     }
   ],
   [
     "복근 코스터 머신",
     {
       "page": "https://burnfit.io/라이브러리/복근-코스터-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/복근-코스터-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/복근-코스터-머신.gif",
+      "steps": [
+        "패드 위에 무릎을 올리고 양손으로 손잡이를 잡아 상체를 고정해요.",
+        "복부 근육을 사용해 무릎을 가슴 방향으로 끌어올립니다.",
+        "무릎이 최대 높이에 도달했을 때 1~2초간 자세를 유지하며 복근의 긴장을 느낍니다.",
+        "복부의 긴장을 유지하며 속도를 조절해 무릎 패드를 시작위치로 되돌려요."
+      ]
     }
   ],
   [
     "플랭크 트위스트",
     {
       "page": "https://burnfit.io/라이브러리/플랭크-트위스트/",
-      "gif": "https://burnfit.io/wp-content/uploads/플랭크-트위스트.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/플랭크-트위스트.gif",
+      "steps": [
+        "팔꿈치를 바닥에 대고 플랭크 자세를 유지해요.",
+        "엉덩이를 좌우로 회전시키면서 한쪽 골반이 바닥에 가까워지도록 해요.",
+        "무릎이 바닥에 닿지 않도록 유지하면서 반대 방향으로 엉덩이를 회전해요.",
+        "동작을 속도를 조절해 반복하며, 코어와 옆구리에 긴장을 유지해요."
+      ]
     }
   ],
   [
-    "데드 버그",
+    "데드버그",
     {
       "page": "https://burnfit.io/라이브러리/데드버그/",
-      "gif": "https://burnfit.io/wp-content/uploads/데드버그.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/데드버그.gif",
+      "steps": [
+        "바닥에 누워 무릎을 90도로 굽히고 다리를 들어 올립니다.",
+        "복부에 힘을 주고 허리가 바닥에서 뜨지 않도록 고정한 상태를 유지해요.",
+        "반대쪽 팔과 다리를 동시에 속도를 조절해 바닥 쪽으로 뻗습니다.",
+        "뻗은 팔과 다리를 원위치로 속도를 조절해 되돌리고, 반대쪽도 같은 방식으로 반복해요."
+      ]
     }
   ],
   [
     "버드독",
     {
       "page": "https://burnfit.io/라이브러리/버드독/",
-      "gif": "https://burnfit.io/wp-content/uploads/버드독.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/버드독.gif",
+      "steps": [
+        "양손과 무릎을 바닥에 대고 네발 자세를 취해요.",
+        "복부에 힘을 주고 척추를 곧게 편 상태에서 한쪽 팔과 반대쪽 다리를 동시에 곧게 뻗어, 몸통과 일직선이 되도록 만듭니다.",
+        "뻗은 팔과 다리를 속도를 조절해 원위치로 되돌려요.",
+        "반대쪽 팔과 다리도 같은 방식으로 반복하며, 좌우 번갈아 가며 수행해요."
+      ]
     }
   ],
   [
     "캡틴스 체어 니 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/캡틴스-체어-니-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/캡틴스-체어-니-레이즈.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/캡틴스-체어-니-레이즈.gif",
+      "steps": [
+        "캡틴스 체어 머신에 올라가 팔꿈치와 전완을 패드에 올려 지지하고, 등과 몸통을 곧게 세운 상태로 손잡이를 잡아 자세를 안정시킵니다.",
+        "다리는 자연스럽게 아래로 늘어뜨리고, 코어에 힘을 줘요.",
+        "숨을 내쉬며 복근의 힘으로 무릎을 굽혀 두 무릎을 가슴 쪽으로 들어 올려요.",
+        "무릎이 배꼽 높이 또는 그 이상까지 올라가 복근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 복근이 이완되는 것을 느끼면서 속도를 조절해 다리를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "캣 카우 스트레치",
     {
       "page": "https://burnfit.io/라이브러리/캣-카우-스트레치/",
-      "gif": "https://burnfit.io/wp-content/uploads/캣-카우-스트레치.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/캣-카우-스트레치.gif",
+      "steps": [
+        "바닥에 네발기기 자세를 취해요.",
+        "숨을 들이마시며, 가슴을 열고 배를 바닥쪽으로 낮추면서 척추를 부드럽게 신전해요.",
+        "숨을 내쉬며, 배꼽을 등 쪽으로 끌어다익고 턱을 당기며 등을 둥글게 말아 척추를 굴곡해요.",
+        "무릎이 배꼽 높이 또는 그 이상까지 올라가 복근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 복근이 이완되는 것을 느끼면서 속도를 조절해 다리를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "굿모닝 엑서사이즈",
     {
       "page": "https://burnfit.io/라이브러리/굿모닝-엑서사이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/GOOD_MORN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/GOOD_MORN.gif",
+      "steps": [
+        "발은 어깨 폭 정도로 벌리고, 가슴을 세우고 허리에 긴장감을 유지해요.",
+        "골반을 뒤로 빼고 인사하듯 상체를 숙여줘요.",
+        "허리에 긴장감을 유지하면서 일어납니다."
+      ]
     }
   ],
   [
     "풀업",
     {
       "page": "https://burnfit.io/라이브러리/풀업/",
-      "gif": "https://burnfit.io/wp-content/uploads/PULL_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PULL_UP.gif",
+      "steps": [
+        "팔을 어깨 폭만큼 벌리고, 손바닥이 앞을 바라본 상태로 바를 잡고매달립니다.",
+        "가슴을 편 상태로 바를 구부려 준다는 느낌으로 팔을 당겨 올라갑니다.",
+        "상체가 흔들리지 않도록 자세를 유지하면서 내려옵니다."
+      ]
     }
   ],
   [
     "중량 풀업",
     {
       "page": "https://burnfit.io/라이브러리/중량-풀업/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_PULL_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_PULL_UP.gif",
+      "steps": [
+        "중량 도구를 몸에 장착하고, 팔을 어깨 폭보다 살짝 넓게 벌린 상태로 바에 매달립니다.",
+        "가슴을 편 상태로 바를 구부려 준다는 느낌으로 팔을 당겨 올라갑니다.",
+        "등에 자극을 느끼면서 내려와 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "친업",
     {
       "page": "https://burnfit.io/라이브러리/친업/",
-      "gif": "https://burnfit.io/wp-content/uploads/CHIN_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CHIN_UP.gif",
+      "steps": [
+        "팔을 어깨 폭만큼 벌리고, 손등이 앞을 바라본 상태로 바를 잡고 매달립니다.",
+        "가슴을 핀 상태로 팔을 당겨 몸을 끌어올립니다.",
+        "상체가 흔들리지 않도록 자세를 유지하면서 내려옵니다."
+      ]
     }
   ],
   [
     "중량 친업",
     {
       "page": "https://burnfit.io/라이브러리/중량-친업/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_CHIN_UP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_CHIN_UP.gif",
+      "steps": [
+        "중량 도구를 몸에 장착하고, 손등이 앞을 바라본 상태로 바를 잡고 매달립니다.",
+        "가슴을 핀 상태로 팔을 당겨 몸을 끌어올립니다.",
+        "상체가 흔들리지 않도록 자세를 유지하면서 내려옵니다."
+      ]
     }
   ],
   [
     "바벨 로우",
     {
       "page": "https://burnfit.io/라이브러리/바벨-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/바벨-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/바벨-로우.gif",
+      "steps": [
+        "골반너비로 다리를 벌리고, 상체를 숙여 손등이 위로 향하게끔 바벨을 잡아요.",
+        "허리가 구부러지지 않게 중립 상태를 유지한 채로, 무릎 높이로 바벨을 들어 올려요.",
+        "팔꿈치를 몸쪽으로 붙인다는 생각으로 팔을 굽혀 바벨을 복부까지 끌어당겨 줘요."
+      ]
     }
   ],
   [
     "펜들레이 로우",
     {
       "page": "https://burnfit.io/라이브러리/펜들레이-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/펜들레이-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/펜들레이-로우.gif",
+      "steps": [
+        "어깨 폭로 양발을 벌리고 일반적인 데드리프트보다 조금 넓게 바벨을 잡아요.",
+        "무릎을 살짝 굽히고 등 하부 기립근 쪽을 평평하게 유지하면서, 시선은 전방을 향해요.",
+        "2번의 자세를 유지하면서 바벨을 복부쪽으로 힘껏 잡아 당깁니다.",
+        "바벨을 자연스럽게 바닥으로 내립니다/"
+      ]
     }
   ],
   [
     "바벨 인클라인 로우",
     {
       "page": "https://burnfit.io/라이브러리/바벨-인클라인-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/INC_BB_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INC_BB_ROW.gif",
+      "steps": [
+        "경사진 벤치에 몸을 기대고, 어깨 폭보다 조금 넓게 바벨을 잡아요.",
+        "복부와 가슴을 벤치에 밀착시킨 상태로, 바벨을 배꼽방향으로 힘차게 당겨 올립니다.",
+        "속도를 조절해 팔을 피면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "덤벨 인클라인 로우",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-인클라인-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/INC_DB_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INC_DB_ROW.gif",
+      "steps": [
+        "양손에 덤벨을 잡고 경사진 벤치에 몸을 기대어 복부와 가슴을 벤치에 밀착하여 엎드립니다.",
+        "팔꿈치를 옆구리에 붙인다는 느낌으로 덤벨을 복부 아래쪽으로 힘차게 당겨 올립니다.",
+        "속도를 조절해 팔을 피면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "인버티드 로우",
     {
       "page": "https://burnfit.io/라이브러리/인버티드-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/INVT_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INVT_ROW.gif",
+      "steps": [
+        "고정된 바를 어깨 폭보다 살짝 넓게 잡고 상체를 곧게 편 상태로 메달립니다.",
+        "엉덩이가 쳐지지 않게 등을 평평하게 유지한 상태로, 바에 가슴이 닿을정도로 힘껏 당깁니다.",
+        "올라온 동선의 역방향으로 속도를 조절해 몸을 내려 1번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "덤벨 로우",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_LOW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_LOW.gif",
+      "steps": [
+        "다리를 골반너비로 벌리고, 상체를 숙여 손등이 위로 향하게끔 덤벨을 잡아요.",
+        "허리가 구부러지지 않게 중립 상태를 유지한 채로, 무릎 높이로 덤벨을 들어올린다.",
+        "팔꿈치를 몸쪽으로 붙인다는 생각으로 팔을 굽혀 덤벨을 복부까지 끌어당겨 줘요.",
+        "등의 자극을 느끼며 덤벨을 내려 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "원암 덤벨 로우",
     {
       "page": "https://burnfit.io/라이브러리/원암-덤벨-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/OA_DB_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/OA_DB_ROW.gif",
+      "steps": [
+        "등을 곧게 피고 상체를 기울인 상태로, 운동하지 않는 손과 무릎을 벤치에 고정시킵니다.",
+        "덤벨을 잡은 손을 아래로 펴서, 등 근육을 이완 시켜줘요.",
+        "덤벨을 옆구리까지 힘차게 들어 올려요.",
+        "등의 자극을 느끼며 덤벨을 내려 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "바벨 풀오버",
     {
       "page": "https://burnfit.io/라이브러리/바벨-풀오버/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_PULLOVER.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_PULLOVER.gif",
+      "steps": [
+        "바벨을 어깨 폭로 잡고 벤치에 가슴을 펴고 누운 상태에서, 바벨을 수직으로 들어 올려요.",
+        "팔꿈치가 하늘을 향하도록 살짝 구부린 상태에서, 바벨을 머리 뒤로 큰 호를 그리며 내려요.",
+        "팔꿈치를 고정한 상태에서, 내려갔던 동선을 따라 바벨을 밀어올립니다."
+      ]
     }
   ],
   [
     "시티드 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/시티드-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/MC_LOW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/MC_LOW.gif",
+      "steps": [
+        "기구에 앉아 상체를 고정한 상태에서, 손잡이를 양손으로 잡아요.",
+        "등이 굽지 않고 곧게 편 상태를 유지하며 팔꿈치를 몸에 붙여 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "시티드 케이블 로우",
     {
       "page": "https://burnfit.io/라이브러리/시티드-케이블-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/SEATED_CABLE_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SEATED_CABLE_ROW.gif",
+      "steps": [
+        "케이블을 마주보고 앉아 발판에 발을 올린후 무릎을 살짝 굽혀요.",
+        "허리를 펴고 가슴을 내민 상태에서 케이블을 잡아 당깁니다.",
+        "중량을 등으로 버티면서 속도를 조절해 팔을 펴서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "랫 풀다운",
+    "랫풀다운",
     {
       "page": "https://burnfit.io/라이브러리/랫풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/LAT_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LAT_PULL_DOWN.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 바를 어깨 폭보다 넓게 잡고 의자에 앉습니다.",
+        "허벅지를 지지대에 고정하고 가슴을 편상태로, 바가 쇄골에 닿을정도로 바를 당겨줍니다.의 힘으로 바를 당겨줍니다.)",
+        "광배근이 이완하는 것을 느끼면서 속도를 조절해 팔을 폅니다."
+      ]
     }
   ],
   [
     "하이퍼 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/하이퍼-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/하이퍼-익스텐션.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/하이퍼-익스텐션.gif",
+      "steps": [
+        "얼굴이 바닥을 향한 상태로, 발뒤꿈치와 허벅지를 머신에 고정시킵니다.",
+        "양손을 가슴 앞이나 머리 뒤쪽에 고정한 상태로, 등 하부 근육이 이완되는걸 느끼면서 상체를 숙여줘요.",
+        "등 하부의 자극을 느끼면서, 상체를 들어 올려요."
+      ]
     }
   ],
   [
     "중량 하이퍼 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/중량-하이퍼-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_HPET.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_HPET.gif",
+      "steps": [
+        "얼굴이 바닥을 향한 상태로, 발뒤꿈치와 허벅지를 머신에 고정시킵니다.",
+        "양손으로 중량판을 고정한 상태로, 등 하부 근육이 이완되는걸 느끼면서 상체를 숙여줘요.",
+        "등 하부의 자극을 느끼면서, 상체를 들어 올려요."
+      ]
     }
   ],
   [
     "백 익스텐션",
     {
       "page": "https://burnfit.io/라이브러리/백-익스텐션/",
-      "gif": "https://burnfit.io/wp-content/uploads/BACK_ET.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BACK_ET.gif",
+      "steps": [
+        "양손과 양발을 적당히 벌린 상태로 바닥에 엎드립니다.",
+        "턱을 당겨 척추 라인을 곧게 편 상태로, 등 하부에 수축을 느끼면서 팔꿈치와 무릎을 들어 올려요.",
+        "등 하부에 긴장감을 느끼면서 속도를 조절해 팔, 다리를 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "티바 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/티바-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/T_BAR_ROW_MAC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/T_BAR_ROW_MAC.gif",
+      "steps": [
+        "골반너비로 다리를 벌린 상태로 로우 머신을 몸의 중앙에 위치시킵니다.",
+        "허리가 구부러지지 않게 중립 상태를 유지한 채로, 머신을 양손으로 잡아요.",
+        "팔꿈치를 몸쪽으로 붙인다는 생각으로 팔을 굽혀 머신을 복부까지 끌어당겨 줘요.",
+        "등의 자극을 느끼며 머신을 내려 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "맥그립 랫풀다운",
     {
       "page": "https://burnfit.io/라이브러리/맥그립-랫풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/MAG_LAT_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/MAG_LAT_PULL_DOWN.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 맥그립을 양손으로 잡고 의자에 앉습니다.",
+        "허벅지를 지지대에 고정하고 가슴을 편상태로, 맥그립이 쇄골에 닿을정도로 당겨줘요.",
+        "광배근이 이완하는 것을 느끼면서 속도를 조절해 팔을 폅니다."
+      ]
     }
   ],
   [
     "패러럴그립 랫풀다운",
     {
       "page": "https://burnfit.io/라이브러리/패러럴그립-랫풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/PAR_LAT_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PAR_LAT_PULL_DOWN.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 패러럴그립을 양손으로 좁게 잡고 의자에 앉습니다.",
+        "허벅지를 지지대에 고정하고 가슴을 편상태로, 패러럴그립이 쇄골에 닿을정도로 당겨줘요.",
+        "광배근이 이완하는 것을 느끼면서 속도를 조절해 팔을 폅니다."
+      ]
     }
   ],
   [
     "언더그립 랫풀다운",
     {
       "page": "https://burnfit.io/라이브러리/언더그립-랫풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_LAT_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_LAT_PULL_DOWN.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 바를 어깨 폭만큼 벌려 언더그립으로 잡고 의자에 앉습니다.",
+        "허벅지를 지지대에 고정하고 가슴을 편상태로, 바가 쇄골에 닿을정도로 당겨줘요.",
+        "광배근이 이완하는 것을 느끼면서 속도를 조절해 팔을 폅니다."
+      ]
     }
   ],
   [
-    "스트레이트 암 풀다운",
+    "케이블 암 풀다운",
     {
       "page": "https://burnfit.io/라이브러리/케이블-암-풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_ARM_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_ARM_PULL_DOWN.gif",
+      "steps": [
+        "높은 풀리에 연결한 손잡이를 잡고 기구 쪽을 향해 서요.",
+        "팔꿈치를 살짝 굽힌 각도를 유지하며 손잡이를 허벅지 쪽으로 당겨요.",
+        "몸통을 고정한 채 손잡이를 시작 높이로 되돌려요."
+      ]
     }
   ],
   [
     "정지 바벨 로우",
     {
       "page": "https://burnfit.io/라이브러리/정지-바벨-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_BB_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/PAUSE_BB_ROW.gif",
+      "steps": [
+        "골반너비로 다리를 벌리고, 상체를 숙여 손등이 위로 향하게끔 바벨을 잡아요.",
+        "허리가 구부러지지 않게 중립 상태를 유지한 채로, 무릎 높이로 바벨을 들어 올려요.",
+        "팔꿈치를 몸쪽으로 붙인다는 생각으로 팔을 굽혀 바벨을 복부까지 끌어당겨 줘요.",
+        "바벨을 최대 높이로 당긴 자세를 2~3초간 유지해요.",
+        "등의 자극을 느끼며 바벨을 내려 2번 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "어시스트 풀업 머신",
     {
       "page": "https://burnfit.io/라이브러리/어시스트-풀업-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/ASS_PULLUP_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ASS_PULLUP_MC.gif",
+      "steps": [
+        "보조 받고 싶은 중량을 설정해요.",
+        "팔을 어깨 폭보다 넓게 벌리고 바를 잡은 상태에서, 받침대에 양발을 올려 체중을 실어줘요.",
+        "가슴을 편 상태로 바를 구부려 준다는 느낌으로 팔을 당겨 올라갑니다.",
+        "상체가 흔들리지 않도록 자세를 유지하면서 내려옵니다."
+      ]
     }
   ],
   [
     "플로어 시티드 케이블 로우",
     {
       "page": "https://burnfit.io/라이브러리/플로어-시티드-케이블-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/FLOOR_SEATED_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/FLOOR_SEATED_ROW.gif",
+      "steps": [
+        "상체를 곧게 펴고 바닥에 앉아 손잡이를 양손으로 잡아요.",
+        "허리를 펴고 가슴을 내민 상태에서, 등 중앙부를 접는다는 느낌으로 팔꿈치를 몸에 붙여 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "언더그립 바벨 로우",
     {
       "page": "https://burnfit.io/라이브러리/언더그립-바벨-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/REV_BB_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/REV_BB_ROW.gif",
+      "steps": [
+        "골반너비로 다리를 벌리고, 상체를 숙여 손바닥이 위로 향하게끔 바벨을 잡아요.",
+        "허리가 구부러지지 않게 중립 상태를 유지한 채로, 무릎 높이로 바벨을 들어 올려요.",
+        "팔꿈치를 몸쪽으로 붙인다는 생각으로 팔을 굽혀 바벨을 복부까지 끌어당겨 줘요.",
+        "등의 자극을 느끼며 바벨을 내려 2번 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "라잉 바벨 로우",
     {
       "page": "https://burnfit.io/라이브러리/라잉-바벨-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/LYING_BB_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LYING_BB_ROW.gif",
+      "steps": [
+        "벤치에 엎드린 상태로, 어깨 폭보다 조금 넓게 바벨을 잡아요.",
+        "복부와 가슴을 벤치에 밀착시킨 상태로, 바벨을 배꼽방향으로 힘차게 당겨 올립니다.",
+        "속도를 조절해 팔을 피면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "비하인드 넥 풀다운",
     {
       "page": "https://burnfit.io/라이브러리/비하인드-넥-풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/BHD_NECK_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BHD_NECK_PULL_DOWN.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 바를 어깨 폭보다 넓게 잡고 의자에 앉습니다.",
+        "허벅지를 지지대에 고정하고 가슴을 편상태로, 바를 머리뒤로 당겨 목에 닿을정도로 바를 당겨줍니다.의 힘으로 바를 당겨줍니다.)",
+        "광배근이 이완하는 것을 느끼면서 속도를 조절해 팔을 폅니다."
+      ]
     }
   ],
   [
     "원암 케이블 풀다운",
     {
       "page": "https://burnfit.io/라이브러리/원암-케이블-풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/CABLE_OA_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CABLE_OA_PULL_DOWN.gif",
+      "steps": [
+        "양 발을 어깨 폭만큼 벌린 상태로 케이블을 바라보고 서요.",
+        "한 손으로 케이블을 잡고 광배근의 자극을 느끼며 팔을 아래로 당깁니다.",
+        "가슴을 활짝 편 상태로 광배에 자극을 느끼면서 속도를 조절해 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "원암 레터럴 와이드 풀다운",
     {
       "page": "https://burnfit.io/라이브러리/원암-레터럴-와이드-풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/OA_LAT_WIDE_PULL_DOWN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/OA_LAT_WIDE_PULL_DOWN.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 손잡이를 어깨 폭보다 넓게 잡고 의자에 앉습니다.",
+        "허벅지를 지지대에 고정하고 가슴을 편상태로, 손잡이를 잡은 한손의 팔꿈치를 옆구리 방향으로 힘차게 내립니다.",
+        "광배근이 이완하는 것을 느끼면서 속도를 조절해 팔을 폅니다."
+      ]
     }
   ],
   [
     "로우 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/로우-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/LOW_ROW_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/LOW_ROW_MC.gif",
+      "steps": [
+        "기구에 앉아 상체를 고정한 상태에서, 손잡이를 양손으로 잡아요.",
+        "등 근육의 자극을 느끼면서 팔꿈치를 몸에 붙여 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "원암 로우 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/원암-로우-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/OA_LOW_ROW_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/OA_LOW_ROW_MC.gif",
+      "steps": [
+        "기구에 앉아 상체를 고정한 상태에서, 손잡이를 한손으로 잡아요.",
+        "등 근육의 자극을 느끼면서 팔꿈치를 몸에 붙여 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "하이 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/하이-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/HIGH_ROW_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HIGH_ROW_MC.gif",
+      "steps": [
+        "기구에 앉아 상체를 고정한 상태에서, 손잡이를 양손으로 잡아요.",
+        "등 근육의 자극을 느끼면서 팔꿈치를 몸에 붙여 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "언더그립 하이 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/언더그립-하이-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/UNDER_HIGH_ROW_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/UNDER_HIGH_ROW_MC.gif",
+      "steps": [
+        "기구에 앉아 상체를 고정한 상태에서, 손잡이를 언더그립으로 잡아요.",
+        "등 근육의 자극을 느끼면서 팔꿈치를 몸에 붙여 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "원암 하이 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/원암-하이-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/OA_HIGH_ROW_MC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/OA_HIGH_ROW_MC.gif",
+      "steps": [
+        "기구에 앉아 상체를 고정한 상태에서, 손잡이를 한손으로 잡아요.",
+        "등 근육의 자극을 느끼면서 팔꿈치를 몸에 붙여 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "원암 시티드 케이블 로우",
     {
       "page": "https://burnfit.io/라이브러리/원암-시티드-케이블-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/OA_CABLE_SEATED_ROW.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/OA_CABLE_SEATED_ROW.gif",
+      "steps": [
+        "케이블을 마주보고 앉아 발판에 발을 올린후 무릎을 살짝 굽혀요.",
+        "허리를 펴고 가슴을 내민 상태에서 케이블을 한손으로 잡아 당깁니다.",
+        "",
+        "중량을 등으로 버티면서 속도를 조절해 팔을 펴서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "랙풀",
     {
       "page": "https://burnfit.io/라이브러리/랙풀/",
-      "gif": "https://burnfit.io/wp-content/uploads/랙풀.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/랙풀.gif",
+      "steps": [
+        "파워랙에서 바벨을 무릎 높이 또는 조금 아래에 위치하도록 설정해요.",
+        "발을 어깨 폭로 벌리고, 양손으로 바벨을 어깨 폭로 잡아요.",
+        "가슴을 펴고 허리를 곧게 세워 몸을 안정화한 상태에서, 다리와 엉덩이의 힘으로 바벨을 들어 올리며 상체를 세웁니다.",
+        "1~2초간 자세를 유지하며 등과 하체 근육에 긴장을 줘요.",
+        "허리를 곧게 유지한 채 바벨을 속도를 조절해 무릎 높이로 내립니다."
+      ]
     }
   ],
   [
     "스미스머신 랙풀",
     {
       "page": "https://burnfit.io/라이브러리/스미스머신-랙풀/",
-      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-랙풀.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스미스머신-랙풀.gif",
+      "steps": [
+        "스미스머신에서 바벨을 무릎 높이 또는 조금 아래에 위치하도록 설정해요.",
+        "발을 어깨 폭로 벌리고, 양손으로 바벨을 어깨 폭로 잡아요.",
+        "가슴을 펴고 허리를 곧게 세워 몸을 안정화한 상태에서, 다리와 엉덩이의 힘으로 바벨을 들어 올리며 상체를 세웁니다.",
+        "1~2초간 자세를 유지하며 등과 하체 근육에 긴장을 줘요.",
+        "허리를 곧게 유지한 채 바벨을 속도를 조절해 무릎 높이로 내립니다."
+      ]
     }
   ],
   [
     "미드 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/미드-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/미드-로우-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/미드-로우-머신.gif",
+      "steps": [
+        "가슴을 패드에 대고 시트에 앉아 양손으로 손잡이를 잡아요.",
+        "허리를 곧게 세운 상태에서 복부에 힘을 주며 손잡이를 몸 쪽으로 당깁니다.",
+        "속도를 조절해 팔꿈치를 펴며 손잡이를 원래 위치로 되돌려요."
+      ]
     }
   ],
   [
     "백 익스텐션 머신",
     {
       "page": "https://burnfit.io/라이브러리/백-익스텐션-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/백-익스텐션-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/백-익스텐션-머신.gif",
+      "steps": [
+        "의자에 앉아 발목을 발걸이에 단단히 고정해요.",
+        "복부와 허리 근육을 사용해 상체를 속도를 조절해 들어 올립니다.",
+        "속도를 조절해 상체를 내리며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "패러럴그립 풀업",
     {
       "page": "https://burnfit.io/라이브러리/패러럴그립-풀업/",
-      "gif": "https://burnfit.io/wp-content/uploads/패러럴그립-풀업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/패러럴그립-풀업.gif",
+      "steps": [
+        "손바닥이 서로 마주보도록 양손으로 풀업 바를 잡아요.",
+        "광배근과 이두근의 힘을 사용해 상체를 들어 올립니다.",
+        "팔꿈치를 펴면서 몸을 시작 자세로 되돌려요."
+      ]
     }
   ],
   [
     "원암 풀업",
     {
       "page": "https://burnfit.io/라이브러리/원암-풀업/",
-      "gif": "https://burnfit.io/wp-content/uploads/원암-풀업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/원암-풀업.gif",
+      "steps": [
+        "한 손으로 바를 어깨 폭보다 약간 좁게 잡아요.",
+        "바를 잡은 한 손의 힘으로 상체를 들어 올립니다.",
+        "속도를 조절해 팔꿈치를 펴면서 몸을 시작 위치로 되돌려요."
+      ]
     }
   ],
   [
     "원암 케이블 랫풀다운",
     {
       "page": "https://burnfit.io/라이브러리/원암-케이블-랫풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/원암-케이블-랫풀다운.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/원암-케이블-랫풀다운.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 핸들을 한 손으로 잡고 의자에 앉습니다.",
+        "견갑골을 모아준다는 느낌으로 케이블을 아래로 당깁니다.",
+        "속도를 조절해 팔을 펴고 케이블을 시작 위치로 되돌려요."
+      ]
     }
   ],
   [
     "스탠딩 케이블 로우",
     {
       "page": "https://burnfit.io/라이브러리/스탠딩-케이블-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/스탠딩-케이블-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스탠딩-케이블-로우.gif",
+      "steps": [
+        "발을 어깨 폭 정도로 벌리고 케이블을 마주보고 서요.",
+        "허리를 펴고 가슴을 내민 상태에서 케이블을 잡아 당깁니다.",
+        "중량을 등으로 버티면서 속도를 조절해 팔을 펴서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "트랩바 로우",
     {
       "page": "https://burnfit.io/라이브러리/트랩바-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/트랩바-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/트랩바-로우.gif",
+      "steps": [
+        "트랩바 안에서 발을 어깨 폭 정도로 서서, 양손으로 트랩바의 손잡이를 잡아요.",
+        "트랩바를 복부 쪽으로 당깁니다.",
+        "팔을 속도를 조절해 펴면서 트랩바를 시작 위치로 되돌려요."
+      ]
     }
   ],
   [
     "DY 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/dy-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/DY-로우-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DY-로우-머신.gif",
+      "steps": [
+        "기구에 앉아 가슴을 패드에 밀착한 상태에서, 손잡이를 양손으로 잡아요.",
+        "손잡이를 몸쪽으로 당깁니다.",
+        "등의 긴장감을 유지하며 속도를 조절해 팔을 펴요."
+      ]
     }
   ],
   [
     "원암 케틀벨 로우",
     {
       "page": "https://burnfit.io/라이브러리/원암-케틀벨-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/원암-케틀벨-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/원암-케틀벨-로우.gif",
+      "steps": [
+        "등을 곧게 피고 상체를 기울인 상태로, 운동하지 않는 손과 무릎을 벤치에 고정시킵니다.",
+        "케틀벨을 잡은 손을 아래로 펴서, 등 근육을 이완 시켜줘요.",
+        "케틀벨을 옆구리까지 힘차게 들어 올려요.",
+        "등의 자극을 느끼며 케틀벨을 내려 2번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "하이풀리 케이블 로우",
     {
       "page": "https://burnfit.io/라이브러리/하이풀리-케이블-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/하이풀리-케이블-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/하이풀리-케이블-로우.gif",
+      "steps": [
+        "상단 풀리에 케이블을 연결한 후, 발을 어깨 폭로 벌리고 케이블을 마주보며 서요.",
+        "허리를 곧게 펴고 가슴을 내민 상태에서 양손으로 케이블 손잡이를 잡아요.",
+        "케이블을 위에서 아래 대각선 방향으로 당기며, 등 중앙부를 접는다는 느낌으로 팔꿈치를 척추 쪽으로 모읍니다.",
+        "등으로 버틴다는 느낌으로 속도를 조절해 팔을 펴면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
-    "클로즈 그립 랫 풀다운",
+    "클로즈그립 랫풀다운",
     {
       "page": "https://burnfit.io/라이브러리/클로즈그립-랫풀다운/",
-      "gif": "https://burnfit.io/wp-content/uploads/클로즈그립-랫풀다운.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/클로즈그립-랫풀다운.gif",
+      "steps": [
+        "허벅지 지지대의 높이를 알맞게 조절한 후, 바를 어깨 폭보다 좁게 잡고 의자에 앉습니다.",
+        "허벅지를 지지대에 고정하고, 가슴을 편 상태에서 바가 가슴 윗부분에 닿을 정도로 속도를 조절해 당겨줍니다.의 수축을 먼저 의식하며 당깁니다.)",
+        "광배근이 이완되는 것을 느끼며, 속도를 조절해 팔을 펴면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "하이풀리 원암 케이블 로우",
     {
       "page": "https://burnfit.io/라이브러리/하이풀리-원암-케이블-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/하이풀리-원암-케이블-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/하이풀리-원암-케이블-로우.gif",
+      "steps": [
+        "케이블을 상단 풀리에 연결한 후, 기구 앞에 앉아 한손으로 손잡이를 잡아요.",
+        "허리를 곧게 펴고 가슴을 내민 상태를 유지하며, 팔꿈치를 척추 방향으로 당기며 케이블을 대각선 아래 방향으로 당깁니다.",
+        "몸통이 비틀리지 않도록 고정한 상태로, 속도를 조절해 팔을 펴면서 처음 위치로 복귀해요.",
+        "정해진 횟수만큼 수행한 후, 반대 팔도 같은 방식으로 반복해요."
+      ]
     }
   ],
   [
     "로우풀리 원암 케이블 로우",
     {
       "page": "https://burnfit.io/라이브러리/로우풀리-원암-케이블-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/로우풀리-원암-케이블-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/로우풀리-원암-케이블-로우.gif",
+      "steps": [
+        "케이블을 하단 풀리에 연결하고, 기구 앞에 앉아 한 손으로 손잡이를 잡아요.",
+        "허리를 곧게 펴고 가슴을 내민 상태를 유지하며, 팔꿈치를 몸통 가까이 붙여 뒤로 당기듯이 케이블을 끌어옵니다.",
+        "몸통이 회전하거나 흔들리지 않도록 고정하고, 속도를 조절해 팔을 펴며 처음 위치로 복귀해요.",
+        "정해진 횟수만큼 수행한 후, 반대 팔도 같은 방식으로 반복해요."
+      ]
     }
   ],
   [
     "로우풀리 케이블 로프 로우",
     {
       "page": "https://burnfit.io/라이브러리/로우풀리-케이블-로프-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/로우풀리-케이블-로프-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/로우풀리-케이블-로프-로우.gif",
+      "steps": [
+        "케이블 머신의 하단 풀리에 로프를 연결한 후, 로프를 양손으로 잡고 케이블을 마주보며 선 자세로 시작해요.",
+        "발은 어깨 폭로 벌리고, 무릎은 살짝 굽힌 상태에서 허리를 곧게 펴고 가슴을 내밉니다.",
+        "팔꿈치를 몸통 가까이 유지한 채, 로프를 복부 방향으로 힘차게 당깁니다.",
+        "몸통이 흔들리지 않도록 코어에 힘을 주고, 속도를 조절해 팔을 펴며 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "체스트 서포티드 티바 로우",
     {
       "page": "https://burnfit.io/라이브러리/체스트-서포티드-티바-로우/",
-      "gif": "https://burnfit.io/wp-content/uploads/체스트-서포티드-티바-로우.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/체스트-서포티드-티바-로우.gif",
+      "steps": [
+        "머신의 패드에 가슴을 밀착시킨 상태로 경사진 벤치에 엎드려 발을 고정하고 준비 자세를 취해요.",
+        "허리를 곧게 유지한 채, 양손으로 바를 잡고 팔을 쭉 편 상태에서 시작해요.",
+        "팔꿈치를 몸 쪽으로 붙인다는 느낌으로 바를 복부 방향으로 당깁니다.",
+        "자극을 느낀 후, 바를 속도를 조절해 내리며 처음 위치로 복귀해요.",
+        "정해진 횟수만큼 부드럽고 통제된 동작으로 반복해요."
+      ]
     }
   ],
   [
     "프론트 풀다운 머신",
     {
       "page": "https://burnfit.io/라이브러리/프론트-풀다운-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/프론트-풀다운-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/프론트-풀다운-머신.gif",
+      "steps": [
+        "허벅지 지지대의 높낮이를 알맞게 조절하고, 바를 어깨 폭보다 약간 넓게 잡은 뒤 의자에 앉습니다.",
+        "허벅지를 지지대에 단단히 고정하고, 가슴을 편 상태에서 상체를 살짝만 뒤로 세운 뒤 준비해요.",
+        "숨을 내쉬며 바를 가슴 앞쪽으로 끌어내립니다.",
+        "광배근이 최대한 수축된 지점에서 다시 멈췄다가, 숨을 들이마시며 광배근이 이완되는 것을 느끼면서 속도를 조절해 팔을 펴 원위치로 돌아옵니다."
+      ]
     }
   ],
   [
     "케이블 풀오버",
     {
       "page": "https://burnfit.io/라이브러리/케이블-풀오버/",
-      "gif": "https://burnfit.io/wp-content/uploads/케이블-풀오버.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/케이블-풀오버.gif",
+      "steps": [
+        "케이블 머신의 손잡이를 가장 위 위치에 설정한 뒤, 바를 잡고 머신 앞에 서서 준비해요.",
+        "발은 어깨 폭로 벌리고, 상체를 살짝만 앞으로 기울인 상태에서 코어에 힘을 주어 자세를 고정해요.",
+        "팔을 거의 편 상태로 유지한 채, 숨을 내쉬며 광배근의 힘으로 손잡이를 허벅지 앞쪽을 향해 아래로 끌어 내립니다.",
+        "손잡이가 허벅지 앞에 도달해 광배근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 광배근이 늘어나는 것을 느끼면서 속도를 조절해 손잡이를 위로 올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "풀오버 머신",
     {
       "page": "https://burnfit.io/라이브러리/풀오버-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/풀오버-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/풀오버-머신.gif",
+      "steps": [
+        "머신의 좌석과 등받이를 조절해 손잡이가 머리 위 또는 가슴 위쪽에 오도록 맞춘 뒤, 좌석에 앉아 손잡이를 잡고 준비해요.",
+        "등과 엉덩이를 시트에 밀착시키고, 발은 바닥에 단단히 고정해 자세를 안정시킵니다.",
+        "팔꿈치를 살짝 굽힌 각도로 고정한 상태에서, 숨을 내쉬며 광배근의 힘으로 손잡이를 몸 쪽으로 끌어내립니다.",
+        "손잡이가 가장 아래에 도달해 광배근이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 광배근이 늘어나는 것을 느끼면서 속도를 조절해 손잡이를 위로 올려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "리니어 로우 머신",
     {
       "page": "https://burnfit.io/라이브러리/리니어-로우-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/리니어-로우-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/리니어-로우-머신.gif",
+      "steps": [
+        "머신의 좌석 높이와 손잡이 위치를 조절해 손잡이가 배꼽~하부 가슴 높이에 오도록 맞춘 뒤, 머신에 앉아 손잡이를 잡고 준비해요.",
+        "발은 발판에 단단히 고정하고, 상체를 곧게 세운 상태에서 코어에 힘을 주어 자세를 안정시킵니다.",
+        "팔을 앞으로 뻗어 시작 자세를 만든 뒤, 숨을 내쉬며 광배근과 등 중앙의 힘으로 손잡이를 몸 쪽으로 당깁니다.",
+        "손잡이가 몸에 가까워져 견갑이 모이고 등이 최대한 수축된 지점에서 잠시 멈췄다가, 숨을 들이마시며 등 근육이 늘어나는 것을 느끼면서 속도를 조절해 팔을 펴 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "클린",
     {
       "page": "https://burnfit.io/라이브러리/클린/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_CLEAN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_CLEAN.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "시작 자세: 양발을 골반보다 약간 넓게 벌리고, 바벨의 그립을 어깨보다 조금 넓게하여 무릎과 팔이 겹치지 않도록 해요.",
+        "무릎 높이까지 끌기: 팔을 곧게 편 상태로 중심을 잃지 않게 무릎 높이까지 바벨을 끌어 올립니다.",
+        "몸통 펴고 잡아 채기: 바닥의 수직 방향으로 발목, 무릎, 고관절을 강하고 빠르게 신전하여, 바벨을 던지듯이 추켜올립니다.",
+        "앉아 받고 일어서기: 바벨을 위로 던진 상태에서 아래로 내려가 바벨을 앉아서 받고, 신체 균형을 유지하면서 일어서요."
+      ]
     }
   ],
   [
     "클린 & 저크",
     {
       "page": "https://burnfit.io/라이브러리/클린-저크/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_CNJ.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_CNJ.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "시작 자세: 양발을 골반보다 약간 넓게 벌리고, 바벨의 그립을 어깨보다 조금 넓게하여 무릎과 팔이 겹치지 않도록 해요.",
+        "무릎 높이까지 끌기: 팔을 곧게 편 상태로, 중심을 잃지 않게 무릎 높이까지 바벨을 끌어 올립니다.",
+        "몸통 펴고 잡아 채기: 바닥의 수직 방향으로 발목, 무릎, 고관절을 강하고 빠르게 신전하여, 바벨을 던지듯이 추켜올립니다.",
+        "앉아 받고 일어서기: 바벨을 위로 던진 상태에서 아래로 내려가 바벨을 앉아서 받고, 신체 균형을 유지하면서 일어서요.",
+        "저크: 무릎을 굽히고 일어나는 반동으로 빠르게 바벨을 위로 올려요."
+      ]
     }
   ],
   [
     "저크",
     {
       "page": "https://burnfit.io/라이브러리/저크/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_JERK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_JERK.gif",
+      "steps": [
+        "바벨을 어깨 폭로 잡고 쇄골 위에 올려둡니다.",
+        "무릎을 굽히고 일어나는 반동으로 빠르게 바벨을 위로 올려요.",
+        "바벨의 수직 아래에서 두 팔을 곧게 핀 상태로, 바벨을 받습니다.",
+        "굽혔던 모든 관절을 펴서 자세를 유지한 뒤, 바벨을 바닥에 내려놓습니다."
+      ]
     }
   ],
   [
     "스내치",
     {
       "page": "https://burnfit.io/라이브러리/스내치/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_SNATCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_SNATCH.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "시작 자세: 양발을 골반보다 약간 넓게 벌리고, 바벨을 넓게 잡고 두 팔은 곧게 폅니다.",
+        "무릎 높이까지 끌기: 팔은 곧게 편 상태로, 중심을 잃지 않게 무릎 높이까지 끌어 올립니다.",
+        "몸통 펴고 잡아 채기: 바닥의 수직 방향으로 발목, 무릎, 고관절을 강하고 빠르게 신전하여, 바벨을 던지듯이 추켜올립니다.",
+        "잡아 채고 앉아받기: 폭발적인 하지 신전력에 의해 바벨을 위로 던진 상태에서, 바닥으로부터 점프를 하면서 아래로 내려가 바벨을 앉아받습니다.",
+        "앉아 받고 일어서기: 바벨을 들고 일어나면서 구부렸던 관절을 모두 폅니다."
+      ]
     }
   ],
   [
     "덤벨 스내치",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-스내치/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_SNATCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_SNATCH.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "양발을 골반보다 약간 넓게 벌리고, 엉덩이를 뒤로 빼고 무릎을 살짝 구부려 앉습니다.",
+        "양발의 중앙에 놓인 덤벨을 한손으로 잡아요.",
+        "무릎과 고관절을 빠르게 피면서 가슴 높이까지 덤벨을 당겨줘요.",
+        "가슴 높이에 있는 덤벨을 하늘을 향해 펀치하듯 밀어올립니다.",
+        "코어에 힘을 주어 모든 관절이 펴진 상태를 만듭니다."
+      ]
     }
   ],
   [
     "케틀벨 스내치",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-스내치/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_SNATCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_SNATCH.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "양발을 골반보다 약간 넓게 벌리고, 엉덩이를 뒤로 빼고 앉아 한손으로 케틀벨을 잡아요.",
+        "허리가 굽지 않도록 복부와 코어에 인장을 유지한 상태로, 케틀벨을 다리 사이로 보냅니다.",
+        "둔근을 수축하는 힘으로 케틀벨을 밀어 올립니다.",
+        "가슴 높이에 있는 케틀벨을 하늘을 향해 펀치하듯 밀어올립니다.",
+        "올라왔던 역순으로 케틀벨을 내려 스윙 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "스내치 밸런스",
     {
       "page": "https://burnfit.io/라이브러리/스내치-밸런스/",
-      "gif": "https://burnfit.io/wp-content/uploads/BB_SNATCH_BAL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BB_SNATCH_BAL.gif",
+      "steps": [
+        "바벨을 넓게 잡고 목 뒤에 올려둡니다.",
+        "고관절, 무릎, 발목을 가볍게 굽혔다 피는 동시에, 다리를 양옆으로 벌리며 바벨을 머리 위로 들어 올려요.",
+        "들어올린 바벨을 양팔로 잡은 상태로 엉덩이를 속도를 조절해 낮추며 스쿼트해요.",
+        "둔근과 하체의 힘을 사용하여 2번의 자세로 돌아갑니다.",
+        "바벨을 목 뒤로 내리며 1번의 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "중량 행잉 니 레이즈",
     {
       "page": "https://burnfit.io/라이브러리/중량-행잉-니-레이즈/",
-      "gif": "https://burnfit.io/wp-content/uploads/WEI_HANG_KNEE_RAISE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WEI_HANG_KNEE_RAISE.gif",
+      "steps": [
+        "팔을 어깨 폭만큼 벌리고, 손바닥이 앞을 바라본 상태로 바를 잡고 매달립니다.",
+        "덤벨이 떨어지지 않도록 양발로 단단하게 잡아 고정시킵니다.",
+        "아랫 배에 힘을 주어 양다리를 위로 말아 올려요.",
+        "복근에 자극을 느끼며 속도를 조절해 양다리를 내려요."
+      ]
     }
   ],
   [
     "행 클린",
     {
       "page": "https://burnfit.io/라이브러리/행-클린/",
-      "gif": "https://burnfit.io/wp-content/uploads/HANG_CLEAN.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HANG_CLEAN.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "시작 자세: 양발을 골반보다 약간 넓게 벌리고, 어깨보다 조금 넓게 바벨을 잡고 무릎 위에 위치 시킵니다.",
+        "몸통 펴고 잡아 채기: 바닥의 수직 방향으로 발목, 무릎, 고관절을 강하고 빠르게 신전하여, 바벨을 던지듯이 추켜올립니다.",
+        "앉아 받고 일어서기: 바벨을 위로 던진 상태에서 아래로 내려가 바벨을 앉아서 받고, 신체 균형을 유지하면서 일어서요."
+      ]
     }
   ],
   [
     "행 스내치",
     {
       "page": "https://burnfit.io/라이브러리/행-스내치/",
-      "gif": "https://burnfit.io/wp-content/uploads/HANG_SNATCH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HANG_SNATCH.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "시작 자세: 양발을 골반보다 약간 넓게 벌리고, 바벨을 넓게 잡고 무릎 위에 위치 시킵니다.",
+        "몸통 펴고 잡아 채기: 바닥의 수직 방향으로 발목, 무릎, 고관절을 강하고 빠르게 신전하여, 바벨을 던지듯이 추켜올립니다.",
+        "잡아 채고 앉아받기: 폭발적인 하지 신전력에 의해 바벨을 위로 던진 상태에서, 바닥으로부터 점프를 하면서 아래로 내려가 바벨을 앉아받습니다.",
+        "앉아 받고 일어서기: 바벨을 들고 일어나면서 구부렸던 관절을 모두 폅니다."
+      ]
     }
   ],
   [
     "클린 하이풀",
     {
       "page": "https://burnfit.io/라이브러리/클린-하이풀/",
-      "gif": "https://burnfit.io/wp-content/uploads/CLEAN_HIGH_PULL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CLEAN_HIGH_PULL.gif",
+      "steps": [
+        "양발을 골반보다 약간 벏게 벌리고, 바벨의 그립을 어깨보다 조금 넓게하여 무릎과 팔이 겹치지 않도록 해요.",
+        "복압을 유지한채로 바벨을 정강이에 붙인다는 느낌으로 끌어 올립니다.",
+        "바벨이 골반을 지나는 순간, 둔근의 힘을 폭발시켜 바벨을 바닥의 수직 방향으로 띄워 올립니다.",
+        "허리 위로 올라온 바벨을 턱 밑까지 힘차게 당겨 올립니다.",
+        "바벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스내치 하이풀",
     {
       "page": "https://burnfit.io/라이브러리/스내치-하이풀/",
-      "gif": "https://burnfit.io/wp-content/uploads/SNATCH_HIGH_PULL.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SNATCH_HIGH_PULL.gif",
+      "steps": [
+        "양발을 골반보다 약간 넓게 벌리고, 바벨을 넓게 잡고 두 팔은 곧게 폅니다.",
+        "복압을 유지한채로 바벨을 정강이에 붙인다는 느낌으로 끌어 올립니다.",
+        "바벨이 골반을 지나는 순간, 둔근의 힘을 폭발시켜 바벨을 바닥의 수직 방향으로 띄워 올립니다.",
+        "허리 위로 올라온 바벨을 턱 밑까지 힘차게 당겨 올립니다.",
+        "바벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "트레드밀",
     {
       "page": "https://burnfit.io/라이브러리/트레드밀/",
-      "gif": "https://burnfit.io/wp-content/uploads/TREADMIL-1.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/TREADMIL-1.gif",
+      "steps": [
+        "속도를 알맞게 조절하고 운동해요.",
+        "경사를 알맞게 조절하고 운동해요."
+      ]
     }
   ],
   [
-    "실내 사이클",
+    "싸이클",
     {
       "page": "https://burnfit.io/라이브러리/싸이클/",
-      "gif": "https://burnfit.io/wp-content/uploads/CYCLE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CYCLE.gif",
+      "steps": [
+        "안장을 체형에 맞게 조절",
+        "알맞은 강도로 운동"
+      ]
     }
   ],
   [
     "로잉 머신",
     {
       "page": "https://burnfit.io/라이브러리/로잉-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/ROW_MACH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ROW_MACH.gif",
+      "steps": [
+        "양 발을 로잉 머신 발판에 고정시키고, 양손으로 머신의 핸들을 잡아요.",
+        "양쪽 다리의 힘으로 발판을 힘껏 밀어냅니다.",
+        "양 다리가 쭉 펴바닥 코어 근육을 사용하여 몸을 약 45도 정도로 뒤로 젖힙니다.",
+        "당겼던 팔을 다시 펴고 코어, 다리 근육을 이용하여 시작 자세로 되돌아갑니다."
+      ]
     }
   ],
   [
     "계단 오르기",
     {
       "page": "https://burnfit.io/라이브러리/계단-오르기/",
-      "gif": "https://burnfit.io/wp-content/uploads/CLIMB_STAIRS.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/CLIMB_STAIRS.gif",
+      "steps": [
+        "넘어지지 않게 유의하면서 계단을 한칸씩 올라갑니다."
+      ]
     }
   ],
   [
     "줄넘기",
     {
       "page": "https://burnfit.io/라이브러리/줄넘기/",
-      "gif": "https://burnfit.io/wp-content/uploads/JUMP_ROPE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/JUMP_ROPE.gif",
+      "steps": [
+        "몸에 힘을 빼고 시선은 정면을 향한 상태로 곧게 서요.",
+        "줄넘기의 손잡이를 허리 높이에 위치시키고 손목의 힘으로 가볍게 돌려줘요.",
+        "무릎의 탄력을 이용하여 수직으로 점프하여 줄을 넘습니다."
+      ]
     }
   ],
   [
     "이단 뛰기",
     {
       "page": "https://burnfit.io/라이브러리/이단-뛰기/",
-      "gif": "https://burnfit.io/wp-content/uploads/DOUBLE_UNDER.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DOUBLE_UNDER.gif",
+      "steps": [
+        "몸에 힘을 빼고 시선은 정면을 향한 상태로 곧게 서요.",
+        "줄넘기의 손잡이를 허리 높이에 위치시키고 손목의 힘으로 힘차게 2번 연속으로 돌려줘요.",
+        "무릎의 탄력을 이용하여 수직으로 점프하여 줄을 넘습니다."
+      ]
     }
   ],
   [
     "하이니 스킵",
     {
       "page": "https://burnfit.io/라이브러리/하이니-스킵/",
-      "gif": "https://burnfit.io/wp-content/uploads/HIGH_KNEE_SKIP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/HIGH_KNEE_SKIP.gif",
+      "steps": [
+        "무릎을 높게 들어 제자리에서 뜁니다.",
+        "빠르게 달릴 때처럼 팔꿈치도 90도가 되도록 크게 스윙해요.",
+        "바닥과의 접촉시간을 최소로 해요."
+      ]
     }
   ],
   [
-    "에어 바이크",
+    "어썰트 바이크",
     {
       "page": "https://burnfit.io/라이브러리/어썰트-바이크/",
-      "gif": "https://burnfit.io/wp-content/uploads/ASSAULT_BIKE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/ASSAULT_BIKE.gif",
+      "steps": [
+        "의자에 앉아 아랫배에 힘을 주고 허리를 펴고 부드럽게 탑니다.",
+        "어깨와 허리가 무너진 상태로 무리하게 타지 않도록 해요."
+      ]
     }
   ],
   [
-    "천국의 계단",
+    "스텝밀",
     {
       "page": "https://burnfit.io/라이브러리/스텝밀/",
-      "gif": "https://burnfit.io/wp-content/uploads/STEPMILL_MAC.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/STEPMILL_MAC.gif",
+      "steps": [
+        "기기에 올라 낮은 속도로 시작해요.",
+        "상체를 세운 채 한 계단씩 번갈아 밟아요.",
+        "균형을 유지할 수 있는 수준에서 속도를 조절해요."
+      ]
     }
   ],
   [
-    "일립티컬",
+    "일립티컬 머신",
     {
       "page": "https://burnfit.io/라이브러리/일리팁컬-머신/"
     }
   ],
   [
-    "야외 걷기",
+    "걷기",
     {
       "page": "https://burnfit.io/라이브러리/걷기/",
-      "gif": "https://burnfit.io/wp-content/uploads/WALKING.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WALKING.gif",
+      "steps": [
+        "올바른 자세로 걷습니다."
+      ]
     }
   ],
   [
-    "야외 달리기",
+    "달리기",
     {
       "page": "https://burnfit.io/라이브러리/달리기/",
-      "gif": "https://burnfit.io/wp-content/uploads/RUNNING.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/RUNNING.gif",
+      "steps": [
+        "올바른 자세로 달립니다."
+      ]
     }
   ],
   [
     "수영",
     {
       "page": "https://burnfit.io/라이브러리/수영/",
-      "gif": "https://burnfit.io/wp-content/uploads/수영.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/수영.gif",
+      "steps": [
+        "올바른 자세로 수영해요."
+      ]
     }
   ],
   [
-    "스키 에르그",
+    "스키 머신",
     {
       "page": "https://burnfit.io/라이브러리/스키-머신/",
-      "gif": "https://burnfit.io/wp-content/uploads/스키-머신.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스키-머신.gif",
+      "steps": [
+        "스키 머신 앞에 서서, 양손으로 손잡이를 잡고 팔을 머리 위로 올립니다.",
+        "복근과 등 근육에 힘을 주며, 팔을 아래로 강하게 끌어당깁니다.",
+        "손잡이가 허벅지 옆 또는 무릎 근처까지 내려오면, 팔을 속도를 조절해 위로 들어올리며 처음 위치로 복귀해요.",
+        "리듬감 있게 반복하며, 상체의 당기는 힘과 하체의 안정성을 함께 사용하는 것이 중요해요."
+      ]
     }
   ],
   [
     "쓰러스터",
     {
       "page": "https://burnfit.io/라이브러리/쓰러스터/",
-      "gif": "https://burnfit.io/wp-content/uploads/THRUSTER.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/THRUSTER.gif",
+      "steps": [
+        "바벨을 어깨 폭로 잡고 쇄골 위에 올려둡니다.",
+        "시선은 정면을 유지하면서 엉덩이를 뒤로 빼면서 앉습니다.",
+        "복근과 엉덩이에 힘을 주면서 힘차게 일어납니다.",
+        "일어나는 힘을 이용하여 바벨을 머리 위로 힘껏 밀어올립니다."
+      ]
     }
   ],
   [
     "버피",
     {
       "page": "https://burnfit.io/라이브러리/버피/",
-      "gif": "https://burnfit.io/wp-content/uploads/BURPEE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BURPEE.gif",
+      "steps": [
+        "다리를 어깨 폭로 벌리고 편하게 서요.",
+        "스쿼트 자세를 취한 이후 상체를 내리면서 팔굽혀펴기 1회를 수행해요.",
+        "엎드려뻗쳐 자세에서 다리를 가슴 쪽으로 당겨 스쿼트 동작으로 돌아옵니다.",
+        "일어나면서 양손을 하늘 위로 뻗으면서 점프해요."
+      ]
     }
   ],
   [
     "케틀벨 스윙",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-스윙/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_SWING.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_SWING.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "양발을 어깨 폭보다 살짝 넓게 벌린 상태에서, 양손으로 케틀벨을 잡아요.",
+        "허리가 굽지 않도록 복부와 코어에 긴장을 유지한 상태로, 케틀벨을 다리 사이로 보냅니다.",
+        "둔근을 수축하는 힘으로 케틀벨을 밀어 올립니다.",
+        "케틀벨 스윙을 통해 둔근의 수축 이완을 반복해요."
+      ]
     }
   ],
   [
-    "파머스 캐리",
+    "파머스 워크",
     {
       "page": "https://burnfit.io/라이브러리/파머스-워크/",
-      "gif": "https://burnfit.io/wp-content/uploads/FARMER_WALK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/FARMER_WALK.gif",
+      "steps": [
+        "양손에 케틀벨을 들고 양발을 엉덩이 너비만큼 벌리고 서요.",
+        "가슴을 활짝 펴고 등에 힘을 준 상태로 복부를 단단하게 조입니다.",
+        "어깨를 뒤로 당긴 상태로 복압을 유지하면서 속도를 조절해 앞으로 걷습니다."
+      ]
     }
   ],
   [
     "월볼 샷",
     {
       "page": "https://burnfit.io/라이브러리/월볼-샷/",
-      "gif": "https://burnfit.io/wp-content/uploads/WB_SHOT.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/WB_SHOT.gif",
+      "steps": [
+        "다리를 어깨 폭로 벌리고, 월볼을 잡고 벽 앞에 서요.",
+        "스쿼트 자세로 앉았다 일어나는 힘으로 팔을 힘껏 뻗으며, 양손에 들고 있던 월볼을 위로 던집니다.",
+        "떨어지는 월볼을 받으며 다시 스쿼트 자세로 돌아갑니다."
+      ]
     }
   ],
   [
     "마운틴 클라이머",
     {
       "page": "https://burnfit.io/라이브러리/마운틴-클라이머/",
-      "gif": "https://burnfit.io/wp-content/uploads/MOUNT_CLIMB.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/MOUNT_CLIMB.gif",
+      "steps": [
+        "양팔을 어깨 폭로 벌리고 엎드립니다.",
+        "한쪽 무릎이 가슴에 닿을정도로 힘차게 올립니다.",
+        "올렸던 무릎을 내리며, 반대쪽 무릎을 가슴방향으로 올립니다."
+      ]
     }
   ],
   [
     "박스 점프",
     {
       "page": "https://burnfit.io/라이브러리/박스-점프/",
-      "gif": "https://burnfit.io/wp-content/uploads/BOX_JUMP.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BOX_JUMP.gif",
+      "steps": [
+        "구조물 앞에 몸을 곧게 펴고 서요.",
+        "양발을 동시에 점프하여 구조물 위에 올라서요.",
+        "구부렸던 관절들을 모두 펴고 일어선 후에, 내려와서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "점핑 잭",
     {
       "page": "https://burnfit.io/라이브러리/점핑-잭/",
-      "gif": "https://burnfit.io/wp-content/uploads/JUMPING_JACK.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/JUMPING_JACK.gif",
+      "steps": [
+        "가슴과 허리를 곧게 펴고 서요.",
+        "무릎을 살짝 굽혀 점프하면서 양 발을 어깨 폭 정도로 벌립니다.",
+        "다시 점프하며 발을 모으고 동시에 양팔을 처음 자세로 내려요.",
+        "무릎을 살짝 굽혀 점프하며 발을 어깨 폭 정도로 벌리면서, 양팔을 머리위까지 올려요.",
+        "다시 점프하며 발을 모으고 동시에 양팔을 처음 자세로 내려요."
+      ]
     }
   ],
   [
     "바 머슬업",
     {
       "page": "https://burnfit.io/라이브러리/바-머슬업/",
-      "gif": "https://burnfit.io/wp-content/uploads/BAR_MU.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/BAR_MU.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "바를 양손으로 잡고, 몸을 당겨 올린 후 밀어 올라갑니다."
+      ]
     }
   ],
   [
     "링 머슬업",
     {
       "page": "https://burnfit.io/라이브러리/링-머슬업/",
-      "gif": "https://burnfit.io/wp-content/uploads/RING_MU.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/RING_MU.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "링을 양손으로 각각 잡고, 몸을 당겨 올린 후 밀어 올라갑니다."
+      ]
     }
   ],
   [
-    "배틀 로프",
+    "배틀링 로프",
     {
       "page": "https://burnfit.io/라이브러리/배틀링-로프/",
-      "gif": "https://burnfit.io/wp-content/uploads/배틀링-로프.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/배틀링-로프.gif",
+      "steps": [
+        "양발을 어깨 폭보다 넓게 벌리고 서서 양손으로 줄을 움켜잡아요.",
+        "엉덩이를 살짝 낮추고 코어에 힘을 준 상태에서, 오른손과 왼손을 번갈아가며 위아래로 움직여줘요.",
+        "각각의 줄이 물결 모양이 나타날 수 있도록 리듬에 맞춰 양손을 움직여줘요."
+      ]
     }
   ],
   [
     "덤벨 버피",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-버피/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_BURPEE.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_BURPEE.gif",
+      "steps": [
+        "양손에 덤벨을 들고, 다리는 어깨 폭만큼 벌리고 편하게 서요.",
+        "다리를 어깨 폭로 벌리고 편하게 서요.",
+        "스쿼트 자세를 취한 이후 상체를 내리면서 팔굽혀펴기 1회를 수행해요.",
+        "엎드려뻗쳐 자세에서 다리를 가슴 쪽으로 당겨 스쿼트 동작으로 돌아옵니다.",
+        "무릎과 골반을 펴주면서 수직방향으로 점프해요."
+      ]
     }
   ],
   [
     "덤벨 쓰러스터",
     {
       "page": "https://burnfit.io/라이브러리/덤벨-쓰러스터/",
-      "gif": "https://burnfit.io/wp-content/uploads/DB_THRUSTER.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/DB_THRUSTER.gif",
+      "steps": [
+        "덤벨을 양손에 하나씩 잡고 양 어깨 위에 올려둡니다.",
+        "시선은 정면을 유지하면서 엉덩이를 뒤로 빼면서 앉습니다.",
+        "복근과 엉덩이에 힘을 주면서 힘차에 일어납니다.",
+        "일어나는 힘을 이용하여 덤벨을 머리 위로 힘껏 밀어올립니다."
+      ]
     }
   ],
   [
     "인치웜",
     {
       "page": "https://burnfit.io/라이브러리/인치웜/",
-      "gif": "https://burnfit.io/wp-content/uploads/INCHWORM.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/INCHWORM.gif",
+      "steps": [
+        "양발을 곧게 편 상태에서 허리를 굽혀 양손을 양발 앞에 위치 시킵니다.",
+        "무릎이 굽지 않게 유지하면서 양손을 한걸음씩 앞으로 뻗어줘요.",
+        "양손은 허리 라인이 일직선이 될때까지 앞으로 이동해요.",
+        "푸시업을 한번 수행해요.",
+        "양손을 역순서대로 움직여 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스모 데드리프트 하이풀",
     {
       "page": "https://burnfit.io/라이브러리/스모-데드리프트-하이풀/",
-      "gif": "https://burnfit.io/wp-content/uploads/SUMO_DEAD_HIGH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/SUMO_DEAD_HIGH.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌리고 바벨 앞에 서요.",
+        "허벅지가 바닥에 수평이 될 때까지 엉덩이를 뒤로 뺀 상태에서, 양팔은 어깨 폭보다 좁게 바벨을 잡아요.",
+        "복압을 유지한채로 바벨을 정강이에 붙인다는 느낌으로 끌어 올립니다.",
+        "바벨이 골반을 지나는 순간, 둔근의 힘을 폭발시켜 바벨을 바닥의 수직 방향으로 띄워 올립니다.",
+        "허리 위로 올라온 바벨을 턱 밑까지 힘차게 당겨 올립니다.",
+        "바벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "케틀벨 스모 하이풀",
     {
       "page": "https://burnfit.io/라이브러리/케틀벨-스모-하이풀/",
-      "gif": "https://burnfit.io/wp-content/uploads/KB_SUMO_HIGH.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/KB_SUMO_HIGH.gif",
+      "steps": [
+        "발끝이 바깥을 향한 상태로 다리를 넓게 벌리고, 양 발의 중앙에 케틀벨을 놓고 서요.",
+        "허벅지가 바닥에 수평이 될 때까지 엉덩이를 뒤로 뺀 상태에서, 양팔로 케틀벨을 잡아요.",
+        "복압을 유지한채로 엉덩이에 힘을 주며 다리를 펴요.",
+        "케틀벨이 골반을 지나는 순간, 둔근의 힘을 폭발시켜 케틀벨을 바닥의 수직 방향으로 띄워 올립니다.",
+        "허리 위로 올라온 케틀벨 턱 밑까지 힘차게 당겨 올립니다.",
+        "케틀벨이 올라온 역순서대로 바닥에 내려 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "터키쉬 겟업",
     {
       "page": "https://burnfit.io/라이브러리/터키쉬-겟업/",
-      "gif": "https://burnfit.io/wp-content/uploads/터키쉬-겟업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/터키쉬-겟업.gif",
+      "steps": [
+        "이 운동은 복잡한 동작으로, 적절한 지도가 가능한 트레이너와 상담하는 것을 추천해요.",
+        "바닥에 곧게 누운 상태에서 케틀벨을 잡은 손을 바닥과 수직방향으로 곧게 뻗습니다.",
+        "케틀벨을 지속적으로 밀어올리면서 반대쪽 손과 다리를 활용하여 몸을 속도를 조절해 일으킵니다.",
+        "케틀벨과 바닥면과 수직하게 유지하면서 곧게 일어서요.",
+        "일어설때의 역순서로 동작을 취하면서 처음 위치로 복귀해요."
+      ]
     }
   ],
   [
     "스탠드 투 스탠드 브릿지",
     {
       "page": "https://burnfit.io/라이브러리/스탠드-투-스탠드-브릿지/",
-      "gif": "https://burnfit.io/wp-content/uploads/스탠드-투-스탠드-브릿지.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/스탠드-투-스탠드-브릿지.gif",
+      "steps": [
+        "발을 어깨 폭로 벌리고 똑바로 서요.",
+        "양손을 머리 위로 들어 올리고, 속도를 조절해 상체를 뒤로 젖힙니다.",
+        "손과 발로 바닥을 단단히 지지하며 완전한 브릿지 자세를 만듭니다.",
+        "허리와 엉덩이의 힘을 사용해 상체를 앞으로 세우며, 다시 똑바로 선 자세로 돌아옵니다."
+      ]
     }
   ],
   [
     "풀 백 브릿지",
     {
       "page": "https://burnfit.io/라이브러리/풀-백-브릿지/",
-      "gif": "https://burnfit.io/wp-content/uploads/풀-백-브릿지.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/풀-백-브릿지.gif",
+      "steps": [
+        "바닥에 등을 대고 누운 상태에서 무릎을 구부려 발을 엉덩이 가까이 위치시킵니다.",
+        "발과 손으로 바닥을 밀면서 엉덩이와 상체를 들어 올립니다.",
+        "브릿지 자세를 유지하며 몸 전체에 고르게 힘을 분배해요.",
+        "손과 발로 몸을 지탱하면서 속도를 조절해 상체와 엉덩이를 바닥으로 내립니다."
+      ]
     }
   ],
   [
     "요가",
     {
       "page": "https://burnfit.io/라이브러리/요가/",
-      "gif": "https://burnfit.io/wp-content/uploads/요가.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/요가.gif",
+      "steps": [
+        "요가 동작을 수행해요."
+      ]
     }
   ],
   [
     "킥복싱",
     {
       "page": "https://burnfit.io/라이브러리/킥복싱/",
-      "gif": "https://burnfit.io/wp-content/uploads/킥복싱.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/킥복싱.gif",
+      "steps": [
+        "킥복싱을 수행해요."
+      ]
     }
   ],
   [
     "타이슨 푸시업",
     {
       "page": "https://burnfit.io/라이브러리/타이슨-푸시업/",
-      "gif": "https://burnfit.io/wp-content/uploads/타이슨-푸시업.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/타이슨-푸시업.gif",
+      "steps": [
+        "무릎과 손을 바닥에 대고 시작해요.",
+        "엉덩이를 뒤로 보내며 엉덩이가 발꿈치 쪽으로 향하도록 몸을 접습니다.",
+        "가슴이 바닥 가까이를 스치듯이 앞으로 이동하면서 상체를 낮춥니다.",
+        "몸이 최대한 앞으로 나간 상태에서, 다시 엉덩이를 뒤로 끌어당기며 처음 위치로 복귀해요.",
+        "위 동작을 부드럽게 연결하여 반복해요."
+      ]
     }
   ],
   [
     "원암 케틀벨 스윙",
     {
       "page": "https://burnfit.io/라이브러리/원암-케틀벨-스윙/",
-      "gif": "https://burnfit.io/wp-content/uploads/원암-케틀벨-스윙.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/원암-케틀벨-스윙.gif",
+      "steps": [
+        "양발을 어깨 폭보다 살짝 넓게 벌리고, 한 손으로 케틀벨을 잡고 선 자세로 시작해요.",
+        "복부와 코어에 긴장을 유지하고, 무릎을 살짝 굽힌 상태에서 케틀벨을 다리 사이로 보냅니다.",
+        "엉덩이를 강하게 수축하며 케틀벨을 앞쪽으로 밀어 올립니다.",
+        "팔을 자연스럽게 따라 올라가는 정도로만 사용하며, 몸통과 엉덩이의 힘으로 케틀벨을 스윙해요.",
+        "케틀벨의 스윙을 반복하며 둔근의 수축과 이완을 리듬감 있게 이어갑니다."
+      ]
     }
   ],
   [
     "데빌 프레스",
     {
       "page": "https://burnfit.io/라이브러리/데빌-프레스/",
-      "gif": "https://burnfit.io/wp-content/uploads/데빌-프레스.gif"
+      "gif": "https://burnfit.io/wp-content/uploads/데빌-프레스.gif",
+      "steps": [
+        "덤벨을 양손으로 잡은 상태로 곧게 서요.",
+        "덤벨을 잡은 채 버피 동작으로 내려갑니다.",
+        "일어나는 반동을 이용해 덤벨을 몸 쪽으로 끌어올린 뒤, 연속 동작으로 덤벨을 머리 위까지 들어 올립니다.",
+        "덤벨을 머리 위에서 안정적으로 컨트롤한 뒤, 덤벨을 바닥으로 내리며 다시 처음 위치로 복귀해요."
+      ]
     }
   ]
 ]);

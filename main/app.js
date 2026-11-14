@@ -1,5 +1,5 @@
 import { showExerciseGuide } from './exercise-guide.js';
-import { catalog, exerciseAliases } from './catalog.js';
+import { catalog } from './catalog.js';
 import { poses, keywords } from './poses.js';
 
 const guideStyles = document.createElement('link');
@@ -63,7 +63,7 @@ const vol = workout => workout.exercises.filter(e=>!isCardio(e)).flatMap(e=>e.se
 const cardioTotal = workout => workout.exercises.filter(isCardio).flatMap(e=>e.sets)
   .reduce((total,s)=>total+s.minutes,0);
 const parseMinutes = value => Number(String(value ?? '').trim().replace(',','.'));
-const paceLabel = name => ['천국의 계단','스텝퍼'].includes(name) ? '레벨' : '속도';
+const paceLabel = name => ['천국의 계단','스텝퍼','스텝밀'].includes(name) ? '레벨' : '속도';
 const validPace = value => {
   const pace = parseMinutes(value);
   return pace >= 0 && pace <= 999;
@@ -275,9 +275,8 @@ function pickerResults() {
   const normalize = value => value.toLowerCase().replace(/[\s-]+/g,'');
   const q = normalize(query.trim());
   const matches = Object.entries(catalog).filter(([group])=>!category||group===category)
-    .map(([group,names])=>[group,names.filter(n=>[n,...(exerciseAliases[n]||[])].some(label=>normalize(label).includes(q)))]).filter(([,names])=>names.length);
-  const custom = !category && q && !Object.values(catalog).flat().some(n=>[n,...(exerciseAliases[n]||[])].some(label=>normalize(label)===q));
-  return (custom ? btn('＋ ‘'+esc(query.trim())+'’ 추가','choose','exercise',query.trim()) : '')+matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>'<div class="picker-exercise">'+exerciseInfo(n,pose(n)+'<span>'+esc(n)+'</span>')+'<button type="button" data-action="choose" data-value="'+esc(n)+'" aria-label="'+esc(n)+' 추가">＋</button>'+'</div>').join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
+    .map(([group,names])=>[group,names.filter(n=>normalize(n).includes(q))]).filter(([,names])=>names.length);
+  return matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>'<div class="picker-exercise">'+exerciseInfo(n,pose(n)+'<span>'+esc(n)+'</span>')+'<button type="button" data-action="choose" data-value="'+esc(n)+'" aria-label="'+esc(n)+' 추가">＋</button>'+'</div>').join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
 }
 function modal() {
   if (dialog==='exercise-menu') return '<h2>'+esc(restExercise.name)+'</h2>'+btn('휴식 타이머 설정','exercise-rest','wide')+btn('닫기','close','wide');
@@ -287,7 +286,7 @@ function modal() {
     + (defaultRestDraft.enabled ? timePicker(defaultRestDraft.seconds,'default-rest') : '')
     + btn('저장','default-rest-save','primary wide rest-confirm');
   if (dialog==='name') return '<h2>어떻게 불러 드릴까요?</h2><form id="profile" class="stack"><input name="name" aria-label="이름 또는 별명" placeholder="이름 또는 별명" maxlength="32" value="'+esc(state.name)+'"><div class="row"><button class="primary">저장</button>'+btn(state.name===null?'건너뛰기':'취소','close')+'</div></form>';
-  if (dialog==='picker') return '<header class="row between"><h2>종목 추가</h2>'+btn('닫기','close')+'</header><input id="search" class="wide" type="search" placeholder="종목 검색 또는 직접 입력" aria-label="종목 검색" value="'+esc(query)+'"><div class="chips">'+['',...Object.keys(catalog)].map(c=>btn(c||'전체','category',c===category?'primary':'',c)).join('')+'</div><div id="results">'+pickerResults()+'</div>';
+  if (dialog==='picker') return '<header class="row between"><h2>종목 추가</h2>'+btn('닫기','close')+'</header><input id="search" class="wide" type="search" placeholder="종목 검색" aria-label="종목 검색" value="'+esc(query)+'"><div class="chips">'+['',...Object.keys(catalog)].map(c=>btn(c||'전체','category',c===category?'primary':'',c)).join('')+'</div><div id="results">'+pickerResults()+'</div>';
   if (dialog==='routine') return '<header class="row between"><h2>루틴 편집</h2>'+btn('취소','close')+'</header><div class="stack"><input id="routine-title" placeholder="루틴 이름" aria-label="루틴 이름" value="'+esc(routine.title)+'"><div class="chips">'+weekday.map((d,i)=>btn(d,'weekday',routine.weekdays.includes(i+1)?'primary':'',i+1)).join('')+ '</div>' + (state.restEnabled ? '<section class="card"><label class="rest-option"><span>루틴 휴식 타이머</span><input id="routine-rest-enabled" type="checkbox" role="switch" '
     +(routine.restEnabled?'checked':'')+'></label>'
     +(routine.restEnabled?restControls(routine.restSeconds ?? state.rest,'routine-rest'):'')
