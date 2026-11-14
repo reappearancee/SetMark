@@ -1,4 +1,4 @@
-const cacheName = 'setmark-pwa-v54';
+const cacheName = 'deukgeun-ilji-pwa-v55';
 const shell = [
   "./",
   "./index.html",
@@ -33,7 +33,7 @@ self.addEventListener('message', event => {
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     for (const key of await caches.keys()) {
-      if (key.startsWith('setmark-pwa-') && key !== cacheName) await caches.delete(key);
+      if ((key.startsWith('setmark-pwa-') || key.startsWith('deukgeun-ilji-pwa-')) && key !== cacheName) await caches.delete(key);
     }
     await self.clients.claim();
   })());

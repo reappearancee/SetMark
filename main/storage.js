@@ -12,7 +12,7 @@ function openDatabase() {
     };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
-    request.onblocked = () => reject(new Error('다른 세트마크 창을 닫은 뒤 다시 시도해 주세요.'));
+    request.onblocked = () => reject(new Error('다른 득근일지 창을 닫은 뒤 다시 시도해 주세요.'));
   });
 }
 

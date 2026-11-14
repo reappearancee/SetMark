@@ -15,16 +15,16 @@
 
 
 /* Preserve single-finger scrolling without pinch or double-tap zoom. */
-html.setmark-app,
-html.setmark-app #app,
-html.setmark-app #app *,
-html.setmark-app .exercise-guide-dialog,
-html.setmark-app .exercise-guide-dialog * {
+html.deukgeun-app,
+html.deukgeun-app #app,
+html.deukgeun-app #app *,
+html.deukgeun-app .exercise-guide-dialog,
+html.deukgeun-app .exercise-guide-dialog * {
   touch-action: pan-x pan-y;
 }
-html.setmark-app input:not([type="checkbox"]):not([type="radio"]),
-html.setmark-app select,
-html.setmark-app textarea {
+html.deukgeun-app input:not([type="checkbox"]):not([type="radio"]),
+html.deukgeun-app select,
+html.deukgeun-app textarea {
   font-size: max(16px, 1em);
 }
 
@@ -82,16 +82,16 @@ html.hide-page-scrollbar::-webkit-scrollbar { display: none; }
 }
 .routine-order strong { overflow-wrap:anywhere; }
 .routine-order li.dragging { background:#e4f0e8; }
-html.setmark-app #app button[data-order-handle] { touch-action:none; cursor:grab; padding:0; }
+html.deukgeun-app #app button[data-order-handle] { touch-action:none; cursor:grab; padding:0; }
 .record-exercise > button[data-action="record-add-set"] { margin-top:10px; }
 
 /* Suppress iOS selection and callouts on display content. */
-html.setmark-app body {
+html.deukgeun-app body {
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
 }
-html.setmark-app :is(input, textarea, [contenteditable="true"]) {
+html.deukgeun-app :is(input, textarea, [contenteditable="true"]) {
   -webkit-user-select: text;
   user-select: text;
   -webkit-touch-callout: default;

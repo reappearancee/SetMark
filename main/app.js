@@ -10,7 +10,7 @@ guideStyles.href = new URL('./exercise-guide.css', import.meta.url).href;
 document.head.append(guideStyles);
 
 // The app module only loads in standalone mode. Keep the install page zoomable.
-document.documentElement.classList.add('setmark-app');
+document.documentElement.classList.add('deukgeun-app');
 const viewport = document.querySelector('meta[name="viewport"]');
 viewport?.setAttribute('content',
   'width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover');
@@ -139,7 +139,7 @@ function home() {
   const today = new Date();
   const milestone = workoutMilestone(state.workouts, today);
   const plans = state.routines.filter(r=>r.weekdays.includes(today.getDay()+1));
-  return '<h1>세트마크</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero'+milestone.effect+'"><div class="hero-date"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><small class="hero-milestone">'+milestone.label+'</small></div><h2>오늘의 운동</h2>'+(state.draft?.startedAt?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?.startedAt?'운동 이어서 기록':state.draft?'운동 준비 이어서':'▶ 자유 운동 시작','start','primary wide')+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
+  return '<h1>득근일지</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero'+milestone.effect+'"><div class="hero-date"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><small class="hero-milestone">'+milestone.label+'</small></div><h2>오늘의 운동</h2>'+(state.draft?.startedAt?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?.startedAt?'운동 이어서 기록':state.draft?'운동 준비 이어서':'▶ 자유 운동 시작','start','primary wide')+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
 }
 function restControls(seconds, action) {
   return '<div class="rest-controls" role="group" aria-label="휴식 시간">'
@@ -406,7 +406,7 @@ function releaseBoard() {
       +release.changes.map(change=>'<li>'+esc(change)+'</li>').join('')+'</ul></article>').join('');
 }
 function settings() {
-  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>세트마크 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card">'+btn('수정사항'+(hasUnreadReleases()?newBadge:''),'releases','wide release-link')+'</section>';
+  return '<h1>설정</h1><section class="card"><h2>프로필</h2>'+btn(esc(state.name||'이름 입력'),'name')+'</section><section class="card"><h2>운동</h2>'+btn('기본 휴식 타이머 · '+restLabel(restFor()),'default-rest','wide')+'<label class="rest-sound"><span>휴식 종료음</span><input id="rest-sound" type="checkbox" role="switch" '+(state.restSound?'checked':'')+'></label><small>득근일지 화면을 보고 있을 때 재생돼요.</small></section><section class="card stack"><h2>데이터</h2>'+btn('JSON으로 내보내기','export')+btn('JSON 적용하기','import')+'<input type="file" id="backup-file" accept=".json,application/json" hidden>'+ '<small>운동과 루틴은 이 기기의 웹앱에 저장돼요.</small></section><section class="card">'+btn('수정사항'+(hasUnreadReleases()?newBadge:''),'releases','wide release-link')+'</section>';
 }
 function exerciseInfo(name, content = esc(name)) {
   return '<button type="button" class="exercise-info" data-action="exercise-info" data-value="'+esc(name)+'" aria-label="'+esc(name)+' 운동 방법">'+content+'</button>';
@@ -627,14 +627,14 @@ async function finish() {
 function download() {
   const data = {formatVersion:1, exportedAt:new Date().toISOString(), workouts:state.workouts, routines:state.routines.map(r=>({...r, exercises:r.exercises.map(e=>({...e,sets:e.sets.map(s=>isCardio(e)?cardioEntry(s):{id:s.id,weightKg:Number(s.weight.trim().replace(',','.'))||0,repetitions:Number(s.reps)||0,restSeconds:s.restSeconds})}))}))};
   const url = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
-  const link = document.createElement('a'); link.href=url; link.download='Setmark-'+new Date().toISOString().slice(0,10)+'.json'; link.click();
+  const link = document.createElement('a'); link.href=url; link.download='득근일지-'+new Date().toISOString().slice(0,10)+'.json'; link.click();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function readBackup(data) {
   const validId = id => typeof id==='string' && id.trim().length>0;
   const validDate = value => typeof value==='string' && Number.isFinite(Date.parse(value));
   if (data?.formatVersion!==1 || !Array.isArray(data.workouts) || !Array.isArray(data.routines)) {
-    throw new Error('세트마크에서 내보낸 JSON 파일을 선택해 주세요.');
+    throw new Error('득근일지에서 내보낸 JSON 파일을 선택해 주세요.');
   }
   function records(items, routine) {
     const ids = new Set();
