@@ -68,3 +68,19 @@ html.setmark-app textarea {
 
 html.hide-page-scrollbar { scrollbar-width: none; }
 html.hide-page-scrollbar::-webkit-scrollbar { display: none; }
+
+.routine-card-footer { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+.routine-card-footer .routine-preview { margin:0; }
+.routine-card-footer .routine-preview > * { width:30px; height:30px; }
+.routine-card-footer .routine-preview > * + * { margin-inline-start:-8px; }
+.routine-card-buttons { display:flex; align-items:center; gap:4px; }
+.routine-card-buttons button { white-space:nowrap; padding-inline:7px; font-size:.875rem; }
+.routine-order { margin:12px 0; padding:0; list-style:none; }
+.routine-order li {
+  display:grid; grid-template-columns:42px minmax(0,1fr) 44px; align-items:center;
+  gap:8px; padding:8px 0; border-bottom:1px solid var(--line);
+}
+.routine-order strong { overflow-wrap:anywhere; }
+.routine-order li.dragging { background:#e4f0e8; }
+html.setmark-app #app button[data-order-handle] { touch-action:none; cursor:grab; padding:0; }
+.record-exercise > button[data-action="record-add-set"] { margin-top:10px; }

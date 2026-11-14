@@ -251,14 +251,14 @@ function workout() {
   return '<header class="row between"><h1>'+esc(d.title)+'</h1>'+btn('홈으로','later')+'</header>'+guide+clock+restPanel+d.exercises.map((e,i)=>'<section class="card"><div class="row between"><div class="row">'+pose(e.name)+exerciseInfo(e.name)+'</div>'+restBadge(d,e)+'</div>'+e.sets.map((s,j)=>isCardio(e) ? cardioRow(s,i,j,started,e.name) : '<div class="set"><small>'+(j+1)+'</small><input aria-label="'+(j+1)+'세트 무게" placeholder="kg" inputmode="decimal" data-set="'+i+':'+j+':weight" value="'+esc(s.weight)+'" '+(s.checked?'disabled':'')+'><input aria-label="'+(j+1)+'세트 횟수" placeholder="횟수" inputmode="numeric" data-set="'+i+':'+j+':reps" value="'+esc(s.reps)+'" '+(s.checked?'disabled':'')+'>'+btn(s.checked?'✓':'○','check',s.checked?'checked':'',i+':'+j,!started)+btn('×','remove-set','danger',i+':'+j)+'</div>').join('')+'<div class="exercise-actions">'+btn(isCardio(e)?'＋ 회차 추가':'＋ 세트 추가','add-set','',i)+btn('종목 삭제','remove-exercise','danger',i)+'</div></section>').join('')+'<div class="stack">'+btn('＋ 종목 추가','picker')+actions+'</div>';
 }
 function routinePreview(exercises) {
-  const visibleCount = 5;
+  const visibleCount = 3;
   const extra = exercises.length - visibleCount;
   const icons = exercises.slice(0, visibleCount).map(exercise => pose(exercise.name)).join('');
   return '<div class="routine-preview" role="img" aria-label="운동 종목 '+exercises.length+'개">'
     + icons + (extra > 0 ? '<span class="routine-preview-more">+'+extra+'</span>' : '') + '</div>';
 }
 function routines() {
-  return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p>'+routinePreview(r.exercises)+'<div class="row">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
+  return '<div class="row between"><h1>루틴</h1>'+btn('＋ 루틴 추가','routine-new','primary')+'</div>'+(state.routines.map(r=>'<section class="card"><h2>'+esc(r.title)+'</h2><p class="muted">'+(r.weekdays.map(d=>weekday[d-1]).join(' · ')||'요일 지정 없음')+'</p><div class="routine-card-footer">'+routinePreview(r.exercises)+'<div class="routine-card-buttons">'+btn('시작','start','primary',r.id)+btn('편집','routine-edit','',r.id)+btn('삭제','routine-delete','danger',r.id)+'</div></div></section>').join('')||'<p class="muted">자주 하는 운동을 루틴으로 저장해 보세요.</p>');
 }
 function recordDetail(record) {
   const date = new Date(record.finishedAt).toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'});
@@ -278,7 +278,7 @@ function recordDetail(record) {
       +(editing?'':'<span class="record-check" aria-label="완료">✓</span>')+'</div>').join('');
     return '<section class="card record-exercise"><div class="row">'+pose(exercise.name)
       +'<div>'+ (group?'<small>'+esc(group)+'</small>':'')+'<strong>'+esc(exercise.name)+'</strong></div></div>'
-      +'<div class="record-exercise-total">'+metric(cardio?'유산소 시간':'종목 볼륨',number(cardio?cardioTotal({exercises:[exercise]}):vol({exercises:[exercise]}))+(cardio?'분':' kg'))+'</div>'+rows+'</section>';
+      +'<div class="record-exercise-total">'+metric(cardio?'유산소 시간':'종목 볼륨',number(cardio?cardioTotal({exercises:[exercise]}):vol({exercises:[exercise]}))+(cardio?'분':' kg'))+'</div>'+rows+(editing?btn(cardio?'＋ 회차 추가':'＋ 세트 추가','record-add-set','',i):'')+'</section>';
   }).join('');
   return '<header class="row between">'+btn('‹ 기록','back-record','', '',editing)+'<strong>'+date+'</strong></header>'
     +'<div class="row between record-heading"><h1>운동 요약</h1>'+ (editing?btn('취소','discard-record-edit'):btn('편집','edit-record','',record.id))+'</div>'
@@ -391,7 +391,70 @@ function pickerResults() {
     .map(([group,names])=>[group,names.filter(n=>normalize(n).includes(q))]).filter(([,names])=>names.length);
   return matches.map(([group,names])=>'<h3>'+group+'</h3>'+names.map(n=>'<div class="picker-exercise">'+exerciseInfo(n,pose(n)+'<span>'+esc(n)+'</span>')+'<button type="button" data-action="choose" data-value="'+esc(n)+'" aria-label="'+esc(n)+' 추가">＋</button>'+'</div>').join('')).join('') || '<p class="muted">검색 결과가 없어요.</p>';
 }
+function orderDialog() {
+  return '<header class="row between"><h2>순서 편집</h2>'+btn('취소','close')+'</header>'
+    +'<p class="muted">손잡이를 잡고 위아래로 옮겨요.</p><ol class="routine-order" data-routine-order>'
+    +routine.exercises.map((exercise,index)=>'<li data-order-index="'+index+'">'+pose(exercise.name)
+      +'<strong>'+esc(exercise.name)+'</strong><button type="button" data-order-handle aria-label="'
+      +esc(exercise.name)+' 순서 이동. 위아래 방향키 사용">☰</button></li>').join('')
+    +'</ol>'+btn('순서 적용','routine-order-apply','primary wide');
+}
+
+function bindRoutineOrder(panel) {
+  const list = panel.querySelector('[data-routine-order]');
+  if (!list) return;
+  let drag = null;
+  let frame = null;
+  function move() {
+    if (!drag || !list.isConnected) return;
+    const bounds = panel.getBoundingClientRect();
+    const edge = 52;
+    if (drag.y < bounds.top + edge) panel.scrollTop -= 10;
+    if (drag.y > bounds.bottom - edge) panel.scrollTop += 10;
+    const rows = [...list.children].filter(row=>row!==drag.row);
+    const before = rows.find(row=>{
+      const rect = row.getBoundingClientRect();
+      return drag.y < rect.top + rect.height/2;
+    });
+    if (drag.row.nextElementSibling !== (before ?? null)) list.insertBefore(drag.row,before ?? null);
+    frame = requestAnimationFrame(move);
+  }
+  function end(event) {
+    if (drag?.id!==event.pointerId) return;
+    drag.row.classList.remove('dragging');
+    if (event.type==='pointercancel') list.insertBefore(drag.row,drag.next);
+    drag=null;
+    cancelAnimationFrame(frame);
+  }
+  list.addEventListener('pointerdown',event=>{
+    const handle = event.target.closest('[data-order-handle]');
+    if (!handle || !event.isPrimary || event.button!==0 || drag) return;
+    const row = handle.closest('li');
+    // Capture on the list so moving a row cannot release the pointer.
+    list.setPointerCapture(event.pointerId);
+    drag={row,id:event.pointerId,y:event.clientY,next:row.nextElementSibling};
+    row.classList.add('dragging');
+    frame=requestAnimationFrame(move);
+  });
+  list.addEventListener('pointermove',event=>{
+    if (drag?.id===event.pointerId) drag.y=event.clientY;
+  });
+  for (const event of ['pointerup','pointercancel','lostpointercapture']) list.addEventListener(event,end);
+  list.addEventListener('keydown',event=>{
+    const handle=event.target.closest('[data-order-handle]');
+    if (!handle || !['ArrowUp','ArrowDown'].includes(event.key)) return;
+    event.preventDefault();
+    const row=handle.closest('li');
+    const previous=row.previousElementSibling;
+    const next=row.nextElementSibling;
+    if (event.key==='ArrowUp' && previous) list.insertBefore(row,previous);
+    if (event.key==='ArrowDown' && next) list.insertBefore(row,next.nextElementSibling);
+    handle.focus();
+    handle.scrollIntoView({block:'nearest'});
+  });
+}
 function modal() {
+  if (dialog==='routine-order') return orderDialog();
   if (dialog==='releases') return releaseBoard();
   if (dialog==='exercise-menu') return '<h2>'+esc(restExercise.name)+'</h2>'+btn('휴식 타이머 설정','exercise-rest','wide')+btn('닫기','close','wide');
   if (dialog==='exercise-rest') return exerciseRestModal();
@@ -409,7 +472,7 @@ function modal() {
     +btn('−','routine-minus','',i)+'<span data-routine-count>'+e.sets.length+(isCardio(e)?'회차':'세트')+'</span>'
     +btn('＋','routine-plus','',i)
     +(isCardio(e)||!state.restEnabled||!routine.restEnabled?'':'<button type="button" data-action="exercise-menu" data-value="'+i+'" aria-label="'+esc(e.name)+' 더 보기">⋯</button>')
-    +btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('루틴 저장','routine-save','primary')+'</div>';
+    +btn('삭제','routine-remove','danger',i)+'</div></div>').join('')+btn('종목 추가','picker')+btn('순서 편집','routine-order','', '',routine.exercises.length<2)+btn('루틴 저장','routine-save','primary')+'</div>';
   if (dialog==='rest') return '<h2>휴식 타이머</h2><p class="clock" data-rest></p><div class="row">'+btn('건너뛰기','skip','primary')+btn('닫기','close')+'</div>';
   return '';
 }
@@ -424,6 +487,7 @@ function render() {
   if (dialog) {
     const current = app.querySelector('dialog');
     current.showModal();
+    bindRoutineOrder(current);
     for (const item of current.querySelectorAll('[data-set-rest]')) {
       item.open = openRest.has(item.dataset.setRest);
     }
@@ -485,6 +549,7 @@ function startRest(seconds = restFor(state.draft)) {
 }
 function openPicker() { category=''; query=''; dialog='picker'; }
 function closeDialog() {
+  if (dialog==='routine-order') { dialog='routine'; return; }
   if (dialog==='default-rest') {
     dialog = restExercise ? 'exercise-rest' : '';
     return;
@@ -691,7 +756,8 @@ app.addEventListener('click', async event=>{
       const panel = target.closest('dialog');
       const scroll = panel.scrollTop;
       if (adding) {
-        exercise.sets.push(set());
+        const previous = exercise.sets.at(-1);
+        exercise.sets.push({...previous,...set(),weight:previous?.weight ?? '',reps:previous?.reps ?? '',minutes:previous?.minutes ?? '',pace:previous?.pace ?? ''});
         const template = document.createElement('template');
         template.innerHTML = routineSets(exercise,i);
         rows.append(template.content.lastElementChild);
@@ -704,6 +770,15 @@ app.addEventListener('click', async event=>{
       return;
     }
     case 'routine-remove': routine.exercises.splice(i,1);break;
+    case 'routine-order':
+      routineScroll = app.querySelector('dialog').scrollTop;
+      dialog='routine-order';
+      break;
+    case 'routine-order-apply':
+      routine.exercises = [...app.querySelectorAll('[data-order-index]')]
+        .map(row=>routine.exercises[Number(row.dataset.orderIndex)]);
+      closeDialog();
+      break;
     case 'routine-save':
       routine.title=routine.title.trim();
       if(!routine.title||!routine.exercises.length) return notice('루틴 이름과 종목을 입력해 주세요.');
@@ -741,6 +816,14 @@ app.addEventListener('click', async event=>{
       recordDraft.durationMinutes = String(Math.floor(totalSeconds/60));
       recordDraft.durationSeconds = String(totalSeconds%60).padStart(2,'0');
       window.scrollTo(0,0);
+      break;
+    }
+    case 'record-add-set': {
+      const exercise=recordDraft?.exercises[i];
+      if (!exercise) return;
+      const last=exercise.sets.at(-1);
+      const defaults=isCardio(exercise)?{minutes:0}:{weightKg:0,repetitions:1};
+      exercise.sets.push({...defaults,...last,id:id()});
       break;
     }
     case 'discard-record-edit': recordDraft=null; break;
