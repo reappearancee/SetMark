@@ -730,9 +730,28 @@ app.addEventListener('click', async event=>{
       editor='manual'; window.scrollTo(0,0); break;
     }
     case 'start': {
-      const template=state.routines.find(r=>r.id===value);
-      if (!d) state.draft={id:id(), title:template?.title||'자유 운동',startedAt:null,restEnabled:template ? template.restEnabled === true : undefined,restSeconds:template?.restSeconds,exercises:template?.exercises.map(e=>({...e,id:id(),sets:e.sets.map(s=>({...set(),weight:s.weight,reps:s.reps,minutes:s.minutes,pace:s.pace,restSeconds:s.restSeconds}))}))||[]};
-      editor=true; window.scrollTo(0,0); save(); break;
+      const previous = state.draft;
+      const template = state.routines.find(r=>r.id===value);
+      if (value && !template) return notice('선택한 루틴을 찾을 수 없어요.');
+      const switchingRoutine = previous && template && previous.routineId !== template.id;
+      if (switchingRoutine && !confirm('작성 중인 운동을 버리고 선택한 루틴을 불러올까요?')) return;
+      if (!previous || switchingRoutine) {
+        state.draft = {
+          id: id(),
+          title: template?.title || '자유 운동',
+          routineId: template?.id,
+          startedAt: null,
+          restEnabled: template ? template.restEnabled === true : undefined,
+          restSeconds: template?.restSeconds,
+          exercises: template?.exercises.map(exercise=>({
+            ...exercise,
+            id: id(),
+            sets: exercise.sets.map(entry=>({...entry,id:id(),checked:false})),
+          })) || [],
+        };
+        if (!await save()) { state.draft = previous; return; }
+      }
+      editor=true; window.scrollTo(0,0); break;
     }
     case 'begin-workout':
       if (!d || d.startedAt) return;

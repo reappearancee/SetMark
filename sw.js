@@ -1,4 +1,4 @@
-const cacheName = 'deukgeun-ilji-pwa-v59';
+const cacheName = 'deukgeun-ilji-pwa-v60';
 const shell = [
   "./",
   "./index.html",
