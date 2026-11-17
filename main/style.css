@@ -243,10 +243,15 @@ dialog > #search + .chips {
 .page-heading + :is(.card, .muted) { margin-block-start: 0; }
 
 .hero .hero-streak { margin: 0; color: #e3f5e7; }
-.hero .rest-day-action,
-[data-appearance="dark"] .hero .rest-day-action {
-  background: transparent;
-  color: #fff;
-  border-color: #ffffff70;
+.hero.hero-with-rest-action { margin-block-end: 0; }
+.hero.hero-resting { filter: saturate(.35); }
+.hero-rest-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 6px 0 16px;
+}
+.hero-rest-actions .rest-day-action {
+  padding: 4px 10px;
+  font-size: .875rem;
 }
 .calendar .calendar-rest { width: 9px; height: 2px; margin-block: 2px 1px; }
