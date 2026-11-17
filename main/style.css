@@ -241,3 +241,12 @@ dialog > #search + .chips {
 
 .page-heading { margin-block-end: 10px; }
 .page-heading + :is(.card, .muted) { margin-block-start: 0; }
+
+.hero .hero-streak { margin: 0; color: #e3f5e7; }
+.hero .rest-day-action,
+[data-appearance="dark"] .hero .rest-day-action {
+  background: transparent;
+  color: #fff;
+  border-color: #ffffff70;
+}
+.calendar .calendar-rest { width: 9px; height: 2px; margin-block: 2px 1px; }

@@ -26,7 +26,7 @@ document.addEventListener('touchmove', event => {
 }, {passive:false});
 
 
-const defaults = { appearance: 'system', name: null, rest: 90, restEnabled: false, restSound: true, draft: null, manualDraft: null, workouts: [], routines: [] };
+const defaults = { restDays: [], appearance: 'system', name: null, rest: 90, restEnabled: false, restSound: true, draft: null, manualDraft: null, workouts: [], routines: [] };
 const app = document.querySelector('#app');
 let storage;
 try {
@@ -87,9 +87,9 @@ function recordElapsed(record) {
 }
 const isCardio = exercise => exercise.kind === 'cardio';
 const vol = workout => workout.exercises.filter(e=>!isCardio(e)).flatMap(e=>e.sets)
-  .reduce((total,s)=>total+s.weightKg*s.repetitions,0);
+  .reduce((total,s)=>total+parseMinutes(s.weightKg)*parseMinutes(s.repetitions),0);
 const cardioTotal = workout => workout.exercises.filter(isCardio).flatMap(e=>e.sets)
-  .reduce((total,s)=>total+s.minutes,0);
+  .reduce((total,s)=>total+parseMinutes(s.minutes),0);
 const parseMinutes = value => Number(String(value ?? '').trim().replace(',','.'));
 const paceLabel = name => ['천국의 계단','스텝퍼','스텝밀'].includes(name) ? '레벨' : '속도';
 const validPace = value => {
@@ -101,7 +101,7 @@ function cardioEntry(entry) {
     ...(String(entry.pace ?? '').trim() ? {pace:parseMinutes(entry.pace)} : {})};
 }
 const validMinutes = value => { const minutes = parseMinutes(value); return minutes > 0 && minutes <= 1440; };
-const number = x => Number(x).toLocaleString('ko-KR',{maximumFractionDigits:2});
+const number = x => parseMinutes(x).toLocaleString('ko-KR',{maximumFractionDigits:2});
 const sorted = () => [...state.workouts].sort((a,b)=>new Date(b.finishedAt)-new Date(a.finishedAt));
 const btn = (label, action, css='', value='', disabled=false) => '<button type="button" data-action="'+action+'" data-value="'+esc(value)+'" class="'+css+'"'+(disabled?' disabled':'')+'>'+label+'</button>';
 
@@ -134,24 +134,46 @@ function recordList(records) {
   return records.length ? records.map(w=>btn('<strong>'+esc(w.title)+'</strong><small>'+(w.manualEntry ? new Date(w.finishedAt).toLocaleDateString('ko-KR',{dateStyle:'medium'}) : dateLabel(w.finishedAt))+' · '+w.exercises.flatMap(x=>x.sets).length+'세트</small>','record','exercise row between',w.id)).join('') : '<p class="muted">운동 기록이 없어요.</p>';
 }
 function workoutMilestone(workouts, today) {
+  const monthStart = new Date(today.getFullYear(),today.getMonth(),1);
   const end = new Date(today);
-  end.setHours(23, 59, 59, 999);
-  const completedDays = new Set(workouts
-    .filter(workout=>Date.parse(workout.finishedAt)<=end.getTime())
-    .map(workout=>dayKey(workout.finishedAt)));
+  end.setHours(23,59,59,999);
+  const completedDays = new Set();
+  const monthlyDays = new Set();
+  for (const workout of workouts) {
+    const date = new Date(workout.finishedAt);
+    if (!(date <= end)) continue;
+    const key = dayKey(date);
+    completedDays.add(key);
+    if (date >= monthStart) monthlyDays.add(key);
+  }
+
   const completedToday = completedDays.has(dayKey(today));
-  const count = completedDays.size + (completedToday ? 0 : 1);
-  const emoji = count >= 30 ? '🔥' : count >= 7 ? '💪' : '👊';
+  const cursor = new Date(today);
+  if (!completedToday) cursor.setDate(cursor.getDate()-1);
+  let streak = 0;
+  while (completedDays.has(dayKey(cursor))) {
+    streak++;
+    cursor.setDate(cursor.getDate()-1);
+  }
+
+  const count = monthlyDays.size;
   return {
-    label: (completedToday ? count+'일차 달성!' : '오늘 하면 '+count+'일 차에요')+' '+emoji,
-    effect: count%30===0 ? ' milestone-fire' : count%7===0 ? ' milestone-glow' : '',
+    completedToday, streak,
+    label: '이번 달 '+count+'일 운동'+(count>=21?' 🔥':count>=7?' 💪':count?' 👊':''),
+    effect: count===21 ? ' milestone-fire' : count===7 ? ' milestone-glow' : '',
   };
 }
 function home() {
   const today = new Date();
   const milestone = workoutMilestone(state.workouts, today);
+  const resting = !milestone.completedToday && state.restDays.includes(dayKey(today));
+  const streak = milestone.completedToday
+    ? (milestone.streak > 1 ? '오늘까지 '+milestone.streak+'일 연속 운동했어요!' : '')
+    : (!resting && milestone.streak ? '오늘 하면 연속으로 '+(milestone.streak+1)+'일 차에요' : '');
+  const restAction = milestone.completedToday ? '' :
+    btn(resting?'휴식일 표시 취소':'오늘은 운동 쉬는 날','toggle-rest-day','rest-day-action wide');
   const plans = state.routines.filter(r=>r.weekdays.includes(today.getDay()+1));
-  return '<h1>득근일지</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero'+milestone.effect+'"><div class="hero-date"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><small class="hero-milestone">'+milestone.label+'</small></div><h2>오늘의 운동</h2>'+(state.draft?.startedAt?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?.startedAt?'운동 이어서 기록':state.draft?'운동 준비 이어서':'▶ 자유 운동 시작','start','primary wide')+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
+  return '<h1>득근일지</h1><p class="muted">'+(state.name ? esc(state.name)+'님 안녕하세요.' : '안녕하세요.')+'</p><section class="hero'+milestone.effect+'"><div class="hero-date"><small>'+today.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'short'})+'</small><small class="hero-milestone">'+milestone.label+'</small></div><h2>오늘의 운동</h2>'+(streak?'<p class="hero-streak">'+streak+'</p>':'')+(resting?'<p class="hero-streak">오늘은 운동 쉬는 날로 표시했어요.</p>':'')+(state.draft?.startedAt?'<p>운동 시간 <strong class="clock" data-clock></strong></p>':'')+btn(state.draft?.startedAt?'운동 이어서 기록':state.draft?'운동 준비 이어서':'▶ 자유 운동 시작','start','primary wide')+restAction+'</section><section><h2>오늘의 루틴</h2>'+(plans.map(r=>btn(esc(r.title),'start','exercise',r.id)).join('')||'<p class="muted">오늘 예정된 루틴이 없어요.</p>')+'</section><section class="section"><h2>최근 기록</h2>'+recordList(sorted().slice(0,3))+'</section>';
 }
 function restControls(seconds, action) {
   return '<div class="rest-controls" role="group" aria-label="휴식 시간">'
@@ -320,11 +342,12 @@ function recordDetail(record) {
     +'<div class="row between record-heading"><h1>운동 요약</h1>'+ (editing?btn('취소','discard-record-edit'):btn('편집','edit-record','',record.id))+'</div>'
     +'<section class="card record-summary"><strong>'+esc(record.title)+'</strong>'
     +metric('운동 시간',editing?('<span class="record-duration-fields">'+field('분','durationMinutes',workout.durationMinutes,'numeric')+field('초','durationSeconds',workout.durationSeconds,'numeric')+'</span>'):duration(recordElapsed(record)))
-    +metric('운동 개수',record.exercises.length+'개')+metric('전체 볼륨',number(vol(record))+' kg')
-    +(cardioTotal(record)?metric('유산소 시간',number(cardioTotal(record))+'분'):'')
+    +metric('운동 개수',workout.exercises.length+'개')+metric('전체 볼륨',number(vol(workout))+' kg')
+    +(cardioTotal(workout)?metric('유산소 시간',number(cardioTotal(workout))+'분'):'')
     +'<div class="record-memo"><strong>메모</strong>'
     +(editing?'<textarea data-record-field="memo" aria-label="운동 메모" maxlength="2000" placeholder="오늘 운동은 어땠나요?">'+esc(workout.memo)+'</textarea>'
-      :'<p>'+esc(record.memo || '작성한 메모가 없어요.')+'</p>')+'</div></section>'+details
+      :'<p>'+esc(record.memo || '작성한 메모가 없어요.')+'</p>')+'</div></section>'
+    +(editing?btn('루틴으로 덮어쓰기','record-routine','wide'):'')+details
     +(editing?btn('변경 저장','save-record','primary wide',record.id):btn('기록 삭제','delete-record','danger wide',record.id));
 }
 async function saveRecordEdit() {
@@ -372,6 +395,8 @@ function history() {
   const first = new Date(month.getFullYear(),month.getMonth(),1);
   const length = new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
   const marked = new Set(state.workouts.map(w=>dayKey(w.finishedAt)));
+  const restDays = new Set(state.restDays);
+  const isRestDay = key => restDays.has(key) && !marked.has(key);
   const today = new Date();
   today.setHours(0,0,0,0);
   const dateAction = day <= new Date()
@@ -381,9 +406,11 @@ function history() {
     const d = new Date(first.getFullYear(),first.getMonth(),i+1);
     const hasWorkout = marked.has(dayKey(d));
     const selected = dayKey(d)===dayKey(day);
-    const style = selected ? 'primary' : d<today && !hasWorkout ? 'calendar-past' : '';
-    return btn((i+1)+(hasWorkout?'<i></i>':''),'day',style,i+1);
-  }).join('')+'</div></section><div class="row between record-day-heading"><h2>'+day.toLocaleDateString('ko-KR',{month:'long',day:'numeric'})+'</h2>'+dateAction+'</div>'+recordList(sorted().filter(w=>dayKey(w.finishedAt)===dayKey(day)));
+    const resting = isRestDay(dayKey(d));
+    const style = selected ? 'primary' : d<today && !hasWorkout && !resting ? 'calendar-past' : '';
+    const marker = hasWorkout ? '<i></i>' : resting ? '<i class="calendar-rest" aria-label="휴식일"></i>' : '';
+    return btn((i+1)+marker,'day',style,i+1);
+  }).join('')+'</div></section><div class="row between record-day-heading"><h2>'+day.toLocaleDateString('ko-KR',{month:'long',day:'numeric'})+'</h2>'+dateAction+'</div>'+(isRestDay(dayKey(day))?'<p class="muted">운동 쉬는 날</p>':recordList(sorted().filter(w=>dayKey(w.finishedAt)===dayKey(day))));
 }
 function statistics() {
   const timeline = Array.from({length:days},(_,i)=>{const d=new Date(); d.setDate(d.getDate()-days+1+i);return d;});
@@ -498,6 +525,14 @@ function bindRoutineOrder(panel) {
   });
 }
 function modal() {
+  if (dialog==='record-routine') {
+    const choices = state.routines.filter(plan=>plan.exercises.length).map(plan=>
+      btn('<strong>'+esc(plan.title)+'</strong><small>'+plan.exercises.length+'종목</small>',
+        'record-use-routine','exercise row between',plan.id)).join('');
+    return '<header class="row between"><h2>루틴 선택</h2>'+btn('닫기','close')+'</header>'
+      +'<p>선택한 루틴의 종목과 세트로 바꿉니다. 빈 횟수나 유산소 시간은 입력한 뒤 저장해 주세요.</p>'
+      +(choices || '<p class="muted">불러올 루틴이 없어요.</p>');
+  }
   if (dialog==='routine-order') return orderDialog();
   if (dialog==='releases') return releaseBoard();
   if (dialog==='exercise-menu') return '<h2>'+esc(restExercise.name)+'</h2>'+btn('휴식 타이머 설정','exercise-rest','wide')+btn('닫기','close','wide');
@@ -715,6 +750,14 @@ app.addEventListener('click', async event=>{
     case 'tab':
       if (recordDraft && !confirm('저장하지 않은 변경사항을 버릴까요?')) return;
       recordDraft=null; tab=value; editor=false; activeRecord=null; window.scrollTo(0,0); break;
+    case 'toggle-rest-day': {
+      const today = dayKey(new Date());
+      if (state.workouts.some(workout=>dayKey(workout.finishedAt)===today)) return;
+      const previous = state.restDays;
+      state.restDays = previous.includes(today) ? previous.filter(key=>key!==today) : [...previous,today];
+      if (!await save()) { state.restDays = previous; return; }
+      break;
+    }
     case 'add-record': {
       const now = new Date();
       if (day > now) return;
@@ -914,6 +957,23 @@ app.addEventListener('click', async event=>{
       recordDraft.durationMinutes = String(Math.floor(totalSeconds/60));
       recordDraft.durationSeconds = String(totalSeconds%60).padStart(2,'0');
       window.scrollTo(0,0);
+      break;
+    }
+    case 'record-routine':
+      if (recordDraft?.id !== activeRecord) return;
+      dialog='record-routine';
+      break;
+    case 'record-use-routine': {
+      if (dialog!=='record-routine' || !recordDraft || recordDraft.id!==activeRecord) return;
+      const plan = state.routines.find(item=>item.id===value);
+      if (!plan?.exercises.length || !confirm('현재 편집 중인 종목과 세트를 이 루틴으로 바꿀까요?')) return;
+      recordDraft.exercises = plan.exercises.map(exercise=>({
+        id:id(), name:exercise.name, kind:exercise.kind,
+        sets:exercise.sets.map(entry=>isCardio(exercise)
+          ? {id:id(),minutes:entry.minutes ?? '',pace:entry.pace ?? ''}
+          : {id:id(),weightKg:entry.weight ?? '',repetitions:entry.reps ?? ''}),
+      }));
+      closeDialog();
       break;
     }
     case 'record-add-set': {
