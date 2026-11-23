@@ -160,7 +160,7 @@ function workoutMilestone(workouts, today) {
   return {
     completedToday, streak,
     label: '이번 달 '+count+'일 운동'+(count>=21?' 🔥':count>=7?' 💪':count?' 👊':''),
-    effect: count===21 ? ' milestone-fire' : count===7 ? ' milestone-glow' : '',
+    effect: count>=21 ? ' milestone-fire' : count>=7 ? ' milestone-glow' : '',
   };
 }
 function home() {
