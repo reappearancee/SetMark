@@ -377,12 +377,18 @@ async function saveRecordEdit() {
   const totalSeconds = minutes*60+seconds;
   edited.elapsedMs = totalSeconds===Math.floor(original/1000) ? original : totalSeconds*1000;
   if (!Number.isSafeInteger(edited.elapsedMs)) return notice('운동 시간이 너무 길어요.');
+  if (!edited.manualEntry) {
+    const finishedAt = new Date(Date.parse(edited.startedAt)+edited.elapsedMs);
+    if (!Number.isFinite(finishedAt.getTime())) return notice('운동 시작 시각과 운동 시간을 확인해 주세요.');
+    edited.finishedAt = finishedAt.toISOString();
+  }
   edited.memo = (edited.memo ?? '').trim();
   delete edited.durationMinutes;
   delete edited.durationSeconds;
   const previous = state.workouts[index];
   state.workouts[index] = edited;
   if (!await save({workouts:{put:[edited]}})) { state.workouts[index] = previous; return; }
+  day = month = new Date(edited.finishedAt);
   recordDraft = null;
   window.scrollTo(0,0);
   notice('운동 기록을 수정했어요.');
@@ -651,7 +657,7 @@ async function finish() {
   const exercises = d.exercises.map(e=>({...e,sets:e.sets.filter(s=>s.checked).map(s=>isCardio(e)?cardioEntry(s):{id:s.id,weightKg:Number(s.weight.trim().replace(',','.')),repetitions:Number(s.reps)})})).filter(e=>e.sets.length);
   if (!exercises.length) return notice('완료한 세트를 한 개 이상 체크해 주세요.');
   if (d.exercises.some(e=>e.sets.some(s=>!s.checked)) && !confirm('체크한 세트만 저장할까요?')) return;
-  const finishedAt = manual ? new Date(d.recordedAt) : new Date();
+  let finishedAt = manual ? new Date(d.recordedAt) : new Date();
   const {id,title} = d;
   let elapsedMs;
   let startedAt = d.startedAt;
@@ -665,6 +671,7 @@ async function finish() {
     startedAt = new Date(finishedAt.getTime()-elapsedMs).toISOString();
   } else {
     elapsedMs = workoutElapsed(d,finishedAt.getTime());
+    finishedAt = new Date(Date.parse(startedAt)+elapsedMs);
   }
   const record = {id,title,startedAt,finishedAt:finishedAt.toISOString(),elapsedMs,exercises,
     ...(manual ? {manualEntry:true} : {})};
